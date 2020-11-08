@@ -11,7 +11,7 @@
     - [Step 2: Install and Configure Babel and Other Libraries](#step-2-install-and-configure-babel-and-other-libraries)
   - [Part 2: Incorporate Webpack Into your Project](#part-2-incorporate-webpack-into-your-project)
     - [Step 1: Install and Configure Webpack](#step-1-install-and-configure-webpack)
-    - [Step 2: Refactor `server.js`](#step-2-refactor-serverjs)
+    - [Step 2: Update node scripts](#step-2-update-node-scripts)
   - [Part 3: Configure Dev and Prod builds](#part-3-configure-dev-and-prod-builds)
     - [Step 1: Create new config files](#step-1-create-new-config-files)
     - [Step 2: Make changes to `package.json`](#step-2-make-changes-to-packagejson)
@@ -146,7 +146,7 @@ npm install --save express
 `package.json`
 ```json
 "scripts:" {
-  start": "node ./server.js"
+  start": "node ./src/server.js"
 },
 ```
 
@@ -154,7 +154,7 @@ npm install --save express
 
 - Create a server file
 
-`server.js`
+`./src/server.js:`
 ```js
 const path = require("path");
 const express = require("express")
@@ -177,19 +177,19 @@ app.listen(PORT, ()=>{
 
 - Create a HTML file
   
-`index.html`
+`./src/index.html:`
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Express and Webpack App</title>
-    <link rel="shortcut icon" href="#">
-</head>
-<body>
-    <h1>Expack</h1>
-    <p class="description">Express and Webpack Boilerplate App</p>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Node</h1>
+    <p>Boilerplate</p>
+  </body>
 </html>
 ```
 
@@ -251,7 +251,7 @@ const nodeExternals = require("webpack-node-externals");
 
 var config = {
   entry: {
-    server: "./server.js",
+    server: "./src/server.js",
   },
   output: {
     path: path.join(__dirname, "dist"),
@@ -289,7 +289,7 @@ module.exports = config;
 
 ### 4. Configure HtmlWebpackPlugin
 
-`webpack.config.js`
+`webpack.config.js:`
 
 ```js
 var HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -302,7 +302,7 @@ var config = {
 
 plugins: [
     new HtmlWebpackPlugin({
-      template: "./index.html",
+      template: "./src/index.html",
       filename: "./index.html",
       excludeChunks: ['server']
     }),
@@ -317,21 +317,7 @@ plugins: [
 
 <br/>
 
-### 5. Make provisions for vendor libraries
 
-`webpack.config.js:`
-
-```js
-const VENDOR_LIBS = [];
-
-var config = {
-  ...
-  entry: {
-    bundle: "./src/index.js",
-    vendor: VENDOR_LIBS
-  }
-}
-```
 
 - You should end up with the following folder structure:
 
@@ -343,30 +329,9 @@ var config = {
 
 ```
 
-## Step 2: Refactor `server.js`
+## Step 2: Update node scripts
 
-### 1. Refactor `server.js` to `import` syntax:
-
-```js
-import path from 'path'
-import express from 'express'
-
-const app = express(),
-  DIST_DIR = __dirname,
-  HTML_FILE = path.join(DIST_DIR, 'index.html')
-  
-app.use(express.static(DIST_DIR))app.get('*', (req, res) => {
-  res.sendFile(HTML_FILE)
-})const PORT = process.env.PORT || 8080
-
-app.listen(PORT, () => {
-  console.log(`App listening to ${PORT}....`)
-  console.log('Press Ctrl+C to quit.')
-})
-
-```
-
-### 2. Edit Script section of `package.json`
+### 1. Edit Script section of `package.json`
 
 `package.json`
 ```json
@@ -376,7 +341,7 @@ app.listen(PORT, () => {
 },
 ```
 
-### 3. Test the new setup
+### 2. Test the new setup
 
 ```bash
 npm run build
@@ -392,7 +357,7 @@ npm run start
 
 ## Step 1: Create new config files
 
-1. Make a copy of `webpack.config.js` in project root and rename it `base.config.js`
+1. Make a copy of `webpack.config.js` in project root and rename it `webpack.base.config.js`
 2. Create 2 new files in the same folder and name them `webpack.dev.config.js` and `webpack.prod.config.js`
 3. Edit the two new files above as below:
 
