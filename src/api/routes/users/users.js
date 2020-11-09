@@ -1,9 +1,8 @@
 /**
- * Express router for user routes
- * @module routers/users
+ * Express router for user route operations
+ * @module routes/users
  * @requires express
  */
-
 const express = require("express");
 const router = express.Router();
 const {
@@ -14,7 +13,10 @@ const {
 } = require("express-validator");
 
 const UserModel = require("../../../db/models/User");
-const { checkUserRegistration } = require("./checkUserRegistration");
+const {
+  checkUserRegistration,
+} = require("../../../services/routes/users/checkUserRegistration");
+const addUser = require("../../../services/routes/users/addUser");
 
 /**
  * Route for getting users
@@ -25,32 +27,33 @@ const { checkUserRegistration } = require("./checkUserRegistration");
 router.get("/", (req, res) => res.send("User route"));
 
 /**
- * Route for creating a new user
+ * @description Route for creating a new user
+ * @name post/
+ * @function
+ * @param {string} path - Express path
+ * @param {Object} req - User details
+ * @borrows checkUserRegistration as checkUserRegistration
+ * @returns {string} - New user ID
  */
 router.post("/register", checkUserRegistration(), async (req, res) => {
-  // console.log("<<<");
-  // console.log(req.body);
-  // console.log(">>>");
-  // console.log(req.body.name.firstname);
-  // checkUserRegistration(req);
   const { name, address, gender, dob, email, password } = req.body;
 
-  // console.log("-- ||| --");
-  // console.log(validationResult(req));
-  // console.log("-- ^^^ --");
+  // Check for validation error
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+    console.log(errors);
     return res.status(400).json({ errors: errors.array() });
   }
 
   try {
-    // check if user exists
-    let user = await User.findOne({ email });
+    // Check if user exists
+    let user = await UserModel.findOne({ email });
 
     if (user) {
       return res.status(400).json({ errors: [{ msg: "user already exists" }] });
     }
 
+    // Create new user
     user = new UserModel({
       name: {
         firstname: name.firstname,
@@ -68,7 +71,8 @@ router.post("/register", checkUserRegistration(), async (req, res) => {
       password,
     });
 
-    await user.save();
+    // await user.save();
+    console.log(user);
 
     const payload = {
       user: {
@@ -80,7 +84,6 @@ router.post("/register", checkUserRegistration(), async (req, res) => {
     res.status(500).send("Server error");
   }
 
-  // await user.save();
   // console.log(user);
 });
 

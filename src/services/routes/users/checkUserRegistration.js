@@ -1,6 +1,15 @@
-const { check, checkSchema, validationResult } = require("express-validator");
+/**
+ * @description Checks new user input form data
+ * @exports checkUserRegistration
+ * @name checkUserRegistration
+ * @function
+ * @requires express-validator
+ * @param {Object} req - New user details
+ */
 
-exports.checkUserRegistration = (req, res, next) => {
+const { checkSchema } = require("express-validator");
+
+exports.checkUserRegistration = () => {
   // console.log(req.body);
   return checkSchema({
     "name.firstname": {
@@ -32,5 +41,4 @@ exports.checkUserRegistration = (req, res, next) => {
       errorMessage: "Please enter password in 8 or more characters",
     },
   });
-  // console.log(result);
 };

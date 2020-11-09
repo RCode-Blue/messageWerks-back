@@ -12,9 +12,9 @@
   "opts": {
     "checkJs": true,
     "recurse": true,
-    "destination": "./docs/",
+    "destination": "./docs/docs/",
     // "template": "./docs/custom-template",
-    "tutorials": "./docs/tutorials",
-    "readme": "./docs/readme/readme.md"
+    "tutorials": "./docs/tutorials"
+    // "readme": "./docs/readme/readme.md"
   }
 }

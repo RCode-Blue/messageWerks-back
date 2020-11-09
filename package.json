@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:dev": "rimraf dist && webpack --config=webpack.dev.config.js --mode development",
     "build:prod": "rimraf dist && webpack --config=webpack.prod.config.js --mode production",
-    "doc": "jsdoc -r * -c jsconfig.json"
+    "doc": "rimraf ./docs/docs && jsdoc -c jsconfig.json"
   },
   "repository": {
     "type": "git",
