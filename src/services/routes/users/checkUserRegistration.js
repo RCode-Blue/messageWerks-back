@@ -11,7 +11,6 @@
 const { checkSchema } = require("express-validator");
 
 exports.checkUserRegistration = () => {
-  // console.log(req.body);
   return checkSchema({
     "name.firstname": {
       notEmpty: true,

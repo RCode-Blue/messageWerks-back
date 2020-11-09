@@ -33,6 +33,7 @@ router.get("/", (req, res) => res.send("User route"));
  * @param {string} path - Express path
  * @param {Object} req - User details
  * @borrows checkUserRegistration as checkUserRegistration
+ * @borrows addUser as addUser
  * @returns {string} - New user ID
  * @throws {Object} - Error if:<ul> <li>submitted user details do not fulfill requirements</li><li>an existing user already exists</li><li>there is a problem saving to database</li></ul>
  */
@@ -53,26 +54,9 @@ router.post("/register", checkUserRegistration(), async (req, res) => {
       return res.status(400).json({ errors: [{ msg: "user already exists" }] });
     }
 
-    // Create new user
-    user = new UserModel({
-      name: {
-        firstname: name.firstname,
-        familyname: name.familyname,
-      },
-      address: {
-        addressline1: address.addressline1,
-        addressline2: address.addressline2,
-        state: address.state,
-        country: address.country,
-      },
-      gender,
-      dob,
-      email,
-      password,
-    });
-
-    // await user.save();
-    console.log(user);
+    // Create user
+    user = await addUser(req);
+    await user.save();
 
     const payload = {
       user: {
@@ -84,7 +68,8 @@ router.post("/register", checkUserRegistration(), async (req, res) => {
     res.status(500).send("Server error");
   }
 
-  // console.log(user);
+  res.status(200).send("User registered!");
+  // res.status(200).json({ user });
 });
 
 module.exports = router;
