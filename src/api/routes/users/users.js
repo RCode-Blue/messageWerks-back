@@ -34,6 +34,7 @@ router.get("/", (req, res) => res.send("User route"));
  * @param {Object} req - User details
  * @borrows checkUserRegistration as checkUserRegistration
  * @returns {string} - New user ID
+ * @throws {Object} - Error if:<ul> <li>submitted user details do not fulfill requirements</li><li>an existing user already exists</li><li>there is a problem saving to database</li></ul>
  */
 router.post("/register", checkUserRegistration(), async (req, res) => {
   const { name, address, gender, dob, email, password } = req.body;
@@ -41,7 +42,6 @@ router.post("/register", checkUserRegistration(), async (req, res) => {
   // Check for validation error
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors);
     return res.status(400).json({ errors: errors.array() });
   }
 

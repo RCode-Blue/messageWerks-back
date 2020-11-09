@@ -2,9 +2,10 @@
  * @description Checks new user input form data
  * @exports checkUserRegistration
  * @name checkUserRegistration
- * @function
  * @requires express-validator
  * @param {Object} req - New user details
+ * @returns {Object} validationResult
+ * @throws {string} - Error if: <ul> <li>no first name</li> <li>no famiy name</li> <li>incomplete address</li> <li>gender or password</li> </ul>
  */
 
 const { checkSchema } = require("express-validator");
