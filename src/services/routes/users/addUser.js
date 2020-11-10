@@ -1,5 +1,6 @@
 /**
  * @description Creates new user
+ * @async
  * @exports addUser
  * @name addUser
  * @borrows encrypt as encrypt
@@ -10,9 +11,9 @@ const UserModel = require("../../../db/models/User");
 const encrypt = require("../../../scripts/encrypt");
 
 const addUser = async (req) => {
-  // console.log("AddUser");
   const { name, address, gender, dob, email, password } = req.body;
   const encryptedPassword = await encrypt(password);
+
   // Create new user
   user = new UserModel({
     name: {

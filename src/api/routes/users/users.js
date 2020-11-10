@@ -5,12 +5,8 @@
  */
 const express = require("express");
 const router = express.Router();
-const {
-  body,
-  check,
-  checkSchema,
-  validationResult,
-} = require("express-validator");
+const { validationResult } = require("express-validator");
+const jwt = require("jsonwebtoken");
 
 const UserModel = require("../../../db/models/User");
 const {
@@ -30,6 +26,7 @@ router.get("/", (req, res) => res.send("User route"));
  * @description Route for creating a new user
  * @name post/
  * @function
+ * @async
  * @param {string} path - Express path
  * @param {Object} req - User details
  * @borrows checkUserRegistration as checkUserRegistration
@@ -63,12 +60,22 @@ router.post("/register", checkUserRegistration(), async (req, res) => {
         id: user.id,
       },
     };
+    jwt.sign(
+      payload,
+      config.get(process.env.JWT_SECRET),
+      { expiresIn: 360000 },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+        console.log(token);
+      }
+    );
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
   }
 
-  res.status(200).send("User registered!");
+  // res.status(200).send("User registered!");
   // res.status(200).json({ user });
 });
 

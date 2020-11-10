@@ -1,9 +1,31 @@
+/**
+ * @description Starting server file for project
+ * @name server
+ * @requires express
+ * @borrows {object} connectDB - DB connection to MongoDB
+ */
+
 const path = require("path");
 const express = require("express");
 const connectDB = require("./config/db");
 
+const fs = require("fs");
+const rootDir = path.dirname(__dirname);
+// const envFile = path.join(rootDir + "./.env");
+// console.log(envFile);
+if (fs.existsSync(path.join(rootDir) + "/.env")) {
+  require("dotenv").config();
+}
+
+// console.log(path.dirname(__dirname));
+
+// require("dotenv").config({ path: __dirname + "/../.env" });
+
 const app = express();
 
+// console.log("---");
+// console.log(process.env.JWT_SECRET);
+// console.log("----");
 // DB connection
 connectDB();
 

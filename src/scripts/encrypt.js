@@ -1,5 +1,6 @@
 /**
  * @description Encrypts a password
+ * @async
  * @exports encrypt
  * @name encrypt
  * @param {string} password - User password

@@ -1,3 +1,10 @@
+/**
+ * @description db connection to MongoDB
+ * @name connectDB
+ * @requires mongoose
+ * @exports {Object} connectDB
+ */
+
 const mongoose = require("mongoose");
 const devConfig = require("./dev.config.json");
 const prodConfig = require("./prod.config.json");
@@ -12,7 +19,7 @@ const mongoUri =
   devConfig.mongoUriPart4;
 
 const connectDB = async () => {
-  console.log(mongoUri);
+  // console.log(mongoUri);
   try {
     await mongoose.connect(mongoUri, {
       useNewUrlParser: true,
