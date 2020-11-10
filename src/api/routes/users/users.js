@@ -6,13 +6,14 @@
 const express = require("express");
 const router = express.Router();
 const { validationResult } = require("express-validator");
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 
 const UserModel = require("../../../db/models/User");
 const {
   checkUserRegistration,
 } = require("../../../services/routes/users/checkUserRegistration");
-const addUser = require("../../../services/routes/users/addUser");
+const createUser = require("../../../services/routes/users/createUser");
+const getToken = require("../../../scripts/token");
 
 /**
  * Route for getting users
@@ -52,24 +53,26 @@ router.post("/register", checkUserRegistration(), async (req, res) => {
     }
 
     // Create user
-    user = await addUser(req);
-    await user.save();
+    user = await createUser(req);
 
-    const payload = {
-      user: {
-        id: user.id,
-      },
-    };
-    jwt.sign(
-      payload,
-      config.get(process.env.JWT_SECRET),
-      { expiresIn: 360000 },
-      (err, token) => {
-        if (err) throw err;
-        res.json({ token });
-        console.log(token);
-      }
-    );
+    // Generate token
+    getToken(user);
+
+    // const payload = {
+    //   user: {
+    //     id: user.id,
+    //   },
+    // };
+    // jwt.sign(
+    //   payload,
+    //   process.env.JWT_SECRET,
+    //   { expiresIn: 360000 },
+    //   (err, token) => {
+    //     if (err) throw err;
+    //     res.json({ token });
+    //     console.log(token);
+    //   }
+    // );
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

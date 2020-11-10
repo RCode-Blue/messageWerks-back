@@ -13,8 +13,9 @@
     - [Step 1: Install and Configure Webpack](#step-1-install-and-configure-webpack)
     - [Step 2: Update node scripts](#step-2-update-node-scripts)
   - [Part 3: Configure Dev and Prod builds](#part-3-configure-dev-and-prod-builds)
-    - [Step 1: Create new config files](#step-1-create-new-config-files)
-    - [Step 2: Make changes to `package.json`](#step-2-make-changes-to-packagejson)
+    - [Step 1: Create Dev and Prod Webpack config files](#step-1-create-dev-and-prod-webpack-config-files)
+    - [Step 2: Add node scripts to load different configs](#step-2-add-node-scripts-to-load-different-configs)
+    - [Step 3: Set up environment variables for Dev and Prod](#step-3-set-up-environment-variables-for-dev-and-prod)
 
 <br/><br/><br/>
 
@@ -355,7 +356,7 @@ npm run start
 
 # Part 3: Configure Dev and Prod builds
 
-## Step 1: Create new config files
+## Step 1: Create Dev and Prod Webpack config files
 
 1. Make a copy of `webpack.config.js` in project root and rename it `webpack.base.config.js`
 2. Create 2 new files in the same folder and name them `webpack.dev.config.js` and `webpack.prod.config.js`
@@ -391,7 +392,7 @@ var config = Object.assign(prodConfig, commonConfig);
 module.exports = config;
 ```
 
-## Step 2: Make changes to `package.json` 
+## Step 2: Add node scripts to load different configs 
 
 `package.json`
 ```json
@@ -403,8 +404,72 @@ module.exports = config;
   },
   ```
 
-
-
-
-
 [Reference](https://medium.com/@binyamin/creating-a-node-express-webpack-app-with-dev-and-prod-builds-a4962ce51334)
+
+
+## Step 3: Set up environment variables for Dev and Prod
+
+1. Install `dotenv`
+
+```bash
+npm install --save dotenv
+```
+
+where:
+| Library | Description / Link |
+| ------------------- | ------------ |
+| dotenv: | A module that loads environment variables from an `.env` file into `process.env` |
+| | _[homepage](https://github.com/motdotla/dotenv#readme)_ `|` _[npm](https://www.npmjs.com/package/dotenv)_ |
+
+<br/>
+
+
+2. Create `.env` file
+
+Create `.env` file at project root. Fill it with variables. Example below:
+
+```
+NODE_ENV=development
+API_KEY_1=cjgasl_o9080234hbt-osdas
+PASSWORD=mypassword
+```
+
+
+3. Create configuration loader script
+
+In project root. create new file named `dotenvConfig.js`, with contents as below:
+
+```js
+const dotenv = require("dotenv");
+
+const result = dotenv.config();
+
+if (result.error) {
+  throw result.error;
+}
+```
+
+4. Create node script
+
+`package.json`
+```json
+"scripts":{
+  "serve": "node -r dotenv/config dotenvConfig.js dotenv_config_path=.env && nodemon ./src/server.js",
+}
+```
+
+5. Load configuration in your project
+
+`src/server.js`
+```js
+const path = require("path");
+const fs = require("fs");
+
+...
+
+// Check if .env file exists
+const rootDir = path.dirname(__dirname);
+if (fs.existsSync(path.join(rootDir) + "/.env")) {
+  require("dotenv").config();
+}
+```

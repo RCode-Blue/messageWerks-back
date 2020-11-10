@@ -7,25 +7,20 @@
 
 const path = require("path");
 const express = require("express");
+const fs = require("fs");
+
 const connectDB = require("./config/db");
 
-const fs = require("fs");
+// Check if .env file exists
 const rootDir = path.dirname(__dirname);
-// const envFile = path.join(rootDir + "./.env");
-// console.log(envFile);
 if (fs.existsSync(path.join(rootDir) + "/.env")) {
   require("dotenv").config();
+} else {
+  require("dotenv");
 }
-
-// console.log(path.dirname(__dirname));
-
-// require("dotenv").config({ path: __dirname + "/../.env" });
 
 const app = express();
 
-// console.log("---");
-// console.log(process.env.JWT_SECRET);
-// console.log("----");
 // DB connection
 connectDB();
 

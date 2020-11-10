@@ -31,6 +31,7 @@ const addUser = async (req) => {
     email,
     password: encryptedPassword,
   });
+  await user.save();
   return user;
 };
 
