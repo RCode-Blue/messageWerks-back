@@ -7,15 +7,15 @@
  * @param {Object} req - New user details
  * @returns {Object} - User object
  */
-const UserModel = require("../../../db/models/User");
-const encrypt = require("../../../scripts/encrypt");
+const User = require("../../db/models/User");
+const encrypt = require("../../scripts/encrypt");
 
 const addUser = async (req) => {
-  const { name, address, gender, dob, email, password } = req.body;
+  const { name, address, gender, dob, email, password, status } = req.body;
   const encryptedPassword = await encrypt(password);
 
   // Create new user
-  user = new UserModel({
+  user = new User({
     name: {
       firstname: name.firstname,
       familyname: name.familyname,
@@ -30,6 +30,7 @@ const addUser = async (req) => {
     dob,
     email,
     password: encryptedPassword,
+    status,
   });
   await user.save();
   return user;

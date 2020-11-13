@@ -6,14 +6,13 @@
 const express = require("express");
 const router = express.Router();
 const { validationResult } = require("express-validator");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
-const UserModel = require("../../../db/models/User");
+const UserModel = require("../../db/models/User");
 const {
   checkUserRegistration,
-} = require("../../../services/routes/users/checkUserRegistration");
-const createUser = require("../../../services/routes/users/createUser");
-const getToken = require("../../../scripts/token");
+} = require("../../services/users/checkUserRegistration");
+const createUser = require("../../services/users/createUser");
 
 /**
  * Route for getting users
@@ -36,9 +35,10 @@ router.get("/", (req, res) => res.send("User route"));
  * @throws {Object} - Error if:<ul> <li>submitted user details do not fulfill requirements</li><li>an existing user already exists</li><li>there is a problem saving to database</li></ul>
  */
 router.post("/register", checkUserRegistration(), async (req, res) => {
-  const { name, address, gender, dob, email, password } = req.body;
+  const { email } = req.body;
 
   // Check for validation error
+  // console.log(req);
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -56,30 +56,26 @@ router.post("/register", checkUserRegistration(), async (req, res) => {
     user = await createUser(req);
 
     // Generate token
-    getToken(user);
+    // generateToken(user);
 
-    // const payload = {
-    //   user: {
-    //     id: user.id,
-    //   },
-    // };
-    // jwt.sign(
-    //   payload,
-    //   process.env.JWT_SECRET,
-    //   { expiresIn: 360000 },
-    //   (err, token) => {
-    //     if (err) throw err;
-    //     res.json({ token });
-    //     console.log(token);
-    //   }
-    // );
+    const payload = {
+      user: {
+        id: user.id,
+      },
+    };
+    jwt.sign(
+      payload,
+      process.env.JWT_SECRET,
+      { expiresIn: 360000 },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      }
+    );
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
   }
-
-  // res.status(200).send("User registered!");
-  // res.status(200).json({ user });
 });
 
 module.exports = router;

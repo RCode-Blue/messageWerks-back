@@ -41,7 +41,8 @@ app.use(express.json());
 // #endregion
 
 // Routes
-app.use("/api/users", require("./api/routes/users/users"));
+app.use("/api/users", require("./routes/api/users"));
+app.use("/api/auth", require("./routes/api/auth"));
 
 const PORT = process.env.port || 5000;
 app.listen(PORT, () => {

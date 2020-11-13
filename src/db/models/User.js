@@ -17,7 +17,6 @@ const UserSchema = new mongoose.Schema({
   address: {
     addressline1: {
       type: String,
-      required: true,
     },
     addressline2: {
       type: String,
@@ -39,7 +38,6 @@ const UserSchema = new mongoose.Schema({
   },
   gender: {
     type: String,
-    required: true,
   },
   dob: {
     type: Date,
@@ -52,6 +50,9 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+  },
+  status: {
+    type: String,
   },
 });
 
