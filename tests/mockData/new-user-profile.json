@@ -1,0 +1,12 @@
+{
+  "address": {
+    "addressline1": "21 Fifth Avenue",
+    "addressline2": "",
+    "city": "Canley Vale",
+    "state": "NSW",
+    "country": "Australia",
+    "zip": "2166"
+  },
+  "gender": "F",
+  "dob": "7-12-1999"
+}

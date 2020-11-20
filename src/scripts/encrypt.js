@@ -1,11 +1,11 @@
 /**
  * @description Encrypts a password
  * @async
- * @exports encrypt
+ * @requires bcrypt
  * @name encrypt
  * @param {string} password - User password
  * @returns {string} - password hash
- * @required bcrypt
+ * @exports encrypt
  */
 
 const bcrypt = require("bcrypt");

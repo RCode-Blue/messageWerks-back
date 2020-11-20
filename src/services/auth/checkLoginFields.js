@@ -1,4 +1,13 @@
-const { body, check, checkSchema } = require("express-validator");
+/**
+ * @description Checks login form data
+ * @name checkLoginFields
+ * @exports checkLoginFields
+ * @requires express-validator
+ * @param {string} email - Email address
+ * @param {string} password - Password
+ * @returns {array} ValidationChain - Field validation results
+ */
+const { checkSchema } = require("express-validator");
 
 const checkLoginFields = () => {
   const test = checkSchema({
@@ -12,8 +21,6 @@ const checkLoginFields = () => {
     },
   });
 
-  // const test = [body("email").isEmail(), body("password").exists()];
-  // console.log(test);
   return test;
 };
 module.exports = checkLoginFields;

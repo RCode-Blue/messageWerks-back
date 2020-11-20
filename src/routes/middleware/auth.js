@@ -1,8 +1,17 @@
+/**
+ * @description Middleware for authentication
+ * @module auth
+ * @function
+ * @param {Object} req - User token
+ * @param {Function} next Next Express middleware
+ * @return {Object} - User token
+ */
 const jwt = require("jsonwebtoken");
 
 module.exports = function (req, res, next) {
   // Get token from header
   const token = req.header("x-auth-token");
+  // console.log(token);
 
   // If not token
   if (!token) {
@@ -15,6 +24,7 @@ module.exports = function (req, res, next) {
       if (error) {
         return res.status(401).json({ msg: "Invalid token" });
       } else {
+        // Return user id
         req.user = decoded.user;
         next();
       }

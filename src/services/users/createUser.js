@@ -1,33 +1,28 @@
 /**
  * @description Creates new user
- * @async
- * @exports addUser
- * @name addUser
- * @borrows encrypt as encrypt
+ * @name createUser
+ * @exports createUser
+ * @requires encrypt as encrypt
+ * @requires User as User
  * @param {Object} req - New user details
+ * @borrows User
+ * @borrows encrypt
  * @returns {Object} - User object
  */
 const User = require("../../db/models/User");
 const encrypt = require("../../scripts/encrypt");
 
-const addUser = async (req) => {
-  const { name, address, gender, dob, email, password, status } = req.body;
+const createUser = async (req, res) => {
+  const { name, email, password, status } = req.body;
   const encryptedPassword = await encrypt(password);
 
   // Create new user
-  user = new User({
+  const user = new User({
     name: {
       firstname: name.firstname,
+      middlename: name.middlename,
       familyname: name.familyname,
     },
-    address: {
-      addressline1: address.addressline1,
-      addressline2: address.addressline2,
-      state: address.state,
-      country: address.country,
-    },
-    gender,
-    dob,
     email,
     password: encryptedPassword,
     status,
@@ -36,4 +31,4 @@ const addUser = async (req) => {
   return user;
 };
 
-module.exports = addUser;
+module.exports = createUser;

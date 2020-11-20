@@ -11,6 +11,8 @@ const fs = require("fs");
 
 const connectDB = require("./config/db");
 
+global.__basedir = __dirname;
+
 // Check if .env file exists
 const rootDir = path.dirname(__dirname);
 if (fs.existsSync(path.join(rootDir) + "/.env")) {
@@ -42,6 +44,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/users", require("./routes/api/users"));
+app.use("/api/profiles", require("./routes/api/profiles"));
 app.use("/api/auth", require("./routes/api/auth"));
 
 const PORT = process.env.port || 5000;

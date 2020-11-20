@@ -1,5 +1,16 @@
+/**
+ * @description Schema for the User model
+ * @module models
+ * @name User
+ * @returns {Object} - User model
+ */
 const mongoose = require("mongoose");
 
+/**
+ * @name UserSchema
+ * @description User schema
+ * @constructor User
+ */
 const UserSchema = new mongoose.Schema({
   name: {
     firstname: {
@@ -14,34 +25,7 @@ const UserSchema = new mongoose.Schema({
       required: true,
     },
   },
-  address: {
-    addressline1: {
-      type: String,
-    },
-    addressline2: {
-      type: String,
-    },
-    city: {
-      type: String,
-    },
-    state: {
-      type: String,
-      required: true,
-    },
-    country: {
-      type: String,
-      required: true,
-    },
-    zip: {
-      type: String,
-    },
-  },
-  gender: {
-    type: String,
-  },
-  dob: {
-    type: Date,
-  },
+
   email: {
     type: String,
     required: true,
