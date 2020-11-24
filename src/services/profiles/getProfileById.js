@@ -1,9 +1,9 @@
 const Profile = require("../../db/models/Profile");
 
-const getProfileById = async (userid, res) => {
+const getProfileById = async (req, res) => {
   try {
     const profile = await Profile.findOne({
-      user: userid,
+      user: req.params.user_id,
     }).populate("user");
 
     if (!profile) {
