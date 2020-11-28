@@ -1,3 +1,11 @@
+/**
+ * @description Gets a logged in user's profile
+ * @param {Object} req - Express request object - User ID
+ * @param {Object} res - Express response object - User profile
+ * @throws Throws error if no user profile is found
+ * @throws Error is the is a problem retrieving data from the server
+ * @returns {Object} profile - User profile
+ */
 const Profile = require("../../db/models/Profile");
 
 const getMyProfile = async (req, res) => {

@@ -4,12 +4,17 @@
  * @requires express
  * @borrows {object} connectDB - DB connection to MongoDB
  */
-
-const path = require("path");
 const express = require("express");
 const fs = require("fs");
+const path = require("path");
+
+const adminsPath = require("./routes/api/admins");
+const authPath = require("./routes/api/auth");
+const profilesPath = require("./routes/api/profiles");
+const usersPath = require("./routes/api/users");
 
 const connectDB = require("./config/db");
+const { clearScreenDown } = require("readline");
 
 global.__basedir = __dirname;
 
@@ -43,13 +48,18 @@ app.use(express.json());
 // #endregion
 
 // Routes
-app.use("/api/users", require("./routes/api/users"));
-app.use("/api/profiles", require("./routes/api/profiles"));
-app.use("/api/auth", require("./routes/api/auth"));
+app.use("/api/users", usersPath);
+app.use("/api/profiles", profilesPath);
+app.use("/api/auth", authPath);
+app.use("/api/admins", adminsPath);
 
 const PORT = process.env.port || 5000;
 app.listen(PORT, () => {
-  console.log(`App listening to ${PORT}...`);
-  console.log(`Environment: ${process.env.NODE_ENV}`);
+  // console.log("\033[2J");
+  console.log("-------------------------------------------------------------");
+  console.log(`App listening to port:  ${PORT}...`);
+  console.log(`          Environment: * ${process.env.NODE_ENV} *`);
+  console.log("-------------------------------------------------------------");
   console.log("Press Ctrl+C to quit");
+  console.log();
 });

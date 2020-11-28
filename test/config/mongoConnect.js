@@ -1,4 +1,4 @@
-const mongoose = rerquire("mongoose");
+const mongoose = require("mongoose");
 
 const mongoConfig = async () => {
   await mongoose.connectiion(

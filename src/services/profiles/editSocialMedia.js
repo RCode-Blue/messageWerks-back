@@ -1,10 +1,19 @@
+/**
+ * @description Updates user social media profile
+ * @name editSocialMedia
+ * @requires Profile
+ * @requires checkSocialFields
+ * @borrows checkSocialFields
+ * @param {Object} req - Array of social media objects
+ */
+
 const Profile = require("../../db/models/Profile");
 
 const checkSocialFields = require("../../services/profiles/checkSocialFields");
 
 const updateUserProfile = async (profile, res) => {
   const options = { new: true };
-  function handleResult(err, result) {
+  function handleCallback(err, result) {
     if (err) {
       res.send(err);
     } else {
@@ -12,7 +21,7 @@ const updateUserProfile = async (profile, res) => {
     }
   }
 
-  Profile.findByIdAndUpdate(profile.id, profile, options, handleResult);
+  Profile.findByIdAndUpdate(profile.id, profile, options, handleCallback);
 };
 
 const getUserProfile = async (id, res) => {

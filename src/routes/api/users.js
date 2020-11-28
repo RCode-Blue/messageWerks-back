@@ -22,6 +22,7 @@ const {
   checkUserRegistration,
 } = require("../../services/users/checkUserRegistration");
 const createUser = require("../../services/users/createUser");
+const getUsers = require("../../services/users/getUsers");
 
 /**
  * Route for getting users
@@ -29,11 +30,13 @@ const createUser = require("../../services/users/createUser");
  * @function
  * @param {string} path - Express path
  */
-router.get("/", (req, res) => res.send("User route"));
+router.get("/", (req, res) => {
+  // res.send("User route")
+  getUsers(req, res);
+});
 
 /**
  * @description Route for creating a new user. <br/>Checks if user email already exists, and creates one if not
- * @name post/
  * @function
  * @async
  * @param {string} path - Express path

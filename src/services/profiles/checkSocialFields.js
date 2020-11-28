@@ -1,3 +1,10 @@
+/**
+ * @description Checks updated social media form data
+ * @requires validate.js
+ * @param {Object} req - New social media values
+ * @returns {array} validationResult - Array of values from validation
+ */
+
 const validate = require("validate.js");
 
 const checkSocialFields = (req) => {
