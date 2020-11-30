@@ -1,0 +1,10 @@
+{
+  "name": {
+    "firstname": "Amanda",
+    "middlename": "Madeline",
+    "familyname": "Jones"
+  },
+  "email": "ajones@myemail.com",
+  "password": "qrstu",
+  "status": "2"
+}

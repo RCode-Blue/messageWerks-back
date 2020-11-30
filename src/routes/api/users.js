@@ -1,34 +1,36 @@
 /**
  * @description Express router for user route operations
- * @name api/users
  * @module routes/users
  * @requires express
- * @requires express-validator
- * @requires jsonwebtoken
  * @requires checkUserRegistration
- * @requires createUser
- * @requires User
- * @borrows createUser
  * @borrows checkUserRegistration
+ * @requires postUser
+ * @borrows postUser
+ * @requires User
+ * @borrows User
  * @returns {string} - user Token
  */
 const express = require("express");
 const router = express.Router();
-const { validationResult } = require("express-validator");
-const jwt = require("jsonwebtoken");
 
-const User = require("../../db/models/User");
+const auth = require("../middleware/auth");
 const {
   checkUserRegistration,
-} = require("../../services/users/checkUserRegistration");
-const createUser = require("../../services/users/createUser");
-const getUsers = require("../../services/users/getUsers");
+} = require("../middleware/users/checkUserRegistration");
+const getUsers = require("../controllers/users/getUsers");
+const postUser = require("../controllers/users/postUser");
+const putDetails = require("../controllers/users/putDetails");
+const putPasswordById = require("../controllers/users/putPasswordById");
+const putStatus = require("../controllers/users/putStatus");
 
 /**
  * Route for getting users
- * @name get/
+ * @module get/
  * @function
- * @param {string} path - Express path
+ * @param {string} path Express path
+ * @param {Object} req Express request object
+ * @param {Object} res Express result object
+ * @returns {Object} res User object
  */
 router.get("/", (req, res) => {
   // res.send("User route")
@@ -36,55 +38,31 @@ router.get("/", (req, res) => {
 });
 
 /**
- * @description Route for creating a new user. <br/>Checks if user email already exists, and creates one if not
+ * @description Route for creating a new user.
+ * @module post/
  * @function
  * @async
- * @param {string} path - Express path
- * @param {Object} req - User details
- * @borrows checkUserRegistration as checkUserRegistration
- * @borrows createUser as createUser
- * @returns {string} - New user ID
- * @throws {Object} - Error if:<ul> <li>submitted user details do not fulfill requirements</li><li>an existing user already exists</li><li>there is a problem saving to database</li></ul>
+ * @param {string} path Express path
+ * @param {Object} req Express request object - User details
+ * @param {Object} res Express result object
+ * @returns {Object} res New user ID
  */
 router.post("/register", checkUserRegistration(), async (req, res) => {
-  const { email } = req.body;
+  postUser(req, res);
+});
 
-  // Check for validation error
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
+router.put("/password", auth, (req, res) => {
+  putPasswordById(req, res);
+});
 
-  try {
-    // Check if user exists
-    let user = await User.findOne({ email });
+router.put("/details", async (req, res) => {
+  putDetails(req, res);
+  // res.send("PUT /email: Change email");
+});
 
-    if (user) {
-      return res.status(400).json({ errors: [{ msg: "user already exists" }] });
-    }
-
-    // Create user
-    user = await createUser(req);
-
-    // Generate token
-    const payload = {
-      user: {
-        id: user.id,
-      },
-    };
-    jwt.sign(
-      payload,
-      process.env.JWT_SECRET,
-      { expiresIn: 360000 },
-      (err, token) => {
-        if (err) throw err;
-        res.json({ token });
-      }
-    );
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
-  }
+router.put("./status", async (req, res) => {
+  putStatus(req, res);
+  // res.send("PUT /status: Edit status");
 });
 
 module.exports = router;

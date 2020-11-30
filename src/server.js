@@ -4,6 +4,7 @@
  * @requires express
  * @borrows {object} connectDB - DB connection to MongoDB
  */
+
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -14,7 +15,6 @@ const profilesPath = require("./routes/api/profiles");
 const usersPath = require("./routes/api/users");
 
 const connectDB = require("./config/db");
-const { clearScreenDown } = require("readline");
 
 global.__basedir = __dirname;
 
@@ -54,11 +54,12 @@ app.use("/api/auth", authPath);
 app.use("/api/admins", adminsPath);
 
 const PORT = process.env.port || 5000;
+
 app.listen(PORT, () => {
-  // console.log("\033[2J");
+  console.clear();
   console.log("-------------------------------------------------------------");
-  console.log(`App listening to port:  ${PORT}...`);
-  console.log(`          Environment: * ${process.env.NODE_ENV} *`);
+  console.log(`Listening to port:  ${PORT}`);
+  console.log(`      Environment:  ${process.env.NODE_ENV}`);
   console.log("-------------------------------------------------------------");
   console.log("Press Ctrl+C to quit");
   console.log();

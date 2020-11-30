@@ -1,5 +1,5 @@
 /**
- * @description Creates new user
+ * @description Creates a new user
  * @name createUser
  * @exports createUser
  * @requires encrypt as encrypt
