@@ -6,7 +6,7 @@
  * @borrows Profile
  * @returns {Object} - User Profile
  */
-const Profile = require("../../db/models/Profile");
+const Profile = require("../../../db/models/Profile");
 
 const postProfile = async (req, res) => {
   const { address, dob, socialmedia } = req.body;

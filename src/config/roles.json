@@ -1,6 +1,0 @@
-{
-  "admin": "System wide full permissions",
-  "owner": "Can edit own business data and delegate managers",
-  "manager": "Can edit own business data",
-  "subscriber": "Permission to unsubscribe"
-}

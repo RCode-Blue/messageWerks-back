@@ -6,7 +6,7 @@
  * @param {Object} res - Express response object
  * @returns {Object} allProfiles - All user profiles
  */
-const Profile = require("../../db/models/Profile");
+const Profile = require("../../../db/models/Profile");
 
 const getAllProfiles = async (req, res) => {
   const allProfiles = await Profile.find({})

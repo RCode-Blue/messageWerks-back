@@ -9,6 +9,10 @@ const BusinessSchema = new mongoose.Schema({
       },
     },
   ],
+  name: {
+    type: String,
+    required: true,
+  },
   address: {
     addressline1: {
       type: String,

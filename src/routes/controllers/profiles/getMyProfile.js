@@ -6,7 +6,7 @@
  * @throws Error is the is a problem retrieving data from the server
  * @returns {Object} profile - User profile
  */
-const Profile = require("../../db/models/Profile");
+const Profile = require("../../../db/models/Profile");
 
 const getMyProfile = async (req, res) => {
   try {
@@ -15,7 +15,7 @@ const getMyProfile = async (req, res) => {
     }).populate("user");
     if (!profile) {
       return res.status(400).json({
-        msg: "There is no profile for this user",
+        msg: "Profile not found",
       });
     }
     res.json(profile);

@@ -7,9 +7,9 @@
  * @param {Object} req - Array of social media objects
  */
 
-const Profile = require("../../db/models/Profile");
+const Profile = require("../../../db/models/Profile");
 
-const checkSocialFields = require("../../services/profiles/checkSocialFields");
+const checkSocialFields = require("../../../services/profiles/checkSocialFields");
 
 const updateUserProfile = async (profile, res) => {
   const options = { new: true };

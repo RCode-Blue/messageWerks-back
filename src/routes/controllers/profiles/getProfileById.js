@@ -7,7 +7,7 @@
  * @throws Error if cannot retrieve data from server
  * @returns {Object} User profile
  */
-const Profile = require("../../db/models/Profile");
+const Profile = require("../../../db/models/Profile");
 
 const getProfileById = async (req, res) => {
   try {

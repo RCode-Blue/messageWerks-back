@@ -9,11 +9,11 @@ const checkMongoId = require("../middleware/checkMongoId");
 // const checkSocialFields = require("../../services/profiles/checkSocialFields");
 // const checkUserRegistration = require("../../services/users/checkUserRegistration");
 
-const editSocialMedia = require("../../services/profiles/editSocialMedia");
-const getMyProfile = require("../../services/profiles/getMyProfile");
-const getProfileById = require("../../services/profiles/getProfileById");
-const getAllProfiles = require("../../services/profiles/getAllProfiles");
-const postProfile = require("../../services/profiles/postProfile");
+const editSocialMedia = require("../controllers/profiles/editSocialMedia");
+const getMyProfile = require("../controllers/profiles/getMyProfile");
+const getProfileById = require("../controllers/profiles/getProfileById");
+const getAllProfiles = require("../controllers/profiles/getAllProfiles");
+const postProfile = require("../controllers/profiles/postProfile");
 
 router.get("/me", auth, async (req, res) => {
   await getMyProfile(req, res);

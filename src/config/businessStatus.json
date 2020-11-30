@@ -1,0 +1,6 @@
+{
+  "inactive": "not active",
+  "pending": "pending owner confirmation",
+  "confirmed": "active account",
+  "suspended": "disabled business account"
+}

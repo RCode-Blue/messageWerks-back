@@ -1,0 +1,18 @@
+{
+  "1": {
+    "name": "pending",
+    "description": "not yet confirmed"
+  },
+  "2": {
+    "name": "active",
+    "description": "active subscription"
+  },
+  "3": {
+    "name": "silent",
+    "description": "no subscriptions"
+  },
+  "4": {
+    "name": "inactive",
+    "description": "not active"
+  }
+}
