@@ -3,10 +3,16 @@ const router = express.Router();
 
 const checkMongoId = require("../../routes/middleware/checkMongoId");
 
+const getAllBusinesses = require("../../routes/controllers/businesses/getAllBusinesses");
 const postNewBusiness = require("../controllers/businesses/postNewBusiness");
 
 router.get("/all", async (req, res) => {
-  res.send("GET: all businesses");
+  getAllBusinesses(req, res);
+  // res.send("GET: all businesses");
+});
+
+router.get("/id/:business_id", async (req, res) => {
+  res.send("GET: business by id");
 });
 
 router.get("/search", async (req, res) => {
@@ -18,7 +24,7 @@ router.post("/new", async (req, res) => {
   postNewBusiness(req, res);
 });
 
-router.put("/edit", async (req, res) => {
+router.put("/edit/:business_id", async (req, res) => {
   res.send("PUT: edit existing business");
 });
 
