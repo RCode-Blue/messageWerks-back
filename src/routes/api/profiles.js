@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { body, checkSchema, validationResult } = require("express-validator");
+// const { body, checkSchema, validationResult } = require("express-validator");
 
-const Profile = require("../../db/models/Profile");
+// const Profile = require("../../db/models/Profile");
 
 const auth = require("../middleware/auth");
 const checkMongoId = require("../middleware/checkMongoId");
@@ -32,21 +32,7 @@ router.post("/", auth, async (req, res) => {
 });
 
 router.post("/user/social", auth, async (req, res) => {
-  // console.log(req.body);
-
   await editSocialMedia(req, res);
-
-  // const errors = validationResult(req);
-  // console.log(errors);
-  // // Check for validation error
-  // const errors = validationResult(req);
-  // if (!errors.isEmpty()) {
-  //   return res.status(400).json({ errors: errors.array() });
-  // }
-  // userProfile = await getProfileById(req, res);
-  // // console.log(userProfile);
-
-  // res.json(userProfile);
 });
 
 module.exports = router;

@@ -11,6 +11,7 @@ const path = require("path");
 
 const adminsPath = require("./routes/api/admins");
 const authPath = require("./routes/api/auth");
+const businessPath = require("./routes/api/businesses");
 const profilesPath = require("./routes/api/profiles");
 const usersPath = require("./routes/api/users");
 
@@ -48,10 +49,12 @@ app.use(express.json());
 // #endregion
 
 // Routes
-app.use("/api/users", usersPath);
-app.use("/api/profiles", profilesPath);
-app.use("/api/auth", authPath);
+
 app.use("/api/admins", adminsPath);
+app.use("/api/auth", authPath);
+app.use("/api/businesses", businessPath);
+app.use("/api/profiles", profilesPath);
+app.use("/api/users", usersPath);
 
 const PORT = process.env.port || 5000;
 

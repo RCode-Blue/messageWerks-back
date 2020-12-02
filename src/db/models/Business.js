@@ -3,15 +3,21 @@ const mongoose = require("mongoose");
 const BusinessSchema = new mongoose.Schema({
   owners: [
     {
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "user",
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
     },
   ],
   name: {
     type: String,
     required: true,
+  },
+  contact: {
+    telephone: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
   },
   address: {
     addressline1: {

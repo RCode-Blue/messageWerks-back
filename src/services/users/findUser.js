@@ -9,7 +9,15 @@ const byEmail = async (data) => {
 // Find by user id
 // {id: <id>}
 const byUserId = async (data) => {
-  return await User.findById(data);
+  try {
+    return await User.findById(data);
+  } catch (err) {
+    return {
+      statusCode: 500,
+      name: "Server Error",
+      message: err.message,
+    };
+  }
 };
 
 module.exports = { byEmail, byUserId };
