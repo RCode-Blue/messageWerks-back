@@ -6,12 +6,12 @@ const checkDups = require("../../../services/checkdups");
 const checkMongoId = require("../../../services/checkMongoId");
 const checkUserIds = require("../../../services/users/checkUserIds");
 
-const newBusinessOwnersChecks = require("../../../services/businesses/newBusinessOwnersChecks");
+const checkUsersArray = require("../../../services/users/checkUsersArray");
 
 const postNewBusiness = async (req, res) => {
   const { owners } = req.body;
 
-  const validity = await newBusinessOwnersChecks(owners);
+  const validity = await checkUsersArray(owners);
   console.log(validity);
 
   if (validity.status === 200) {

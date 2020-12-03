@@ -1,6 +1,8 @@
+// given an array of users, perform some checks and return with a true/fail
+
 const checkDups = require("../checkdups");
 const checkMongoId = require("../checkMongoId");
-const checkUserIds = require("../users/checkUserIds");
+const checkUserIds = require("./checkUserIds");
 
 // Check if all ID numbers are valid
 const checkAllValid = (array) => array.every((val) => val === true);

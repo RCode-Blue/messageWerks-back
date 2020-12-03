@@ -51,6 +51,10 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
+  // Path Intellisense
+  "typescript.suggest.paths": false,
+  "path-intellisense.showHiddenFiles": true,
+
   // BRACKET PAIR COLORIZER 2
   "bracket-pair-colorizer-2.forceIterationColorCycle": true,
   "bracket-pair-colorizer-2.colorMode": "Consecutive",
