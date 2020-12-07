@@ -3,17 +3,18 @@ const router = express.Router();
 
 // const checkMongoId = require("../../routes/middleware/checkMongoId");
 
-const getAllBusinesses = require("../../routes/controllers/businesses/getAllBusinesses");
+const deleteBusiness = require("../controllers/businesses/deleteBusiness");
+const getAllBusinesses = require("../controllers/businesses/getAllBusinesses");
+const getBusinessById = require("../controllers/businesses/getById");
 const postNewBusiness = require("../controllers/businesses/postNewBusiness");
-const putBusiness = require("../../routes/controllers/businesses/putBusiness");
+const putBusiness = require("../controllers/businesses/putBusiness");
 
 router.get("/all", async (req, res) => {
-  getAllBusinesses(req, res);
-  // res.send("GET: all businesses");
+  await getAllBusinesses(req, res);
 });
 
 router.get("/id/:business_id", async (req, res) => {
-  res.send("GET: business by id");
+  await getBusinessById(req, res);
 });
 
 router.get("/search", async (req, res) => {
@@ -21,17 +22,15 @@ router.get("/search", async (req, res) => {
 });
 
 router.post("/new", async (req, res) => {
-  // res.send("POST: new  business");
-  postNewBusiness(req, res);
+  await postNewBusiness(req, res);
 });
 
 router.put("/edit/:business_id", async (req, res) => {
-  putBusiness(req, res);
-  // res.send("PUT: edit existing business");
+  await putBusiness(req, res);
 });
 
 router.delete("/delete", async (req, res) => {
-  res.send("DELETE: delete existing business");
+  await deleteBusiness(req, res);
 });
 
 module.exports = router;

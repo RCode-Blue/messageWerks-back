@@ -10,7 +10,7 @@
  * @returns {Object} - User object
  */
 const User = require("../../db/models/User");
-const encrypt = require("../../scripts/encrypt");
+const encrypt = require("../encrypt");
 
 const createUser = async (req, res) => {
   const { name, email, password, status } = req.body;

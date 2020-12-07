@@ -5,7 +5,6 @@ const BusinessSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
-      unique: true,
     },
   ],
   name: {

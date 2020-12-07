@@ -1,7 +1,7 @@
 const User = require("../../../db/models/User");
 
 const findUser = require("../../../services/users/findUser");
-const encrypt = require("../../../scripts/encrypt");
+const encrypt = require("../../../services/encrypt");
 
 const putPassword = async (req, res) => {
   console.log(req.user);

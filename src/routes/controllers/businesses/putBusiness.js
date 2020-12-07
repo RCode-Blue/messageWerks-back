@@ -54,10 +54,10 @@ const putBusiness = async (req, res) => {
     response.message = "Success";
     response.data = { user: updatedUser, resData: resData };
 
-    res.status(response.status).json(response);
-  } catch {
+    return res.status(response.status).json(response);
+  } catch (err) {
     let response = responseTemplates._500;
-    res.status(response.status).json({ message: "Server Error" });
+    return res.status(response.status).json({ message: err.message });
   }
 };
 

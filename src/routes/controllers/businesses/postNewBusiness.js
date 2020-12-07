@@ -9,6 +9,7 @@ const checkUserIds = require("../../../services/users/checkUserIds");
 const checkUsersArray = require("../../../services/users/checkUsersArray");
 
 const postNewBusiness = async (req, res) => {
+  console.log(req.body);
   const { owners } = req.body;
 
   const validity = await checkUsersArray(owners);

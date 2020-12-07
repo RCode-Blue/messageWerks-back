@@ -1,0 +1,67 @@
+[
+  {
+    "group": "admin",
+    "permissions": [
+      {
+        "resource": "*",
+        "methods": "*",
+        "action": "allow"
+      }
+    ]
+  },
+  {
+    "group": "owners",
+    "permissions": [
+      {
+        "resource": "businesses/",
+        "methods": "*",
+        "action": "allow"
+      }
+    ]
+  },
+  {
+    "group": "customers",
+    "permissions": [
+      {
+        "resource": "/businesses",
+        "methods": "*",
+        "action": "deny"
+      }
+    ]
+  },
+  {
+    "group": "managers",
+    "permissions": [
+      {
+        "resource": "businesses/",
+        "methods": "*",
+        "action": "allow"
+      }
+    ]
+  },
+  {
+    "group": "guest",
+    "permissions": [
+      {
+        "resource": "auth/",
+        "methods": "*",
+        "action": "allow"
+      }
+    ]
+  },
+  {
+    "group": "anonymous",
+    "permissions": [
+      {
+        "resource": "businesses/*",
+        "methods": "*",
+        "action": "deny"
+      },
+      {
+        "resource": "profiles/*",
+        "methods": "*",
+        "action": "deny"
+      }
+    ]
+  }
+]

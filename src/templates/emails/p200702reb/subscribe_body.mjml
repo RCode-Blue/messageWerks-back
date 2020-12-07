@@ -1,0 +1,30 @@
+<mj-wrapper mj-class="body">
+<mj-section>
+  <mj-column mj-class="columns">
+    <mj-text mj-class="body-text body-text-main">
+      You received this email because you signed up for our newsletter
+    </mj-text>
+    <mj-text mj-class="body-text body-text-main">
+      Please verify your email by clicking the button below
+    </mj-text>
+    <mj-button>
+      CONFIRM
+    </mj-button>
+    <mj-text mj-class="body-text body-text-small">
+      If the email address was not submitted by you, please ignore this message
+    </mj-text>
+  </mj-column>
+</mj-section>
+<mj-section>
+  <mj-column mj-class="footer">
+    <mj-image mj-class="logo" src="https://drive.google.com/uc?export=view&id=1d_7I7P-8pk6V2gWqqkuGMI4r7PkexzXT"/>
+    <mj-navbar>
+      <mj-navbar-link href="http://google.com">Work with me</mj-navbar-link>
+      <mj-navbar-link href="http://google.com">Contact us</mj-navbar-link>
+      <mj-navbar-link href="http://google.com">Blogs</mj-navbar-link>
+      
+    </mj-navbar>
+  </mj-column>
+  
+</mj-section>
+</mj-wrapper>

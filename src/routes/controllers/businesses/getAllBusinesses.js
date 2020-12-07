@@ -3,6 +3,11 @@ const Business = require("../../../db/models/Business");
 const jsonTemplates = require("../../../config/responseTemplates.json");
 
 const getAllBusinesses = async (req, res) => {
+  // console.log(req.url); // /all
+  // console.log(req.method); // GET
+  // console.log(req.baseUrl); // /api/businesses
+  // console.log(req.originalUrl); // /api/businesses/all
+
   let response;
 
   try {
