@@ -1,0 +1,26 @@
+<mj-section mj-class="body">
+  <mj-column>
+    <mj-text
+       mj-class="bodytext">
+      You received this email because we got an unsubscribe message from you
+    </mj-text>
+    <mj-text
+       mj-class="bodytext">
+      If the request was not submitted by you, please contact us immediately
+    </mj-text>
+
+    <mj-text mj-class="footer">
+      <img 
+        src="https://drive.google.com/uc?export=view&id=1d_7I7P-8pk6V2gWqqkuGMI4r7PkexzXT"
+        style="width: 40px;
+        vertical-align: middle"
+      />
+      <mj-navbar>
+        <mj-navbar-link href="http://google.com">Work with me</mj-navbar-link>
+        <mj-navbar-link href="http://google.com">Contact us</mj-navbar-link>
+        <mj-navbar-link href="http://google.com">Blogs</mj-navbar-link>
+      </mj-navbar>
+    </mj-text>
+  </mj-column>
+
+</mj-section>
