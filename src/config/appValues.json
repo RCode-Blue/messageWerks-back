@@ -1,0 +1,90 @@
+{
+  "user": {
+    "maxLogin": 3,
+    "minPasswordLength": 8,
+    "user_status": [
+      {
+        "code": 190,
+        "designation": "Active",
+        "description": "Account is active"
+      },
+      {
+        "code": 150,
+        "designation": "Pending",
+        "description": "Email confirmation pending"
+      },
+
+      {
+        "code": 120,
+        "designation": "Locked out",
+        "description": "Password retry max exceeded"
+      },
+      {
+        "code": 110,
+        "designation": "Disabled",
+        "description": "Account disabled"
+      }
+    ],
+    "subscriber_status": [
+      {
+        "code": 290,
+        "designation": "Active",
+        "description": "Account is active and receiving emails"
+      },
+      {
+        "code": 215,
+        "designation": "Silent",
+        "description": "Account does not receive emails from this list"
+      },
+      {
+        "code": 210,
+        "designation": "Disabled",
+        "description": "Account is disabled"
+      }
+    ],
+    "acl_role": [
+      {
+        "code": 590,
+        "roleName": "administrator",
+        "description": "Full permissions"
+      },
+      {
+        "code": 580,
+        "roleName": "client",
+        "description": "Permissions to manage business"
+      },
+      {
+        "code": 570,
+        "roleName": "subscriber",
+        "description": "Email recipient"
+      },
+      {
+        "code": 500,
+        "roleName": "",
+        "description": "No role specified"
+      }
+    ],
+    "client_permissions": [
+      {
+        "code": 890,
+        "designation": "Owner",
+        "description": "Owner with full permissions to own business"
+      },
+      {
+        "code": 880,
+        "designation": "Manager",
+        "description": "Delegated permissions to manage business"
+      }
+    ]
+  },
+
+  "session": {
+    "sessionDuration": 360000
+  },
+
+  "token": {
+    "options": {
+      "expiresIn": "5 days"
+    }
+  }
+}

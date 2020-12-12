@@ -35,6 +35,12 @@
     "message": null,
     "data": null
   },
+  "_409": {
+    "status": 409,
+    "status_name": "Conflict",
+    "message": null,
+    "data": null
+  },
   "_500": {
     "status": 500,
     "status_name": "Internal Server Error",

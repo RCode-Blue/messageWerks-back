@@ -37,7 +37,7 @@ connectDB();
 
 // Init middleware
 app.use(express.json());
-app.use(acl.authorize);
+// app.use(acl.authorize);
 
 // app.get("/", (req, res) => res.send("API running"));
 
@@ -56,8 +56,8 @@ app.use(acl.authorize);
 // Routes
 
 app.use("/api/auth", authPath);
-app.use("/api/businesses", businessPath);
-app.use("/api/profiles", profilesPath);
+// app.use("/api/businesses", businessPath);
+// app.use("/api/profiles", profilesPath);
 app.use("/api/users", usersPath);
 
 const PORT = process.env.port || 5000;

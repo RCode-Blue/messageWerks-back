@@ -1,18 +1,22 @@
 /**
  * @description Performs user login<br/>Matches form data with password, and generates a user token
- * @name login
- * @exports login
+ * @function login
+ * @returns {Object} - User token
+ *
  * @requires bcrypt
  * @requires jsonwebtoken
- * @param {Object} req - Email and password
- * @throws {Object} - Error if: <ul><li>User does not exist</li><li>Wrong password</li></ul>
- * @returns {Object} - User token
+ *
+ * @param {object} req - Email and password
+ * @throws {object} Error if user does not exist
+ * @throws {object} Error if wrong password
+ *
  */
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const User = require("../../db/models/User");
+const appValues = require("../../config/appValues.json");
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -34,16 +38,13 @@ const login = async (req, res) => {
       id: user.id,
     },
   };
+  const key = process.env.JWT_SECRET;
+  const options = appValues.token.options;
 
-  jwt.sign(
-    payload,
-    process.env.JWT_SECRET,
-    { expiresIn: "5 days" },
-    (err, token) => {
-      if (err) throw err;
-      res.json({ token });
-    }
-  );
+  jwt.sign(payload, key, options, (err, token) => {
+    if (err) throw err;
+    res.json({ token });
+  });
   // } catch (err) {
   //   console.error(err.message);
   //   res.status(500).send("Server error");

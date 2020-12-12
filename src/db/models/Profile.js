@@ -16,37 +16,30 @@ const ProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
   },
+  name: {
+    firstname: {
+      type: String,
+      required: true,
+    },
+    middlename: {
+      type: String,
+    },
+    familyname: {
+      type: String,
+      required: true,
+    },
+  },
   address: {
-    addressline1: {
-      type: String,
-    },
-    addressline2: {
-      type: String,
-    },
-    city: {
-      type: String,
-    },
-    state: {
-      type: String,
-    },
-    country: {
-      type: String,
-    },
-    zip: {
-      type: String,
-    },
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "address",
   },
   dob: {
     type: Date,
   },
   socialmedia: [
     {
-      media: {
-        type: String,
-      },
-      userid: {
-        type: String,
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "socialmedia",
     },
   ],
 });

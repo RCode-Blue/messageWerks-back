@@ -1,30 +1,41 @@
+/**
+ * @description
+ */
+
 const findUser = require("../../../services/users/findUser");
 
+const jsonTemplates = require("../../../config/responseTemplates.json");
+
 const putDetails = async (req, res) => {
-  const { email, newemail, newname } = req.body;
+  const { email, newemail, role } = req.body;
+  let response;
 
   let user = await findUser.byEmail({ email });
   if (!user) {
-    return res.status(400).json({ errors: [{ msg: "user not found" }] });
+    response = jsonTemplates._400;
+    response.message = "User not found";
+    return res.status(response.status).json(response);
   }
 
   if (await findUser.byEmail({ newemail })) {
-    return (
-      res.status(400), json({ errors: [{ msg: "new email already in use" }] })
-    );
+    response = jsonTemplates._400;
+    response.message = "Email already in use";
+    return res.status(response.status), json(response);
   }
 
   user.email = newemail;
-  user.name.firstname = newname.newfirstname;
-  user.name.middlename = newname.newmiddlename;
-  user.name.familyname = newname.newfamilyname;
+  user.role = newrole;
 
   try {
     await user.save();
-    console.log(user);
-    res.json(user);
+    response = jsonTemplates._200;
+    response.message = "Success";
+    response.data = user;
+    res.status(response.status).json(response);
   } catch {
-    res.status(500).send("Server error");
+    response = jsonTemplates._500;
+    response.message = "Server error";
+    res.status(response.status).json(response);
   }
 };
 

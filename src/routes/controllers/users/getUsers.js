@@ -1,15 +1,33 @@
+/**
+ * @description Retrieves all users
+ * @module getUsers
+ * @async
+ *
+ * @requires User
+ * @borrows User
+ * @returns {object} users
+ * @param {object} req Express request object
+ * @param {object} res Express response object
+ * @throws {object} Error if no user found
+ */
 const User = require("../../../db/models/User");
 
+const createJson = require("../../../services/createJsonResponse");
+
 const getUsers = async (req, res) => {
+  let response;
   try {
     const users = await User.find({});
     if (!users) {
-      return res.status(400).json({ errors: "User(s) not found" });
+      response = createJson("_400", { errors: "User(s) not found" });
+      return res.status(response.status).json(response);
     }
-    res.json(users);
+    response = createJson("_200", "Success", { users });
+    res.status(response.status).json(response);
   } catch (err) {
     console.error(err.message);
-    return res.status(500).json({ msg: "Server Error" });
+    response = createJson(_500, "Server error");
+    return res.status(response.status).json(response);
   }
 };
 

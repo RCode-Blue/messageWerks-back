@@ -1,5 +1,5 @@
 /**
- * @Description Creates / Updates user profile
+ * @description Creates / Updates user profile
  * @name postProfile
  * @exports postProfile
  * @requires Profile
@@ -8,8 +8,11 @@
  */
 const Profile = require("../../../db/models/Profile");
 
+const jsonTemplates = require("../../../config/responseTemplates.json");
+
 const postProfile = async (req, res) => {
   const { address, dob, socialmedia } = req.body;
+  let response;
 
   const data = {
     user: req.user.id,
@@ -31,6 +34,11 @@ const postProfile = async (req, res) => {
 
   try {
     await Profile.findOneAndUpdate(filter, data, settings);
+
+    response = jsonTemplates._200;
+    response.message = "Success";
+    response.data = newProfile;
+    res.status(response.status).json(response);
 
     res.json(newProfile);
   } catch (err) {

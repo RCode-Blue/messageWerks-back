@@ -11,33 +11,32 @@ const mongoose = require("mongoose");
  * @description User schema
  * @constructor User
  */
-const UserSchema = new mongoose.Schema({
-  name: {
-    firstname: {
+const UserSchema = new mongoose.Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
       type: String,
       required: true,
     },
-    middlename: {
+    acl_role: {
+      type: Number,
+      default: 500,
+    },
+    user_status: {
+      type: Number,
+      default: 150,
+    },
+    mj_contact_id: {
       type: String,
     },
-    familyname: {
-      type: String,
-      required: true,
-    },
   },
-
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  status: {
-    type: String,
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 module.exports = mongoose.model("user", UserSchema);

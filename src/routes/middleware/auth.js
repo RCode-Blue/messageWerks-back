@@ -1,12 +1,15 @@
 /**
- * @description Middleware for authentication<br/>Takes in a token and returns a user object
+ * @description Middleware for authentication
+ *
  * @module auth
- * @function
+ * @returns {Object} - User object
+ *
+ * @requires jsonwebtoken
+ *
  * @param {Object} req - Express request object: User token
  * @param {Object} res - Express response object
- * @param {Function} next Next Express middleware
- * @param {Function} next - Express next middleware function
- * @return {Object} - User object
+ * @param {Function} next - Next Express middleware / function
+ *
  */
 const jwt = require("jsonwebtoken");
 
