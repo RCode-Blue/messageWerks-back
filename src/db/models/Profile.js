@@ -36,7 +36,7 @@ const ProfileSchema = new mongoose.Schema({
   dob: {
     type: Date,
   },
-  socialmedia: [
+  social_media: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "socialmedia",

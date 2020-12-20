@@ -7,21 +7,29 @@
  * @returns {Object} profile - User profile
  */
 const Profile = require("../../../db/models/Profile");
+const jsonResponse = require("../../../services/createJsonResponse");
 
 const getMyProfile = async (req, res) => {
+  let response;
   try {
     const profile = await Profile.findOne({
       user: req.user.id,
     }).populate("user");
     if (!profile) {
-      return res.status(400).json({
-        msg: "Profile not found",
-      });
+      response = jsonResponse("_400", "Profile not found", req.user);
+      return res.status(response.status).json(response);
+      // return res.status(400).json({
+      //   msg: "Profile not found",
+      // });
     }
-    res.json(profile);
+    reponse = jsonResponse("_200", "Success", { user, profile });
+    res.status(response.status).json(response);
+    // res.json(profile);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server Error");
+    response = jsonResponse("_500", "Server error");
+    res.status(res.status).json(response);
+    // res.status(500).send("Server Error");
   }
 };
 

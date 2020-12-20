@@ -8,24 +8,23 @@
  */
 const Profile = require("../../../db/models/Profile");
 
-const jsonTemplates = require("../../../config/responseTemplates.json");
+// const jsonTemplates = require("../../../config/responseTemplates.json");
+const jsonResponse = require("../../../services/createJsonResponse");
 
 const postProfile = async (req, res) => {
-  const { address, dob, socialmedia } = req.body;
+  const { type, name, address, dob, social_media } = req.body;
   let response;
 
   const data = {
     user: req.user.id,
-    address: {
-      addressline1: address.addressline1,
-      addressline2: address.addressline2,
-      city: address.city,
-      state: address.state,
-      country: address.country,
-      zip: address.zip,
+    name: {
+      firstname: name.firstname,
+      middlename: name.middlename,
+      familyname: name.familyname,
     },
+    address,
     dob,
-    socialmedia,
+    social_media,
   };
 
   const newProfile = new Profile(data);
@@ -35,15 +34,12 @@ const postProfile = async (req, res) => {
   try {
     await Profile.findOneAndUpdate(filter, data, settings);
 
-    response = jsonTemplates._200;
-    response.message = "Success";
-    response.data = newProfile;
+    response = jsonResponse("_200", "Success", newProfile);
     res.status(response.status).json(response);
-
-    res.json(newProfile);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server Error");
+    response = jsonResponse("_500", "Server error");
+    res.status(response.status).json(response);
   }
 };
 

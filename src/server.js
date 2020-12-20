@@ -13,6 +13,7 @@ const path = require("path");
 const authPath = require("./routes/api/auth");
 const businessPath = require("./routes/api/businesses");
 const profilesPath = require("./routes/api/profiles");
+const socialMediaPath = require("./routes/api/socialMedia");
 const usersPath = require("./routes/api/users");
 
 const aclConfig = require("./config/acl.config.json");
@@ -57,7 +58,8 @@ app.use(express.json());
 
 app.use("/api/auth", authPath);
 // app.use("/api/businesses", businessPath);
-// app.use("/api/profiles", profilesPath);
+app.use("/api/profiles", profilesPath);
+app.use("/api/socialmedia/", socialMediaPath);
 app.use("/api/users", usersPath);
 
 const PORT = process.env.port || 5000;

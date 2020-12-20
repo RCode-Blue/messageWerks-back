@@ -15,24 +15,38 @@ const getProfileById = require("../controllers/profiles/getProfileById");
 const getAllProfiles = require("../controllers/profiles/getAllProfiles");
 const postProfile = require("../controllers/profiles/postProfile");
 
+// Get profile of currently logged in user
 router.get("/me", auth, async (req, res) => {
   await getMyProfile(req, res);
 });
 
+// Create / edit profile of currently logged in user
+router.post("/me", auth, async (req, res) => {
+  await postMyProfile(req, res);
+});
+
+// Get profile by user id
 router.get("/user/:user_id", checkMongoId, async (req, res) => {
   await getProfileById(req, res);
 });
 
+// Get all profiles
 router.get("/", auth, async (req, res) => {
   await getAllProfiles(req, res);
 });
 
-router.post("/", auth, async (req, res) => {
+// Post new profile
+router.post("/new", auth, async (req, res) => {
   await postProfile(req, res);
 });
 
-router.post("/user/social", auth, async (req, res) => {
-  await editSocialMedia(req, res);
+// router.post("/user/social", auth, async (req, res) => {
+//   await editSocialMedia(req, res);
+// });
+
+// Search user profiles
+router.get("/users/search", auth, async (req, res) => {
+  res.send("User search path");
 });
 
 module.exports = router;

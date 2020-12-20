@@ -19,8 +19,10 @@
 
 const findUser = require("../../../services/users/findUser");
 const encrypt = require("../../../services/encrypt");
+const changePassword = require("../../../services/users/changePassword");
 
-const jsonTemplates = require("../../../config/responseTemplates.json");
+// const jsonTemplates = require("../../../config/responseTemplates.json");
+const jsonResponse = require("../../../services/createJsonResponse");
 
 const putMyPassword = async (req, res) => {
   let response;
@@ -29,26 +31,18 @@ const putMyPassword = async (req, res) => {
 
   // Check if repeated passwords are same
   if (password1 !== password2) {
-    response = jsonTemplates._400;
-    response.message = "Passwords don't match";
+    response = jsonResponse("_400", "Passwords don't match");
     return res.status(response.status).json(response);
   }
 
   try {
-    let user = await findUser.byUserId(req.user.id);
-    const encryptedPassword = await encrypt(password1);
-
-    user.password = encryptedPassword;
-    await user.save();
-
-    response = jsonTemplates._200;
-    response.message = "Success";
-    response.data = user;
+    let user = changePassword(req.user.id, password1);
+    response = jsonResponse("_200", "Success", user);
     res.status(response.status).json(response);
   } catch (err) {
     console.error(err.message);
-    response = jsonTemplates._500;
-    response.message = "Server error";
+
+    response = jsonResponse("_500", "Server error", err);
     res.status(response.status).json(response);
   }
 };

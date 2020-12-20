@@ -2,10 +2,10 @@
 
 const checkIdExists = require("./checkIdExists");
 
-const checkUserIds = async (owners) => {
+const checkUserIds = async (userIds) => {
   let results = [];
   await Promise.all(
-    owners.map(async (id) => {
+    userIds.map(async (id) => {
       let value = null;
       let idCheck = await checkIdExists(id);
       idCheck.status === 200 ? results.push(true) : results.push(false);

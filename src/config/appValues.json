@@ -1,4 +1,50 @@
 {
+  "emailTemplates": {
+    "type": {
+      "_01": {
+        "name": "marketing",
+        "mongoUserAccount": "",
+        "mongoReaderAccount": ""
+      },
+      "_02": {
+        "name": "transactional",
+        "mongoUserAccount": "",
+        "mongoReaderAccount": ""
+      }
+    }
+  },
+
+  "session": {
+    "sessionDuration": 360000
+  },
+
+  "subscriber": {
+    "status": {
+      "_01": {
+        "name": "pending",
+        "description": "not yet confirmed"
+      },
+      "_02": {
+        "name": "active",
+        "description": "active subscription"
+      },
+      "_03": {
+        "name": "silent",
+        "description": "no subscriptions"
+      },
+      "_04": {
+        "name": "inactive",
+        "description": "not active"
+      }
+    }
+  },
+
+  "token": {
+    "options": {
+      "expiresIn": "5 days"
+    }
+  },
+
   "user": {
     "maxLogin": 3,
     "minPasswordLength": 8,
@@ -76,15 +122,5 @@
         "description": "Delegated permissions to manage business"
       }
     ]
-  },
-
-  "session": {
-    "sessionDuration": 360000
-  },
-
-  "token": {
-    "options": {
-      "expiresIn": "5 days"
-    }
   }
 }
