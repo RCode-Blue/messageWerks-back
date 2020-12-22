@@ -1,47 +1,41 @@
 const mongoose = require("mongoose");
 
-const BusinessSchema = new mongoose.Schema({
-  owners: [
-    {
+const BusinessAddressSchema = new mongoose.Schema({
+  address: {
+    id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
+      ref: "address",
     },
-  ],
+    addresstype: {
+      type: String,
+    },
+    notes: {
+      type: String,
+    },
+  },
+});
+
+const BusinessSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
-  contact: {
-    telephone: {
-      type: String,
-    },
-    email: {
-      type: String,
-    },
-  },
-  address: {
-    addressline1: {
-      type: String,
-    },
-    addressline2: {
-      type: String,
-    },
-    city: {
-      type: String,
-    },
-    state: {
-      type: String,
-    },
-    country: {
-      type: String,
-    },
-    zip: {
-      type: String,
-    },
-  },
   url: {
     type: String,
   },
+  industry: {
+    type: [String],
+  },
+  status: {
+    type: Number,
+  },
+  api_key: {
+    type: String,
+  },
+  private_key: {
+    type: String,
+  },
+  addresses: [BusinessAddressSchema],
 });
 
 module.exports = mongoose.model("business", BusinessSchema);

@@ -1,42 +1,22 @@
 {
-  "emailTemplates": {
+  "email_templates": {
     "type": {
-      "_01": {
+      "01": {
         "name": "marketing",
         "mongoUserAccount": "",
         "mongoReaderAccount": ""
       },
-      "_02": {
+      "02": {
         "name": "transactional",
         "mongoUserAccount": "",
         "mongoReaderAccount": ""
       }
-    }
+    },
+    "status": {}
   },
 
   "session": {
     "sessionDuration": 360000
-  },
-
-  "subscriber": {
-    "status": {
-      "_01": {
-        "name": "pending",
-        "description": "not yet confirmed"
-      },
-      "_02": {
-        "name": "active",
-        "description": "active subscription"
-      },
-      "_03": {
-        "name": "silent",
-        "description": "no subscriptions"
-      },
-      "_04": {
-        "name": "inactive",
-        "description": "not active"
-      }
-    }
   },
 
   "token": {
@@ -47,80 +27,100 @@
 
   "user": {
     "maxLogin": 3,
-    "minPasswordLength": 8,
-    "user_status": [
-      {
-        "code": 190,
-        "designation": "Active",
-        "description": "Account is active"
-      },
-      {
-        "code": 150,
-        "designation": "Pending",
-        "description": "Email confirmation pending"
-      },
+    "minPasswordLength": 8
+  },
 
-      {
-        "code": 120,
-        "designation": "Locked out",
-        "description": "Password retry max exceeded"
-      },
-      {
-        "code": 110,
-        "designation": "Disabled",
-        "description": "Account disabled"
-      }
-    ],
-    "subscriber_status": [
-      {
-        "code": 290,
-        "designation": "Active",
-        "description": "Account is active and receiving emails"
-      },
-      {
-        "code": 215,
-        "designation": "Silent",
-        "description": "Account does not receive emails from this list"
-      },
-      {
-        "code": 210,
-        "designation": "Disabled",
-        "description": "Account is disabled"
-      }
-    ],
-    "acl_role": [
-      {
-        "code": 590,
-        "roleName": "administrator",
-        "description": "Full permissions"
-      },
-      {
-        "code": 580,
-        "roleName": "client",
-        "description": "Permissions to manage business"
-      },
-      {
-        "code": 570,
-        "roleName": "subscriber",
-        "description": "Email recipient"
-      },
-      {
-        "code": 500,
-        "roleName": "",
-        "description": "No role specified"
-      }
-    ],
-    "client_permissions": [
-      {
-        "code": 890,
-        "designation": "Owner",
-        "description": "Owner with full permissions to own business"
-      },
-      {
-        "code": 880,
-        "designation": "Manager",
-        "description": "Delegated permissions to manage business"
-      }
-    ]
+  "permission": {
+    "_90": {
+      "code": 90,
+      "name": "owner",
+      "description": "owner with full permissions to own business"
+    },
+    "_80": {
+      "code": 80,
+      "name": "owner-demo",
+      "description": "owner but view only"
+    },
+    "_70": {
+      "code": 70,
+      "name": "manager",
+      "description": "Delegated permissions to manage business"
+    },
+    "_60": {
+      "code": 60,
+      "name": "manager-demo",
+      "description": "manager but view only"
+    }
+  },
+
+  "role": {
+    "90": {
+      "code": 90,
+      "role": "administrator",
+      "description": "full admin permissions"
+    },
+    "80": {
+      "code": 80,
+      "role": "administrator-demo",
+      "description": "full view permissions only"
+    },
+    "60": {
+      "code": 60,
+      "role": "client",
+      "description": "business owner or manager"
+    },
+    "50": {
+      "code": 50,
+      "role": "client-demo",
+      "description": "can view own business data"
+    },
+    "40": {
+      "code": 40,
+      "role": "subscriber",
+      "description": "email recipient"
+    },
+    "20": {
+      "code": 20,
+      "role": "visitor",
+      "description": "visitor"
+    },
+    "10": {
+      "code": 10,
+      "role": "anonymous",
+      "description": "default"
+    }
+  },
+
+  "account_status": {
+    "90": {
+      "code": 90,
+      "name": "active",
+      "description": "account is active"
+    },
+    "50": {
+      "code": 50,
+      "name": "pending",
+      "description": "account is pending"
+    },
+    "25": {
+      "code": 25,
+      "name": "silent",
+      "description": "account is not sending or receiving emails"
+    },
+    "12": {
+      "code": 12,
+      "name": "frozen",
+      "description": "account is frozen"
+    },
+    "10": {
+      "code": 10,
+      "name": "disabled",
+      "description": "account is disabled"
+    }
+  },
+
+  "business": {
+    "source_url_dev": "",
+    "source_url_prod": ""
   }
 }

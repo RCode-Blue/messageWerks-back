@@ -3,6 +3,7 @@ const checkMongoId = require("../checkMongoId");
 
 const checkPrincipal = require("../../services/socialMedia/checkPrincipal");
 const checkUserIds = require("../../services/users/checkUserIds");
+const upsertSocialMediaItem = require("./upsertSocialMediaItem");
 
 const upsertSocialMedia = async (socialMedia) => {
   const checkSocialMedia = async (testResults) => {
@@ -22,18 +23,25 @@ const upsertSocialMedia = async (socialMedia) => {
   let status = 400;
   let testResult, testData, areAccountsLegit;
 
+  // Check for bad principal data
   testResult = await checkPrincipal(socialMedia);
   if (testResult.errors.length > 0) {
     testData = testResult;
     return { status, testData };
   }
 
+  // Check if accounts are valid
   areAccountsLegit = await checkSocialMedia(testResult);
-
   if (areAccountsLegit.includes(false)) {
     testData = { AccountErrs: [...areAccountsLegit] };
     return { status, testData };
   }
+
+  // Update
+  socialMedia.forEach((item) => {
+    upsertSocialMediaItem(item);
+  });
+
   return testResult;
 };
 

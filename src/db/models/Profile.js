@@ -15,6 +15,7 @@ const ProfileSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
+    required: true,
   },
   name: {
     firstname: {
@@ -36,12 +37,6 @@ const ProfileSchema = new mongoose.Schema({
   dob: {
     type: Date,
   },
-  social_media: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "socialmedia",
-    },
-  ],
 });
 
 module.exports = mongoose.model("profile", ProfileSchema);

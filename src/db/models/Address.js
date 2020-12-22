@@ -19,6 +19,12 @@ const AddressSchema = new mongoose.Schema({
   zip: {
     type: String,
   },
+  telephone: {
+    type: String,
+  },
+  email: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("address", AddressSchema);

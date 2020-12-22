@@ -1,9 +1,27 @@
 const SocialMedia = require("../../db/models/SocialMedia");
 
-const createSocialMedia = async (req, res) => {
-  const { type, media } = req.body;
+const createSocialMediaItem = async (socialMedia) => {
+  const { media, userid, principal } = socialMedia;
+  // const { userAccount } = principal;
+  let filter;
+  // console.log(media, ":", userid, ":");
+  if (principal.businessAccount) {
+    filter = {
+      media: media,
+      userid: userid,
+    };
+  }
+  if (principal.userAccount) {
+    filter = {
+      media,
+      userid,
+      "principal.userAccount": principal.userAccount,
+    };
+  }
+
+  console.log(await SocialMedia.find(filter));
 
   const jsonResponse = require("../../config/responseTemplates.json");
 };
 
-module.exports = createSocialMedia;
+module.exports = createSocialMediaItem;

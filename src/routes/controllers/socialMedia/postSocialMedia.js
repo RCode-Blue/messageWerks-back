@@ -29,7 +29,7 @@ const postSocialMedia = async (req, res) => {
   }
 
   let result = await upsertSocialMedia(body.socialMedia);
-  console.log(result);
+  // console.log(result);
   if ((result.status = 400)) {
     response = createJsonResponse("_400", "Bad request data", result.testData);
     return res.status(response.status).json(response);

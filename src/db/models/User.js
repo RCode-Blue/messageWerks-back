@@ -22,18 +22,26 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    aclRoles: {
-      type: Number,
-      default: 500,
+    profile: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "profile",
     },
-    failedLogins: {
-      type: Number,
+    social_media: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "social_media",
+    },
+    acl_roles: {
+      type: [String],
+      default: "_10",
     },
     status: {
-      type: Number,
-      default: 150,
+      type: String,
+      default: "_50",
     },
-    mjContactId: {
+    failed_logins: {
+      type: Number,
+    },
+    mj_contact_id: {
       type: String,
     },
   },
