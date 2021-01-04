@@ -6,7 +6,10 @@ const BusinessAddressSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "address",
     },
-    addresstype: {
+    email: {
+      type: String,
+    },
+    address_type: {
       type: String,
     },
     notes: {

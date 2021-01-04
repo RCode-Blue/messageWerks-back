@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const AddressSchema = new mongoose.Schema({
-  addressline1: {
+  address_line1: {
     type: String,
   },
-  addressline2: {
+  address_line2: {
     type: String,
   },
   city: {
@@ -22,9 +22,6 @@ const AddressSchema = new mongoose.Schema({
   telephone: {
     type: String,
   },
-  email: {
-    type: String,
-  },
 });
 
-module.exports = mongoose.model("address", AddressSchema);
+module.exports = AddressSchema;

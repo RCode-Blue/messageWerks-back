@@ -13,6 +13,7 @@ const checkSocialFields = (req) => {
       presence: { allowEmpty: false },
     },
     userid: {
+      presence: false,
       presence: { allowEmpty: false },
     },
   };

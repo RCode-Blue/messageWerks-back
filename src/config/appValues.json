@@ -30,97 +30,201 @@
     "minPasswordLength": 8
   },
 
-  "permission": {
-    "_90": {
+  "acl_role": {
+    "administrator": {
       "code": 90,
-      "name": "owner",
-      "description": "owner with full permissions to own business"
+      "name": "administrator",
+      "description": "full admin permissions"
     },
-    "_80": {
+    "manager": {
       "code": 80,
-      "name": "owner-demo",
-      "description": "owner but view only"
-    },
-    "_70": {
-      "code": 70,
       "name": "manager",
-      "description": "Delegated permissions to manage business"
+      "description": "permission to business sites"
     },
-    "_60": {
-      "code": 60,
-      "name": "manager-demo",
+    "demo_administrator": {
+      "code": 59,
+      "name": "demo_administrator",
+      "description": "administtrator but view only"
+    },
+    "demo_manager": {
+      "code": 58,
+      "name": "demo_manager",
       "description": "manager but view only"
+    },
+    "anonymous": {
+      "code": 10,
+      "name": "anonymous",
+      "description": "default. no permissions"
     }
   },
 
-  "role": {
+  "business_role": {
     "90": {
       "code": 90,
-      "role": "administrator",
-      "description": "full admin permissions"
+      "name": "administrator",
+      "description": "full permissions"
     },
     "80": {
       "code": 80,
-      "role": "administrator-demo",
-      "description": "full view permissions only"
+      "name": "owner",
+      "description": "full permission to own business, can assign delegate"
     },
-    "60": {
-      "code": 60,
-      "role": "client",
-      "description": "business owner or manager"
+    "70": {
+      "code": 70,
+      "name": "supervisor",
+      "description": "delegated permissions to manage business"
     },
-    "50": {
-      "code": 50,
-      "role": "client-demo",
-      "description": "can view own business data"
+    "58": {
+      "code": 57,
+      "name": "demo_owner",
+      "description": "owner but view only"
     },
-    "40": {
-      "code": 40,
-      "role": "subscriber",
-      "description": "email recipient"
-    },
-    "20": {
-      "code": 20,
-      "role": "visitor",
-      "description": "visitor"
-    },
-    "10": {
-      "code": 10,
-      "role": "anonymous",
-      "description": "default"
+    "57": {
+      "code": 58,
+      "name": "demo_supervisor",
+      "description": "supervisor but view only"
     }
   },
 
-  "account_status": {
-    "90": {
-      "code": 90,
+  "user_status": {
+    "9": {
+      "code": 9,
       "name": "active",
       "description": "account is active"
     },
-    "50": {
-      "code": 50,
+    "7": {
+      "code": 7,
       "name": "pending",
-      "description": "account is pending"
+      "description": "waiting for user action"
     },
-    "25": {
-      "code": 25,
-      "name": "silent",
-      "description": "account is not sending or receiving emails"
+    "3": {
+      "code": 3,
+      "name": "disabled",
+      "description": "account disabled by user"
     },
-    "12": {
-      "code": 12,
-      "name": "frozen",
-      "description": "account is frozen"
+    "2": {
+      "code": 2,
+      "name": "locked out",
+      "description": "account disabled by system"
     },
-    "10": {
-      "code": 10,
+    "0": {
+      "code": 0,
       "name": "disabled",
       "description": "account is disabled"
+    }
+  },
+
+  "business_status": {
+    "9": {
+      "code": 9,
+      "name": "active",
+      "description": ""
+    },
+    "7": {
+      "code": 7,
+      "name": "pending",
+      "description": ""
+    },
+    "3": {
+      "code": 3,
+      "name": "disabled",
+      "description": "disabled by user"
+    },
+    "2": {
+      "code": 2,
+      "name": "locked out - security",
+      "description": "locked out by system"
+    },
+    "1": {
+      "code": 1,
+      "name": "frozen",
+      "description": ""
+    },
+    "0": {
+      "code": 0,
+      "name": "disabled",
+      "description": ""
+    }
+  },
+
+  "mailing_list_status": {
+    "9": {
+      "code": 9,
+      "name": "active",
+      "description": "enabled and in use"
+    },
+    "8": {
+      "code": 8,
+      "name": "inactive",
+      "description": "not activated"
+    },
+    "7": {
+      "code": 7,
+      "name": "pending",
+      "description": "pending action from user"
+    },
+    "3": {
+      "code": 3,
+      "name": "disabled",
+      "description": "disabled by user"
+    },
+    "2": {
+      "code": 2,
+      "name": "locked out - security",
+      "description": "locked out by system"
+    },
+    "1": {
+      "code": 1,
+      "name": "frozen",
+      "description": ""
+    },
+    "0": {
+      "code": 0,
+      "name": "disabled",
+      "description": ""
+    }
+  },
+
+  "subscriber_status": {
+    "9": {
+      "code": 9,
+      "name": "active",
+      "description": ""
+    },
+    "7": {
+      "code": 7,
+      "name": "pending",
+      "description": ""
+    },
+    "4": {
+      "code": 4,
+      "name": "unsubscribed",
+      "description": ""
+    },
+    "1": {
+      "code": 1,
+      "name": "frozen",
+      "description": ""
+    },
+    "0": {
+      "code": 0,
+      "name": "disabled",
+      "description": ""
     }
   },
 
   "business": {
     "source_url_dev": "",
     "source_url_prod": ""
+  },
+
+  "param_types": {
+    "contact_id": "Contact",
+    "social_media_id": "Social_Media",
+    "address_id": "Address",
+    "user_id": "User",
+    "business_id": "Business",
+    "mailing_list_id": "Mailing_list",
+    "email_template_id": "Email_Template"
   }
 }

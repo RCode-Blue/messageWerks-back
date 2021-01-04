@@ -12,10 +12,12 @@ const mongoose = require("mongoose");
  * @constructor Profile
  */
 const ProfileSchema = new mongoose.Schema({
-  user: {
+  dob: {
+    type: Date,
+  },
+  address: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
-    required: true,
+    ref: "address",
   },
   name: {
     firstname: {
@@ -29,13 +31,6 @@ const ProfileSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-  },
-  address: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "address",
-  },
-  dob: {
-    type: Date,
   },
 });
 

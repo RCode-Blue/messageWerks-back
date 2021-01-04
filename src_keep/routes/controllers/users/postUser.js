@@ -23,7 +23,6 @@ const { validationResult } = require("express-validator");
 
 const User = require("../../../db/models/User");
 const createUser = require("../../../services/users/createUser");
-const jsonTemplates = require("../../../config/responseTemplates.json");
 const jsonResponse = require("../../../services/createJsonResponse");
 
 const appValues = require("../../../config/appValues.json");
@@ -76,7 +75,10 @@ const postUser = async (req, res) => {
       }
     );
   } catch (err) {
-    response = jsonResponse("_500", "Error", err);
+    response = jsonResponse("_500", "Error", {
+      source: "postUser",
+      error: err,
+    });
     res.status(response.status).json(response);
   }
 };

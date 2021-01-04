@@ -13,38 +13,28 @@ const mongoose = require("mongoose");
  */
 const UserSchema = new mongoose.Schema(
   {
-    email: {
-      type: String,
+    contact: {
+      type: mongoose.Types.ObjectId,
+      ref: "contact",
       required: true,
-      unique: true,
     },
     password: {
       type: String,
-      required: true,
     },
-    profile: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "profile",
-    },
-    social_media: {
-      type: [mongoose.Schema.Types.ObjectId],
-      ref: "social_media",
-    },
-    acl_roles: {
-      type: [String],
-      default: "_10",
+    acl_role: {
+      type: String,
     },
     status: {
-      type: String,
-      default: "_50",
+      type: Number,
     },
     failed_logins: {
       type: Number,
     },
-    mj_contact_id: {
+    reset_code: {
       type: String,
     },
   },
+
   {
     timestamps: true,
   }

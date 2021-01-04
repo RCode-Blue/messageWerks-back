@@ -1,5 +1,5 @@
 /**
- * @description Verifies if an ID is valid
+ * @description Verifies if a user ID is valid
  * @module checkMongoId
  * @requires mongoose
  * @function
@@ -11,18 +11,11 @@
  */
 
 const mongoose = require("mongoose");
-const jsonResponse = require("../../services/createJsonResponse");
 
 module.exports = function (req, res, next) {
-  let response;
-
-  const key = Object.keys(req.params)[0];
-  const mongoId = req.params[key];
-
-  // Check if id is valid
+  const mongoId = req.params.user_id;
   if (!mongoose.Types.ObjectId.isValid(mongoId)) {
-    response = jsonResponse("400", "Invalid ID");
-    return res.status(response.status).json(response);
+    return res.status(400).json({ msg: "invalid ID" });
   }
   next();
 };
