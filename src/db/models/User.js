@@ -33,6 +33,10 @@ const UserSchema = new mongoose.Schema(
     reset_code: {
       type: String,
     },
+    business: {
+      type: mongoose.Types.ObjectId,
+      ref: "business",
+    },
   },
 
   {

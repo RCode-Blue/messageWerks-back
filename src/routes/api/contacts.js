@@ -19,7 +19,7 @@ router.get("/:contact_id", checkMongoId, async (req, res) => {
   await getContactById(req, res);
 });
 
-router.post("/register", async (req, res) => {
+router.post("/create", async (req, res) => {
   await postContacts(req, res);
 });
 

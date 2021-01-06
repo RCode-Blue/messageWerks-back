@@ -1,20 +1,16 @@
-const Contact = require("../../../db/models/Contact");
-
 const checkContactFields = require("../../../services/contact/checkContactFields");
-// const checkIdExists = require("../../middleware/checkIdExists");
-// const searchContact = require("../../../services/contact/searchContact");
-
 const jsonResponse = require("../../../services/createJsonResponse");
+const searchContact = require("../../../services/contact/searchContact");
+const updateContact = require("../../../services/contact/updateContact");
 
 const putContact = async (req, res) => {
-  let response, foundContact;
-  let contactValidationResults;
-
+  let response, result;
+  const { getEmailfromContactId } = searchContact;
   const id = req.params.contact_id;
-  contactValidationResults = checkContactFields(req);
+  const data = req.body;
 
-  const email = (await Contact.findById(id)).email;
-
+  // Validate input fields
+  const contactValidationResults = checkContactFields(req);
   for (var key in contactValidationResults) {
     if (contactValidationResults[key] !== undefined) {
       response = jsonResponse(
@@ -26,22 +22,21 @@ const putContact = async (req, res) => {
     }
   }
 
-  let data = req.body;
+  // Update
+  const email = await getEmailfromContactId(id);
   data.email = email;
-  const filter = { _id: id };
-  let options = {
-    new: true,
-    upsert: false,
-    omitUndefined: true,
-    overwrite: true,
-  };
 
-  try {
-    let contact = await Contact.findOneAndUpdate(filter, data, options);
-    response = jsonResponse("200", "Successfully updated Contact", contact);
-  } catch (err) {
-    response = jsonResponse("400", "Server error", err);
+  // console.log(data);
+
+  result = await updateContact(data, id);
+  // console.log(result);
+  if (result.err) {
+    response = jsonResponse("400", "Error updating contact", result.err);
   }
+
+  response = jsonResponse("200", "Successfully updated contact", result.doc);
+
+  console.log(response);
 
   res.status(response.status).json(response);
 };

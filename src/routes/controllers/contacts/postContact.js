@@ -1,22 +1,30 @@
-const Contact = require("../../../db/models/Contact");
 const jsonResponse = require("../../../services/createJsonResponse");
+const createContact = require("../../../services/contact/createContact");
+const searchContact = require("../../../services/contact/searchContact");
 
-const postNewContact = async (req, res) => {
-  let response;
+const postContact = async (req, res) => {
+  let response, result;
 
-  const data = req.body;
-  const filter = { email: req.body.email };
-  const settings = { new: true, upsert: true };
+  const { findContactByEmail } = searchContact;
 
-  try {
-    let newContact = await Contact.findOneAndUpdate(filter, data, settings);
+  const data = { email: req.body.email };
 
-    response = jsonResponse("200", "Success", newContact);
-  } catch (err) {
-    response = jsonResponse("400", "Server error", err);
+  result = await findContactByEmail(req.body.email);
+
+  if (result.docs && result.docs.length > 0) {
+    response = jsonResponse("400", "Item already exists", result.docs);
+    return res.status(response.status).json(response);
+  } else {
+    result = null;
   }
+
+  result = await createContact(data);
+
+  response = result.err
+    ? jsonResponse("400", "Error creating contact", result.err)
+    : jsonResponse("200", "Successfully created contact", result.doc);
 
   return res.status(response.status).json(response);
 };
 
-module.exports = postNewContact;
+module.exports = postContact;

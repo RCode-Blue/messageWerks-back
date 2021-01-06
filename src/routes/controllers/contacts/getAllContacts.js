@@ -1,17 +1,16 @@
 const Contact = require("../../../db/models/Contact");
 const jsonResponse = require("../../../services/createJsonResponse");
+const fetchAllContacts = require("../../../services/contact/fetchAllContacts");
 
 const getAllContacts = async (req, res) => {
-  let response;
-  try {
-    const allContacts = await Contact.find({})
-      .limit(10)
-      .populate("socialMedia", "address");
+  let response, result;
 
-    response = jsonResponse("200", "Success", allContacts);
-  } catch (err) {
-    response = jsonResponse("400", "Error", err);
-  }
+  result = await fetchAllContacts();
+
+  response = result.err
+    ? jsonResponse("400", "Error", err)
+    : (response = jsonResponse("200", "Success", result.docs));
+
   res.status(response.status).json(response);
 };
 
