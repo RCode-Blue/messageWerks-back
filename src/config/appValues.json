@@ -19,6 +19,12 @@
     "sessionDuration": 360000
   },
 
+  "password": {
+    "encryption": {
+      "saltRounds": 10
+    }
+  },
+
   "token": {
     "options": {
       "expiresIn": "5 days"

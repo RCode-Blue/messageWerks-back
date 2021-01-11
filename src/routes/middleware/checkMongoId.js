@@ -13,7 +13,7 @@
 const mongoose = require("mongoose");
 const jsonResponse = require("../../services/createJsonResponse");
 
-module.exports = function (req, res, next) {
+const checkMongoId = (req, res, next) => {
   let response;
 
   const key = Object.keys(req.params)[0];
@@ -26,3 +26,5 @@ module.exports = function (req, res, next) {
   }
   next();
 };
+
+module.exports = checkMongoId;

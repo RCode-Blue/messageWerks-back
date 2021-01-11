@@ -1,33 +1,43 @@
 const Contact = require("../../db/models/Contact");
 const jsonResponse = require("../createJsonResponse");
 
+// Assumes contact ID is valid and exists
 const findContactById = async (id) => {
   const contact = await Contact.findById(id);
   return contact ? contact : null;
 };
 
 const findContactByEmail = async (email) => {
-  const searchResults = {};
+  let searchResults = {};
 
   const filter = { email };
-  const columns = ["email"];
-  const options = {
-    sort: {
-      email: 1,
-    },
-    limit: 10,
-  };
-  const callback = (err, docs) => {
-    searchResults.err = err;
-    searchResults.docs = docs;
-  };
-  await Contact.find(filter, columns, options, callback);
+  const projection = [];
+  const options = {};
+  try {
+    let foundContacts = await Contact.find(filter, projection, options);
+    if (foundContacts.length === 0) {
+      searchResults = {
+        docs: null,
+        err: true,
+      };
+    } else {
+      searchResults = {
+        docs: foundContacts,
+        err: false,
+      };
+    }
+  } catch (err) {
+    searchResults = {
+      docs: null,
+      err: err,
+    };
+  }
+
   return searchResults;
 };
 
 const getEmailfromContactId = async (id) => {
   const contact = await findContactById(id);
-  // console.log(contact);
   return contact.email;
 };
 

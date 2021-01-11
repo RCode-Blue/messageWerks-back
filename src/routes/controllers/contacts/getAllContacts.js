@@ -1,4 +1,3 @@
-const Contact = require("../../../db/models/Contact");
 const jsonResponse = require("../../../services/createJsonResponse");
 const fetchAllContacts = require("../../../services/contact/fetchAllContacts");
 

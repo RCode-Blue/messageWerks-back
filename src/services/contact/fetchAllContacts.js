@@ -4,7 +4,7 @@ const fetchAllContacts = async () => {
   const result = {};
 
   const filter = {};
-  const projection = ["email", "address", "social_media"];
+  const projection = ["dob", "name", "email", "address", "social_media"];
   const options = { sort: { email: 1 } };
   const callback = (err, docs) => {
     result.err = err;

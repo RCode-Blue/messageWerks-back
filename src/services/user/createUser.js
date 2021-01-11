@@ -1,12 +1,26 @@
 const User = require("../../db/models/User");
+const encrypt = require("../password/encrypt");
 
-const createUser = async (data) => {
+const createUser = async (userData) => {
+  const { password, acl_role, status, contact_id } = userData;
+  console.log(userData);
   let result = {};
-  const callback = (err, doc) => {
-    result.err = err;
-    result.doc = doc;
+
+  let passwordHash = await encrypt(password);
+
+  let data = {
+    password: passwordHash,
+    acl_role,
+    status,
+    contact: contact_id,
   };
 
-  await User.create(data, callback);
+  try {
+    result.doc = await User.create(data);
+  } catch (err) {
+    result.err = err;
+  }
+
+  return result;
 };
 module.exports = createUser;

@@ -14,9 +14,8 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema(
   {
     contact: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "contact",
-      required: true,
     },
     password: {
       type: String,

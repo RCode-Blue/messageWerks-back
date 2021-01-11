@@ -12,22 +12,26 @@
  *
  */
 const jwt = require("jsonwebtoken");
+const jsonResponse = require("../../services/createJsonResponse");
 
 module.exports = function (req, res, next) {
+  let response;
+
   // Get token from header
   const token = req.header("x-auth-token");
-  // console.log(token);
 
   // If not token
   if (!token) {
-    return res.status(401).json({ msg: "Login failed" });
+    response = jsonResponse("401", "Login failed");
+    return res.status(response.status).json(response);
   }
 
   // Verify token
   try {
     jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
       if (error) {
-        return res.status(401).json({ msg: "Invalid token" });
+        response = jsonResponse("401", "Invalid token");
+        return res.status(response.status).json(response);
       } else {
         // Return user id
         req.user = decoded.user;
@@ -36,6 +40,7 @@ module.exports = function (req, res, next) {
     });
   } catch (err) {
     console.error("Middleware error");
-    res.status(500).json({ msg: "Server error" });
+    response = jsonResponse("500", "Server error");
+    res.status(response.status).json(response);
   }
 };

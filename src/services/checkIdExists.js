@@ -1,31 +1,29 @@
-// checks if a user id exists
+const appValues = require("../config/appValues.json");
 
-const findUser = require("./findUser");
+const Contact = require("../db/models/Contact");
+const User = require("../db/models/User");
+const Business = require("../db/models/Business");
 
-const checkIdExists = async (userid, res) => {
-  // let checkResult = await findUser.byUserId({ id: userid }, res);
-  let checkResult = await findUser.byUserId(userid);
-  // console.log(checkResult);
-  if (checkResult === null) {
-    return {
-      status: 404,
-      name: "Not found",
-    };
+const checkIdExists = async (data) => {
+  const { param_types } = appValues;
+  const id = Object.values(data)[0];
+  const model_type = Object.keys(data)[0];
+  const modelName = param_types[model_type];
+  let model;
+
+  switch (modelName) {
+    case "Contact":
+      model = Contact;
+      break;
+    case "User":
+      model = User;
+      break;
+    case "Business":
+      model = Business;
+      break;
   }
 
-  if (checkResult.statusCode === 500) {
-    return checkResult;
-  }
-
-  if (checkResult.email) {
-    return {
-      status: 200,
-      name: "OK",
-      user: checkResult,
-    };
-  }
-
-  return { checkResult };
+  return model.exists({ _id: id });
 };
 
 module.exports = checkIdExists;

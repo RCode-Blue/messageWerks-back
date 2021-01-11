@@ -4,11 +4,10 @@ const searchContact = require("../../../services/contact/searchContact");
 
 const postContact = async (req, res) => {
   let response, result;
-
   const { findContactByEmail } = searchContact;
-
   const data = { email: req.body.email };
 
+  // Check if email already exists
   result = await findContactByEmail(req.body.email);
 
   if (result.docs && result.docs.length > 0) {
