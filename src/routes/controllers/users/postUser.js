@@ -1,7 +1,7 @@
 const createUser = require("../../../services/user/createUser");
 const jsonResponse = require("../../../services/createJsonResponse");
 const fetchContactId = require("../../../services/contact/fetchContactId");
-const findUser = require("../../../services/user/findUser");
+const findUser = require("../../../services/user/searchUser");
 
 const postUser = async (req, res) => {
   let response;

@@ -1,4 +1,4 @@
-const findUser = require("../../../services/user/findUser");
+const findUser = require("../../../services/user/searchUser");
 const jsonResponse = require("../../../services/createJsonResponse");
 
 const getUser = async (req, res) => {

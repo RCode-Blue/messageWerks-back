@@ -1,6 +1,6 @@
 const validate = require("validate.js");
 
-const checkMediaFields = (name) => {
+const checkNameFields = (name) => {
   const { first_name, family_name } = name;
 
   const constraints = {
@@ -15,4 +15,4 @@ const checkMediaFields = (name) => {
   return validate(name, constraints);
 };
 
-module.exports = checkMediaFields;
+module.exports = checkNameFields;

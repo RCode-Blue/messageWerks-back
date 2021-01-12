@@ -1,8 +1,8 @@
 const encrypt = require("../password/encrypt");
-const findUser = require("../user/findUser");
+const findUser = require("./searchUser");
 const jsonResponse = require("../createJsonResponse");
 
-const editPassword = async (id, passwords) => {
+const editPassword = async (id, passwords, reset_code) => {
   const { new_password_1, new_password_2 } = passwords;
   const user = await findUser.byUserId(id);
 
@@ -32,7 +32,9 @@ const editPassword = async (id, passwords) => {
   const encrypted = await encrypt(new_password_1);
   try {
     user.password = encrypted;
-    return jsonResponse("200", "Successfully updated password", user);
+    user.reset_code = null;
+    await user.save();
+    return jsonResponse("200", "Successfully reset password", user);
   } catch (err) {
     return jsonResponse("500", "Error saving changes");
   }

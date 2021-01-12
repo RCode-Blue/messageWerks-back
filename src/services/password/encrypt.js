@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-// const saltRounds = 10;
+
 const appValues = require("../../config/appValues.json");
 
 const encrypt = async (password) => {

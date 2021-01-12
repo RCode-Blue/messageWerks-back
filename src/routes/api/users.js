@@ -6,6 +6,8 @@ const checkMongoId = require("../middleware/checkMongoId");
 const deleteUser = require("../controllers/users/deleteUser");
 const getUser = require("../controllers/users/getUser");
 const getUsers = require("../controllers/users/getUsers");
+const passwordReset = require("../controllers/users/passwordReset");
+const passwordResetEnable = require("../controllers/users/passwordResetEnable");
 const patchUser = require("../controllers/users/patchUser");
 const postUser = require("../controllers/users/postUser");
 
@@ -27,9 +29,15 @@ router.post("/create", async (req, res) => {
 //   res.send("users GET (search)");
 // });
 
-// router.put("/:user_id", checkMongoId, checkIdExists, async (req, res) => {
-//   res.send("users PUT:user_id (edit user details");
-// });
+// Enable password reset
+router.patch("password/enablereset/:user_email", async (req, res) => {
+  await passwordResetEnable(req, res);
+});
+
+// Reset password
+router.patch("password/reset/:email/:reset_code", async (req, res) => {
+  await passwordReset(req, res);
+});
 
 router.patch("/:user_id", checkMongoId, checkIdExists, async (req, res) => {
   // res.send("users PATCH:user_id (edit one user detail");

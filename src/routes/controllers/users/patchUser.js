@@ -1,5 +1,6 @@
 const editAclRole = require("../../../services/user/editAclRole");
 const editPassword = require("../../../services/user/editPassword");
+const changeResetCode = require("../../../services/user/changeResetCode");
 const editStatus = require("../../../services/user/editStatus");
 
 const patchUser = async (req, res) => {

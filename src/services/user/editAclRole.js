@@ -1,5 +1,5 @@
 const appValues = require("../../config/appValues.json");
-const findUser = require("./findUser");
+const findUser = require("./searchUser");
 const jsonResponse = require("../createJsonResponse");
 
 const editAclRole = async (id, acl_role) => {

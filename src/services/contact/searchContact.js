@@ -10,7 +10,7 @@ const findContactById = async (id) => {
 const findContactByEmail = async (email) => {
   let searchResults = {};
 
-  const filter = { email };
+  const filter = { email: email };
   const projection = [];
   const options = {};
   try {
