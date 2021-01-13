@@ -11,6 +11,7 @@ const path = require("path");
 
 const authPath = require("./routes/api/auth");
 const contactsPath = require("./routes/api/contacts");
+const mePath = require("./routes/api/me");
 const usersPath = require("./routes/api/users");
 
 const connectDB = require("./config/db");
@@ -36,6 +37,7 @@ app.use(express.json());
 // Routes
 app.use("/api/auth", authPath);
 app.use("/api/contacts", contactsPath);
+app.use("/api/me", mePath);
 app.use("/api/users", usersPath);
 
 // app.use("/api/auth", authPath);
