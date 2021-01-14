@@ -221,7 +221,12 @@
 
   "business": {
     "source_url_dev": "",
-    "source_url_prod": ""
+    "source_url_prod": "",
+    "token": {
+      "options": {
+        "expires in": "1 day"
+      }
+    }
   },
 
   "param_types": {

@@ -10,6 +10,7 @@ const fs = require("fs");
 const path = require("path");
 
 const authPath = require("./routes/api/auth");
+const businessesPath = require("./routes/api/businesses");
 const contactsPath = require("./routes/api/contacts");
 const mePath = require("./routes/api/me");
 const usersPath = require("./routes/api/users");
@@ -36,6 +37,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/auth", authPath);
+app.use("/api/businesses", businessesPath);
 app.use("/api/contacts", contactsPath);
 app.use("/api/me", mePath);
 app.use("/api/users", usersPath);
