@@ -1,9 +1,0 @@
-const searchContact = require("./searchContact");
-const processFetchResponse = require("../processFetchResponse");
-
-const fetchContactById = async (id) => {
-  let result = await searchContact.findContactById(id);
-  return processFetchResponse(result);
-};
-
-module.exports = fetchContactById;
