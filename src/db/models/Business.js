@@ -57,6 +57,10 @@ const BusinessSchema = new mongoose.Schema({
   managers: {
     type: [ManagerSchema],
   },
+  emails: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "email",
+  },
 });
 
 module.exports = mongoose.model("business", BusinessSchema);

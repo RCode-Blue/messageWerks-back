@@ -11,7 +11,7 @@ const postContact = async (req, res) => {
   result = await findContactByEmail(req.body.email);
 
   if (result.docs && result.docs.length > 0) {
-    response = jsonResponse("400", "Item already exists", result.docs);
+    response = jsonResponse("400", "Contact already exists", result.docs);
     return res.status(response.status).json(response);
   } else {
     result = null;

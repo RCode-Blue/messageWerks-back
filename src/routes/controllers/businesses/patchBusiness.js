@@ -1,10 +1,8 @@
-const editBusinessArrays = require("../../../services/business/editBusinessArrays");
 const editBusinessFields = require("../../../services/business/editBusinessFields");
-const editBusinessKeys = require("../../../services/business/editBusinessKeys");
 const jsonResponse = require("../../../services/createJsonResponse");
 
 /*
-  expect:
+  expects:
   {
     business_fields: {...
     business_arrays: {...
@@ -24,7 +22,6 @@ const patchBusiness = async (req, res) => {
 
     for (const [key, value] of Object.entries(results)) {
       if (value.error) {
-        // console.log("YES");
         errors++;
       }
     }
@@ -42,10 +39,8 @@ const patchBusiness = async (req, res) => {
         results
       );
     }
-    // console.log(response);
   }
 
-  // console.log(response);
   res.status(response.status).json(response);
 };
 

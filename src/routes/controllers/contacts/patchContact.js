@@ -1,7 +1,7 @@
 const updateContactField = require("../../../services/contact/updateContactField");
 const jsonResponse = require("../../../services/createJsonResponse.js");
 
-const patchContact = async (req, res) => {
+const checkAllowedFields = (keyName) => {
   const allowedFields = [
     "dob",
     "social_media",
@@ -10,21 +10,28 @@ const patchContact = async (req, res) => {
     "address",
   ];
 
-  let response, keyName, result;
   let allowedParam = 0;
-  const id = req.params.contact_id;
-
-  // Use the first key only
-  keyName = Object.keys(req.body)[0];
 
   allowedFields.forEach((field) => {
     if (keyName === field) {
       allowedParam++;
     }
   });
+  return allowedParam;
+};
+
+const patchContact = async (req, res) => {
+  let response, keyName, result;
+
+  const id = req.params.contact_id;
+
+  // Use the first key only
+  keyName = Object.keys(req.body)[0];
+
+  let allowedParam = checkAllowedFields(keyName);
 
   if (allowedParam === 0) {
-    response = jsonResponse("400", "Key name not allowed");
+    response = jsonResponse("400", "Field not allowed");
     return res.status(response.status).json(response);
   }
 
@@ -36,7 +43,7 @@ const patchContact = async (req, res) => {
       details: result.result,
     });
   } else {
-    response = jsonResponse("200", "Success", result.doc);
+    response = jsonResponse("200", "Success", result.docs);
   }
 
   res.status(response.status).json(response);

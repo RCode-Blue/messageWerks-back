@@ -1,10 +1,13 @@
 const Contact = require("../../db/models/Contact");
-const jsonResponse = require("../createJsonResponse");
+const createFetchResponse = require("../../services/createFetchResponse");
 
-// Assumes contact ID is valid and exists
 const findContactById = async (id) => {
-  const contact = await Contact.findById(id);
-  return contact ? contact : null;
+  try {
+    const contact = await Contact.findById(id);
+    return createFetchResponse(null, contact);
+  } catch (err) {
+    return createFetchResponse(err, null);
+  }
 };
 
 const findContactByEmail = async (email) => {

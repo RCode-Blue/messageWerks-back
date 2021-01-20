@@ -1,11 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-// const User = require("../../db/models/User");
 const appValues = require("../../config/appValues.json");
 const findUser = require("../user/searchUser");
-const jsonResponse = require("../createJsonResponse");
-// const searchUser = require("../user/searchUser");
 
 const loginUser = async (email, password) => {
   const { token } = appValues;
@@ -14,10 +11,8 @@ const loginUser = async (email, password) => {
 
   // Get User
   const user = await findUser.byContactEmail(email);
-  // console.log(user);
 
   const isMatch = await bcrypt.compare(password, user.password);
-  // console.log("isMatch: ", isMatch);
   if (!isMatch) {
     result.noMatch = true;
     return result;
@@ -33,7 +28,6 @@ const loginUser = async (email, password) => {
 
   try {
     result.jwt.token = jwt.sign(payload, key, options);
-    // result.jwt.token = newToken;
   } catch (err) {
     result.jwt.err = err;
   }

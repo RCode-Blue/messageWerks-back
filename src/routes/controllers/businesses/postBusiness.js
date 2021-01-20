@@ -2,7 +2,6 @@ const createNewBusiness = require("../../../services/business/createNewBusinesse
 const jsonResponse = require("../../../services/createJsonResponse");
 
 const postBusiness = async (req, res) => {
-  // console.log(req);
   let response;
 
   let result = await createNewBusiness(req.body);

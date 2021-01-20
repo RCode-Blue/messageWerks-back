@@ -1,5 +1,5 @@
 const jsonResponse = require("../../../services/createJsonResponse");
-const loginUser = require("../../../services/auth/loginUser");
+const loginUser = require("../../../services/jwt/loginUser");
 
 const login = async (req, res) => {
   const { email, password } = req.body;

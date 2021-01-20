@@ -5,21 +5,26 @@
  * @exports {Object} connectDB
  */
 
+require("dotenv").config();
+
 const mongoose = require("mongoose");
-const devConfig = require("./dev.config.json");
-const prodConfig = require("./prod.config.json");
+const devConfig = require("../dev.config.json");
+const prodConfig = require("../prod.config.json");
+
+const mongoDBName = process.env.MONGO_DB_NAME;
+const mongoUserAccount = process.env.MONGO_USER_ACCOUNT;
+const mongoUserPassword = process.env.MONGO_USER_PASSWORD;
 
 const mongoUri =
   devConfig.mongoUriPart1 +
-  devConfig.mongoUserAccount +
+  mongoUserAccount +
   devConfig.mongoUriPart2 +
-  devConfig.mongoUserPassword +
+  mongoUserPassword +
   devConfig.mongoUriPart3 +
-  devConfig.mongoDBName +
+  mongoDBName +
   devConfig.mongoUriPart4;
 
 const connectDB = async () => {
-  // console.log(mongoUri);
   try {
     await mongoose.connect(mongoUri, {
       useNewUrlParser: true,

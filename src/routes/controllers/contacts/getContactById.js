@@ -1,13 +1,11 @@
-const Contact = require("../../../db/models/Contact");
-const fetchContactById = require("../../../services/contact/fetchContactById");
-
-const jsonResponse = require("../../../services/createJsonResponse");
+const searchContact = require("../../../services/contact/searchContact");
+const processFetchResponse = require("../../../services/processFetchResponse");
 
 const getContactById = async (req, res) => {
-  let response;
   const id = req.params.contact_id;
 
-  response = await fetchContactById(id);
+  let result = await searchContact.findContactById(id);
+  let response = processFetchResponse(result);
 
   res.status(response.status).json(response);
 };

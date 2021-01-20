@@ -5,7 +5,7 @@ const deleteContact = require("../controllers/contacts/deleteContact");
 const getAllContacts = require("../controllers/contacts/getAllContacts");
 const getContactById = require("../controllers/contacts/getContactById");
 const patchContact = require("../controllers/contacts/patchContact");
-const postContacts = require("../controllers/contacts/postContact");
+const postContact = require("../controllers/contacts/postContact");
 const putContact = require("../controllers/contacts/putContact");
 
 const checkContactFields = require("../middleware/contact/checkContactFields");
@@ -21,7 +21,7 @@ router.get("/:contact_id", checkMongoId, async (req, res) => {
 });
 
 router.post("/create", async (req, res) => {
-  await postContacts(req, res);
+  await postContact(req, res);
 });
 
 router.put(
@@ -40,7 +40,6 @@ router.patch("/:contact_id", checkMongoId, checkIdExists, async (req, res) => {
 
 router.delete("/:contact_id", checkMongoId, checkIdExists, async (req, res) => {
   await deleteContact(req, res);
-  // res.send("contacts DELETE:id");
 });
 
 module.exports = router;

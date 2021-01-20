@@ -6,16 +6,17 @@ const updateContactField = async (id, data) => {
     new: true,
   };
 
-  let updateResult = await Contact.findOneAndUpdate(
+  await Contact.findOneAndUpdate(
     { _id: id },
     data,
     options,
-    function (err, doc) {
+    function (err, docs) {
       result.err = err;
-      result.doc = doc;
+      result.docs = docs;
     }
   );
-  result.result = updateResult;
+  // result.result = updateResult;
+  console.log(result);
   return result;
 };
 module.exports = updateContactField;

@@ -1,14 +1,9 @@
-const jsonResponse = require("../../../services/createJsonResponse");
 const fetchAllContacts = require("../../../services/contact/fetchAllContacts");
+const processFetchResponse = require("../../../services/processFetchResponse");
 
 const getAllContacts = async (req, res) => {
-  let response, result;
-
-  result = await fetchAllContacts();
-
-  response = result.err
-    ? jsonResponse("400", "Error", err)
-    : (response = jsonResponse("200", "Success", result.docs));
+  let result = await fetchAllContacts();
+  let response = processFetchResponse(result);
 
   res.status(response.status).json(response);
 };

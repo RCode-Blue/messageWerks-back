@@ -9,13 +9,14 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 
-const authPath = require("./routes/api/auth");
+const jwtPath = require("./routes/api/jwt");
 const businessesPath = require("./routes/api/businesses");
 const contactsPath = require("./routes/api/contacts");
 const mePath = require("./routes/api/me");
 const usersPath = require("./routes/api/users");
 
-const connectDB = require("./config/db");
+const connectMongo = require("./config/scripts/mongo");
+const redisClient = require("./config/scripts/redis");
 
 global.__basedir = __dirname;
 
@@ -29,14 +30,14 @@ if (fs.existsSync(path.join(rootDir) + "/.env")) {
 
 const app = express();
 
-// DB connection
-connectDB();
+// DB connections
+connectMongo();
 
 // Init middleware
 app.use(express.json());
 
 // Routes
-app.use("/api/auth", authPath);
+app.use("/api/auth", jwtPath);
 app.use("/api/businesses", businessesPath);
 app.use("/api/contacts", contactsPath);
 app.use("/api/me", mePath);
