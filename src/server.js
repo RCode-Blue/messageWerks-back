@@ -16,7 +16,6 @@ const mePath = require("./routes/api/me");
 const usersPath = require("./routes/api/users");
 
 const connectMongo = require("./config/scripts/mongo");
-const redisClient = require("./config/scripts/redis");
 
 global.__basedir = __dirname;
 
