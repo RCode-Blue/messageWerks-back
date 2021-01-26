@@ -5,12 +5,15 @@ const encrypt = require("../password/encrypt");
 const findUser = require("../user/searchUser");
 const jsonResponse = require("../createJsonResponse");
 const searchContact = require("../contact/searchContact");
+// const { result } = require("validate.js");
 
 const { user } = appValues;
 
 const resetPassword = async (email, reset_code, passwords) => {
   let response;
-  let searchResults = {
+  let result = {
+    code: null,
+    msesage: null,
     err: null,
     docs: null,
   };
@@ -18,13 +21,16 @@ const resetPassword = async (email, reset_code, passwords) => {
 
   // Check that passwords match
   if (new_password_1 !== new_password_2) {
+    // result.code = "400";
+    // result.message = "New passwords don't match";
     response = jsonResponse("400", "New passwords don't match");
     return response;
   }
 
-  //check password length
+  // Check password length
   if (new_password_1.length < 8) {
     pwdLength = user.minPasswordLength;
+
     response = jsonResponse(
       "400",
       `Passwords must be at least ${pwdLength} characters long`
@@ -34,22 +40,41 @@ const resetPassword = async (email, reset_code, passwords) => {
 
   // Get Contact id from email
   let searchContactsResults = await searchContact.findContactByEmail(email);
+  console.log(searchContactsResults);
   if (searchContactsResults.err) {
+    // result.code = "400";
+    // result.message = "Contact not found";
     response = jsonResponse("400", "Contact not found");
     return response;
   }
-  let foundContact = searchContactsResults.docs[0];
+  let foundContact = searchContactsResults.docs;
+  // console.log(foundContact);
 
   let searchUserResults = await findUser.byContactId(foundContact.id);
   // console.log(searchUserResults);
   if (searchUserResults.err) {
     // Contact not attached to a user
-    // console.log("No user");
-    response = jsonResponse("404", "User not found");
+    // result.code = "400";
+    // result.message = "User not found";
+
+    response = jsonResponse("400", "User not found");
     return response;
   }
   let foundUser = searchUserResults.docs;
-  // console.log(foundUser);
+
+  // Check email
+  if (email !== foundContact.email) {
+    // result.code = "400";
+    // result.message = "Email not found";
+    response = jsonResponse("400", "Email not found");
+    return response;
+  }
+
+  const encrypted = await encrypt(new_password_1);
+  if (!foundUser.reset_code) {
+    response = jsonResponse("400", "No reset code");
+    return response;
+  }
 
   // Check reset code
   const isMatch = await bcrypt.compare(reset_code, foundUser.reset_code);
@@ -58,17 +83,13 @@ const resetPassword = async (email, reset_code, passwords) => {
     return response;
   }
 
-  // Check email
-  if (email !== foundContact.email) {
-    response = jsonResponse("400", "Email not found");
-    return response;
-  }
+  // Reset password
 
-  // reset password
-  const encrypted = await encrypt(new_password_1);
   try {
     foundUser.password = encrypted;
     foundUser.reset_code = null;
+    foundUser.status = "9";
+    foundUser.failed_logins = 0;
     let saved = await foundUser.save();
     response = jsonResponse("200", "Successfully reset password", saved);
   } catch (err) {

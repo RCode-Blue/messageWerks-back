@@ -19,7 +19,7 @@ const byContactEmail = async (email) => {
     searchResults.err = true;
     return searchResults;
   }
-  let contactId = foundContact.docs[0].id;
+  let contactId = foundContact.docs.id;
   return (await byContactId(contactId)).docs;
 };
 
@@ -27,6 +27,7 @@ const byContactEmail = async (email) => {
 const byUserId = async (id) => {
   try {
     let foundUser = await User.findById(id, projection, options);
+    // console.log(foundUser);
     if (foundUser.length === 0) {
       searchResults.err = true;
     } else {
@@ -41,11 +42,10 @@ const byUserId = async (id) => {
 // Find by contact id
 const byContactId = async (id) => {
   let filter = { contact: id };
-  // return await User.findOne(filter, projection, options);
   try {
     let foundUser = await User.findOne(filter, projection, options);
-    if (foundUser.length === 0) {
-      searchResults.err = true;
+    if (!foundUser) {
+      searchResults.err = false;
     } else {
       searchResults.docs = foundUser;
     }

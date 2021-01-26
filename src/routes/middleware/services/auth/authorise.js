@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 // const jsonResponse = require("../auth/authorise");
 
 const authorise = (key, token) => {
+  // console.log(token);
   let result = { error: null, user: null };
 
   // If no token
@@ -18,7 +19,6 @@ const authorise = (key, token) => {
     const decoded = jwt.verify(token, key);
 
     result.user = decoded.user;
-    // next();
   } catch (err) {
     result.error = {
       status: "401",

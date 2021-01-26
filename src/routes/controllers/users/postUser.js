@@ -1,27 +1,44 @@
+const checkRolePermissions = require("../../../services/user/checkRolePermissions");
 const createUser = require("../../../services/user/createUser");
 const jsonResponse = require("../../../services/createJsonResponse");
 const fetchContactId = require("../../../services/contact/fetchContactId");
 const findUser = require("../../../services/user/searchUser");
 
 const postUser = async (req, res) => {
+  const { userId, acl_role } = req;
   let response;
 
   const data = req.body;
 
+  response = checkRolePermissions(acl_role, 95);
+  if (response) {
+    return res.status(response.status).json(response);
+  }
+
   // Check if Contact exists
-  const contact_id = await fetchContactId(data);
+  const searchResult = await fetchContactId(data);
+
+  if (!searchResult.contact) {
+    response = jsonResponse("404", "Contact not found");
+    return res.status(response.status).json(response);
+  }
+  if (searchResult.err) {
+    response = jsonResponse("400", "Error finding contact");
+    return res.status(response.status).json(response);
+  }
+
+  let contactId = searchResult.contact.id;
 
   // Check if Contact is already assigned to a User
-  let contact = await findUser.byContactId(contact_id);
-  if (contact) {
+  let foundUser = await findUser.byContactId(contactId);
+  if (foundUser.docs) {
     response = jsonResponse("400", "Contact already assigned to user");
     return res.status(response.status).json(response);
   }
 
   // Create user
-  data.contact = contact_id;
+  data.contact_id = contactId;
   let result = await createUser(data);
-  console.log(result);
   if (result.err) {
     response = jsonResponse("400", "Error creating user", response.err);
   } else {

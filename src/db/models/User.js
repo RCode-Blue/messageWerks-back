@@ -22,19 +22,21 @@ const UserSchema = new mongoose.Schema(
     },
     acl_role: {
       type: String,
+      required: true,
     },
     status: {
       type: Number,
+      required: true,
     },
     failed_logins: {
       type: Number,
+      default: 0,
     },
     reset_code: {
       type: String,
     },
-    business: {
-      type: mongoose.Types.ObjectId,
-      ref: "business",
+    confirmation_code: {
+      type: String,
     },
   },
 

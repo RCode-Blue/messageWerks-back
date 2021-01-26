@@ -155,7 +155,7 @@
   },
 
   "user": {
-    "maxLogin": 3,
+    "maxFailedLogins": 3,
     "minPasswordLength": 8,
     "status": {
       "9": {
@@ -170,7 +170,7 @@
       },
       "3": {
         "code": 3,
-        "name": "disabled",
+        "name": "silent",
         "description": "account disabled by user"
       },
       "2": {
@@ -185,28 +185,30 @@
       }
     },
     "acl_role": {
-      "administrator": {
-        "code": 90,
+      "96": {
+        "code": 96,
         "name": "administrator",
         "description": "full admin permissions"
       },
-      "manager": {
-        "code": 80,
-        "name": "manager",
-        "description": "permission to business sites"
-      },
-      "demo_administrator": {
-        "code": 59,
+
+      "91": {
+        "code": 91,
         "name": "demo_administrator",
         "description": "administtrator but view only"
       },
-      "demo_manager": {
-        "code": 58,
+      "86": {
+        "code": 86,
+        "name": "manager",
+        "description": "permission to business sites"
+      },
+
+      "81": {
+        "code": 81,
         "name": "demo_manager",
         "description": "manager but view only"
       },
-      "anonymous": {
-        "code": 10,
+      "09": {
+        "code": 9,
         "name": "anonymous",
         "description": "default. no permissions"
       }
@@ -228,12 +230,12 @@
         "description": "delegated permissions to manage business"
       },
       "58": {
-        "code": 57,
+        "code": 58,
         "name": "demo_owner",
         "description": "owner but view only"
       },
       "57": {
-        "code": 58,
+        "code": 57,
         "name": "demo_supervisor",
         "description": "supervisor but view only"
       }

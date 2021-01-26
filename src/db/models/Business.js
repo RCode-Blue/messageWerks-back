@@ -33,33 +33,34 @@ const BusinessSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  url: {
+  homepage: {
     type: String,
   },
-  industry: {
-    type: [String],
+  business_id: {
+    type: String,
   },
   status: {
     type: Number,
   },
-  public_api_key: {
+  api_key: {
     type: String,
   },
-  private_api_key: {
-    type: String,
+  email_bodies: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "emailbody",
   },
   social_media: {
     type: [SocialMediaSchema],
+  },
+  mailing_lists: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "mailinglist",
   },
   locations: {
     type: [LocationSchema],
   },
   managers: {
     type: [ManagerSchema],
-  },
-  emails: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "email",
   },
 });
 

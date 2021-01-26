@@ -1,6 +1,6 @@
-const jsonResponse = require("../../../services/createJsonResponse");
+const jsonResponse = require("../../../../services/createJsonResponse");
 // const searchContact = require("../../../services/contact/searchContact");
-const searchUser = require("../../../services/user/searchUser");
+const searchUser = require("../../../../services/user/searchUser");
 
 const getMe = async (req, res) => {
   const { userId } = req;

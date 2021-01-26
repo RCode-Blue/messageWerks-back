@@ -1,6 +1,7 @@
 const Contact = require("../../db/models/Contact");
 
 const createContact = async (data) => {
+  console.log(data);
   let result = {};
 
   try {

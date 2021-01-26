@@ -3,7 +3,6 @@ const encrypt = require("../password/encrypt");
 
 const createUser = async (userData) => {
   const { password, acl_role, status, contact_id } = userData;
-  console.log(userData);
   let result = {};
 
   let passwordHash = await encrypt(password);

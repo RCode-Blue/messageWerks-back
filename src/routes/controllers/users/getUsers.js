@@ -1,9 +1,16 @@
 const jsonTemplate = require("../../../services/createJsonResponse");
-
 const fetchUsers = require("../../../services/user/fetchUsers");
+const checkRolePermissions = require("../../../services/user/checkRolePermissions");
 
 const getUsers = async (req, res) => {
+  const { acl_role } = req;
+
   let response;
+
+  response = checkRolePermissions(acl_role, 90);
+  if (response) {
+    return res.status(response.status).json(response);
+  }
 
   const filter = {};
   const projection = {};

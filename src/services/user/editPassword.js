@@ -1,10 +1,12 @@
 const encrypt = require("../password/encrypt");
+
+const bcrypt = require("bcrypt");
 const findUser = require("./searchUser");
 const jsonResponse = require("../createJsonResponse");
 
 const editPassword = async (id, passwords, reset_code) => {
   const { new_password_1, new_password_2 } = passwords;
-  const user = await findUser.byUserId(id);
+  const foundUser = (await findUser.byUserId(id)).docs;
 
   if (new_password_1 != new_password_2) {
     return jsonResponse("400", "Passwords don't match");
@@ -13,30 +15,34 @@ const editPassword = async (id, passwords, reset_code) => {
   // Change password
   if (passwords.current_password) {
     const { current_password } = passwords;
-    const encrypted = await encrypt(current_password);
+    const passwordHash = await encrypt(new_password_1);
 
-    if (encrypted !== user.password) {
+    const isMatch = await bcrypt.compare(current_password, foundUser.password);
+
+    if (!isMatch) {
       return jsonResponse("400", "Original password incorrect");
     }
 
     try {
-      user.password = encrypted;
-      await user.save();
-      return jsonResponse("200", "Successfully updated password", user);
+      foundUser.password = passwordHash;
+      await foundUser.save();
+      return jsonResponse("200", "Successfully updated password", foundUser);
     } catch (err) {
-      return jsonResponse("500", "Error saving changes");
+      console.log(err);
+      return jsonResponse("500", "Error saving changes", err);
     }
   }
 
   // Reset password
-  const encrypted = await encrypt(new_password_1);
+  const passwordHash = await encrypt(new_password_1);
+
   try {
-    user.password = encrypted;
-    user.reset_code = null;
-    await user.save();
-    return jsonResponse("200", "Successfully reset password", user);
+    foundUser.password = passwordHash;
+    foundUser.reset_code = null;
+    await foundUser.save();
+    return jsonResponse("200", "Successfully reset password", foundUser);
   } catch (err) {
-    return jsonResponse("500", "Error saving changes");
+    return jsonResponse("500", "Error saving changes", err);
   }
 };
 

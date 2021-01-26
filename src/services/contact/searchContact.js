@@ -11,6 +11,7 @@ const findContactById = async (id) => {
 };
 
 const findContactByEmail = async (email) => {
+  // console.log(email);
   let searchResults = {};
 
   const filter = { email: email };
@@ -25,7 +26,7 @@ const findContactByEmail = async (email) => {
       };
     } else {
       searchResults = {
-        docs: foundContacts,
+        docs: foundContacts[0],
         err: false,
       };
     }
@@ -40,7 +41,8 @@ const findContactByEmail = async (email) => {
 };
 
 const getEmailfromContactId = async (id) => {
-  const contact = await findContactById(id);
+  const contact = (await findContactById(id)).docs;
+  // console.log(contact);
   return contact.email;
 };
 

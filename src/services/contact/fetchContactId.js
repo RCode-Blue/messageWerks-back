@@ -6,37 +6,36 @@ const Contact = require("../../db/models/Contact");
 const searchContact = require("./searchContact");
 
 const fetchContactId = async (data) => {
-  const { findContactByEmail } = searchContact;
   let foundContact;
-
-  // No ID by default
-  let id = null;
+  let result = {
+    contact: null,
+    err: null,
+  };
 
   // If Contact ID exists
   if (data.contact_id) {
     try {
       foundContact = await Contact.findById(data.contact_id);
     } catch (err) {
-      console.error(err);
+      result.err = err;
     }
 
     if (foundContact) {
-      return foundContact.id;
+      result.contact = foundContact;
     }
   }
 
   // If Contact email exists, get the ID
   if (data.contact_email) {
-    let result;
-    try {
-      result = await findContactByEmail(data.contact_email);
-    } catch (err) {
-      console.error(err);
+    foundContact = await searchContact.findContactByEmail(data.contact_email);
+    if (foundContact.err) {
+      result.err = foundContact.err;
+    } else {
+      result.contact = foundContact.docs;
     }
-    id = result.err ? null : result.docs[0]._id;
   }
 
-  return id;
+  return result;
 };
 
 module.exports = fetchContactId;
