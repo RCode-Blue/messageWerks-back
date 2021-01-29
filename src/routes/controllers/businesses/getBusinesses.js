@@ -1,9 +1,9 @@
-const searchBusinesses = require("../../../services/business/searchBusinesses");
+const findBusinesses = require("../../../services/business/findBusinesses");
 const jsonResponse = require("../../../services/createJsonResponse");
 
 const getBusinesses = async (req, res) => {
   let response;
-  let result = await searchBusinesses.all();
+  let result = await findBusinesses.all();
 
   if (result.err) {
     response = jsonResponse("500", "Error finding businesses");

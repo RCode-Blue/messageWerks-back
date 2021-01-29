@@ -1,0 +1,39 @@
+<mjml>
+  <mj-head>
+    <mj-font name="Quicksand" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400"/>
+    <mj-attributes>
+      <mj-class name="header"
+        background-color="#efeccd"
+        
+      />
+      <mj-class name="header-text"
+        align="center"
+        color="#183748"
+        font-family="Quicksand"
+      />
+      <mj-class name="header-line1"
+        font-size="20px"
+        align="center"
+      />
+      <mj-class name="header-line2"
+        font-size="16px"
+        align="center"
+      />
+    </mj-attributes>
+  </mj-head>
+  <mj-body>
+    <mj-section mj-class="header">
+      <mj-column>
+        <mj-text mj-class="header-text header-line1">
+          Thanks for confirming you email!
+        </mj-text>
+        <mj-text mj-class="header-text header-line2">
+          You'll be receiving a newsletter soon
+        </mj-text>
+        <mj-text mj-class="header-text header-line2">
+          Your confirmation code is: {{var:confirmation_code}}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

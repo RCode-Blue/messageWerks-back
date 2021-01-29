@@ -16,7 +16,7 @@ const all = async () => {
   return searchResults;
 };
 
-const byBusinessId = async (id) => {
+const byId = async (id) => {
   try {
     searchResults.docs = await Business.findById(id).exec();
   } catch (err) {
@@ -25,8 +25,18 @@ const byBusinessId = async (id) => {
   return searchResults;
 };
 
+const byBusinessId = async (business_id) => {
+  let filter = { business_id };
+  try {
+    let foundBusinesses = await Business.findOne(filter);
+    searchResults.docs = foundBusinesses.docs;
+  } catch (err) {
+    searchResults.err = err;
+  }
+};
+
 const byName = async () => {};
 
 const byClient = async () => {};
 
-module.exports = { all, byBusinessId, byName, byClient };
+module.exports = { all, byId, byBusinessId, byName, byClient };

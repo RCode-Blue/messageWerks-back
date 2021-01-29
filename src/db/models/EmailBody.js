@@ -5,6 +5,14 @@ const EmailBodySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  email_body_id: {
+    type: String,
+    required: true,
+  },
+  business: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "business",
+  },
   description: {
     type: String,
   },

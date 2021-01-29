@@ -1,7 +1,7 @@
-const searchBusiness = require("./searchBusinesses");
+const findBusinesses = require("./findBusinesses");
 
 const editBusinessFields = async (id, fields) => {
-  let searchResult = await searchBusiness.byBusinessId(id);
+  let searchResult = await findBusinesses.byId(id);
   let business = searchResult.docs;
   // let results = [];
   let results = {};

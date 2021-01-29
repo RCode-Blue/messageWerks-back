@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
+const auth = require("../middleware/auth");
+const getUserData = require("../middleware/getUserData");
+
 const getBusinesses = require("../controllers/businesses/getBusinesses");
 const postBusiness = require("../controllers/businesses/postBusiness");
 const getBusinessById = require("../controllers/businesses/getBusinessById");

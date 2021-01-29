@@ -1,10 +1,10 @@
-const searchBusinesses = require("./searchBusinesses");
+const searchBusinesses = require("./findBusinesses");
 const searchContacts = require("../contact/searchContact");
 // const searchAddress;
 // const searchSocialMedia;
 
 const editBusinessArray = async (id, arrays) => {
-  let searchResult = await searchBusinesses.byBusinessId(id);
+  let searchResult = await searchBusinesses.byId(id);
   let business = searchResult.docs;
   let results = { industry: null };
 
