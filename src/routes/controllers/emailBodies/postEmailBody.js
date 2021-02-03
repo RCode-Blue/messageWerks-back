@@ -1,12 +1,17 @@
-const createEmailBody = require("../../../services/emailBodies/createNewEmailBody");
 const jsonResponse = require("../../../services/createJsonResponse");
-const createNewEmailBody = require("../../../services/emailBodies/createNewEmailBody");
+const createNewEmailBody = require("../../../services/emailBody/createNewEmailBody");
 
 const postEmailBody = async (req, res) => {
-  // console.log(req.body);
+  console.log(req.body);
   let result, response;
 
-  if (!req.body.business || !req.body.name || !req.body.body) {
+  if (
+    !req.body.business_id ||
+    !req.body.name ||
+    !req.body.status ||
+    !req.body.type ||
+    (!req.body.html_part && !req.body.text_part)
+  ) {
     response = jsonResponse("400", "Insufficient data");
     return res.status(response.status).json(response);
   }

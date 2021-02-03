@@ -1,0 +1,60 @@
+<mjml>
+  <mj-head>
+    <mj-font 
+      name="Open Sans"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300"
+      />
+    <mj-attributes>
+      <mj-class name="header"
+        background-color="#f9f5d5"
+      />
+      <mj-class name="header-text"
+        color="#402511"
+        font-family="'Open Sans', sans-serif"
+        align="center"
+      />
+      <mj-class name="header-line1"
+        font-size="24px"
+      />
+      <mj-class name="header-line2"
+        font-size="20px"
+      />
+      <mj-class name="text-link"
+        font-size="18px"
+      />
+      <mj-class name="columns"
+        width="600px"
+        align="center"
+      />
+      <mj-class name="btn"
+        background-color="#ef862f"
+        align="center"
+        color="#402511"
+        font-family="'Open Sans', sans-serif"
+        font-size="16px"
+        href={{var: link}}
+      />
+
+    </mj-attributes>
+  </mj-head>
+  <mj-body>
+    <mj-section>
+      <mj-column mj-class="columns header">
+        <mj-image src="https://source.unsplash.com/fvpgfw3IF1w/1600x900"/>
+        <mj-text
+          mj-class="header-text header-line1">
+          Thanks for subscribing!
+        </mj-text>
+        <mj-text
+        mj-class="header-text header-line2">
+          Please click on the link to confirm
+        </mj-text>
+        <mj-button mj-class="btn" >
+          Click me!
+        </mj-button>
+      </mj-column>
+    </mj-section>
+    
+  </mj-body>
+
+</mjml>

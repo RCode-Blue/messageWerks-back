@@ -2,8 +2,8 @@ const EmailBody = require("../../db/models/EmailBody");
 const findBusinesses = require("../business/findBusinesses");
 
 const createNewEmailBody = async (data) => {
-  const { business, name, body } = data;
-  let newBody, email_body_id, foundBusiness, updatedBusiness;
+  const { business_id, name, description, status, type } = data;
+  let newBody, emailbody_codename, foundBusiness, updatedBusiness;
   let result = {
     emailBody: {
       err: null,
@@ -15,20 +15,38 @@ const createNewEmailBody = async (data) => {
     },
   };
 
-  newBody = {
-    business,
-    email_body_id,
-    name,
-    body,
-  };
-
-  email_body_id =
+  emailbody_codename =
     name.replace(/[^a-zA-Z]/g, "").substring(0, 4) +
-    Math.floor(Math.random() * 1000 + 1).toString();
-  newBody.email_body_id = email_body_id;
+    Math.floor(Math.random() * 1000000 + 1).toString();
+
+  // Find business object ID
+  foundBusiness = (await findBusinesses.byBusinessId(business_id)).docs;
+  if (!foundBusiness) {
+    result.business.err = true;
+    return result;
+  }
+  if (foundBusiness.err) {
+    result.business.err = foundBusiness.err;
+    return result;
+  }
+
+  newBody = {
+    business: foundBusiness._id,
+    emailbody_codename,
+    status,
+    name,
+    type,
+    total_use: 0,
+  };
 
   if (data.description) {
     newBody.description = data.description;
+  }
+
+  if (data.html_part) {
+    newBody.html_part = data.html_part;
+  } else {
+    newBody.text_part = data.text_part;
   }
 
   try {
@@ -37,16 +55,10 @@ const createNewEmailBody = async (data) => {
     result.emailBody.err = err;
   }
 
-  // console.log(result);
-  // console.log(result.emailBody.doc.id);
-
   if (result.emailBody.err) {
     return result;
   }
 
-  foundBusiness = (await findBusinesses.byId(business)).docs;
-
-  // console.log(foundBusiness);
   try {
     if (!foundBusiness.email_bodies) {
       foundBusiness.email_bodies = result.emailBody.doc.id;
@@ -58,8 +70,9 @@ const createNewEmailBody = async (data) => {
     result.business.doc = updatedBusiness;
   } catch (err) {
     result.business.err = err;
+    return result;
   }
-  // console.log(result);
+
   return result;
 };
 

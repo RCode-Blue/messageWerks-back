@@ -55,6 +55,7 @@
     "jsonwebtoken": "^8.5.1",
     "mjml": "^4.7.1",
     "mongoose": "^5.10.12",
+    "node-mailjet": "^3.3.1",
     "path": "^0.12.7",
     "uuid": "^8.3.2",
     "uuid-apikey": "^1.5.1",

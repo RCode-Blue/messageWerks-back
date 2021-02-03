@@ -19,10 +19,11 @@ const findContactByEmail = async (email) => {
   const options = {};
   try {
     let foundContacts = await Contact.find(filter, projection, options);
+    // foundContacts in format [ {<contact>} ]
     if (foundContacts.length === 0) {
       searchResults = {
         docs: null,
-        err: true,
+        err: null,
       };
     } else {
       searchResults = {

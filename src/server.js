@@ -17,6 +17,8 @@ const mePath = require("./routes/api/me");
 const subscribersPath = require("./routes/api/subscribers");
 const usersPath = require("./routes/api/users");
 
+const prototypePath = require("./routes/api/prototype");
+
 const connectMongo = require("./config/scripts/mongo");
 
 global.__basedir = __dirname;
@@ -33,6 +35,7 @@ const app = express();
 
 // DB connections
 connectMongo();
+// let mongoDB = connectMongo();
 
 // Init middleware
 app.use(express.json());
@@ -43,10 +46,10 @@ app.use("/api/businesses", businessesPath);
 app.use("/api/contacts", contactsPath);
 app.use("/api/emailbodies", emailBodiesPath);
 app.use("/api/me", mePath);
-app.use("api/subscribers", subscribersPath);
+app.use("/api/subscribers", subscribersPath);
 app.use("/api/users", usersPath);
 
-// app.use("/api/auth", authPath);
+app.use("/api/prototype", prototypePath);
 
 const PORT = process.env.port || 5000;
 

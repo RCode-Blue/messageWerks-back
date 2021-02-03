@@ -40,8 +40,8 @@ const resetPassword = async (email, reset_code, passwords) => {
 
   // Get Contact id from email
   let searchContactsResults = await searchContact.findContactByEmail(email);
-  console.log(searchContactsResults);
-  if (searchContactsResults.err) {
+  // console.log(searchContactsResults);
+  if (searchContactsResults.err || !searchContactsResults.docs) {
     // result.code = "400";
     // result.message = "Contact not found";
     response = jsonResponse("400", "Contact not found");

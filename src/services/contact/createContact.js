@@ -1,7 +1,9 @@
 const Contact = require("../../db/models/Contact");
 
 const createContact = async (data) => {
-  console.log(data);
+  // console.log(data);
+  // Expect { email: ""}
+
   let result = {};
 
   try {

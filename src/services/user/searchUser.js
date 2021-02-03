@@ -15,7 +15,7 @@ let searchResults = {
 const byContactEmail = async (email) => {
   let foundContact = await searchContact.findContactByEmail(email);
 
-  if (foundContact.err) {
+  if (foundContact.err || !foundBontact.docs) {
     searchResults.err = true;
     return searchResults;
   }

@@ -29,10 +29,13 @@ const byBusinessId = async (business_id) => {
   let filter = { business_id };
   try {
     let foundBusinesses = await Business.findOne(filter);
-    searchResults.docs = foundBusinesses.docs;
+
+    searchResults.docs = foundBusinesses;
   } catch (err) {
     searchResults.err = err;
   }
+  // console.log(searchResults);
+  return searchResults;
 };
 
 const byName = async () => {};

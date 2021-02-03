@@ -5,21 +5,43 @@ const EmailBodySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  email_body_id: {
+  status: {
+    type: Number,
+    required: true,
+  },
+  emailbody_codename: {
     type: String,
     required: true,
+    lowercase: true,
+    trim: true,
+  },
+  type: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+  },
+  subject: {
+    type: String,
+  },
+  html_part: {
+    type: String,
+  },
+  text_part: {
+    type: String,
+  },
+  variables: {
+    type: String,
   },
   business: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "business",
   },
-  description: {
-    type: String,
+  usage: {
+    type: Number,
   },
-  body: {
-    type: String,
-  },
-  attributes: {
+  notes: {
     type: String,
   },
 });

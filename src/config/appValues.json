@@ -41,20 +41,39 @@
     }
   },
 
-  "email_templates": {
-    "type": {
-      "01": {
-        "name": "marketing",
-        "mongoUserAccount": "",
-        "mongoReaderAccount": ""
-      },
-      "02": {
-        "name": "transactional",
-        "mongoUserAccount": "",
-        "mongoReaderAccount": ""
-      }
+  "email_bodies": {
+    "default_from": {
+      "email": "rickyliew@hotmail.com",
+      "name": "Your friendly neighbourhood email service"
     },
-    "status": {}
+    "types": [
+      "subscription_confirmation",
+      "email_confirmation",
+      "password_change",
+      "password_reset"
+    ],
+    "status": {
+      "9": {
+        "name": "active",
+        "code": 9,
+        "description": "message is verified and ready for use"
+      },
+      "7": {
+        "name": "draft",
+        "code": 7,
+        "description": "message is still in draft mode"
+      },
+      "3": {
+        "name": "inactive",
+        "code": 3,
+        "description": "message is verified but disabled from use"
+      },
+      "0": {
+        "name": "disabled",
+        "code": 0,
+        "description": "message is disabled by system"
+      }
+    }
   },
 
   "mailing_list": {
@@ -240,12 +259,5 @@
         "description": "supervisor but view only"
       }
     }
-  },
-
-  "google": {
-    "scopes": [
-      "https://www.googleapis.com/auth/drive.file",
-      "https://www.googleapis.com/auth/drive.metadata"
-    ]
   }
 }

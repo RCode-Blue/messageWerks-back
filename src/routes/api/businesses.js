@@ -4,6 +4,7 @@ const router = express.Router();
 const auth = require("../middleware/auth");
 const getUserData = require("../middleware/getUserData");
 
+const patchEmailBodies = require("../controllers/businesses/patchEmailBodies");
 const getBusinesses = require("../controllers/businesses/getBusinesses");
 const postBusiness = require("../controllers/businesses/postBusiness");
 const getBusinessById = require("../controllers/businesses/getBusinessById");
@@ -30,12 +31,16 @@ router.post("/create", async (req, res) => {
 });
 
 // PATCH a business
-router.patch("/:business_id", async (req, res) => {
+router.patch("/id/:business_id", async (req, res) => {
   await patchBusiness(req, res);
 });
 
+router.patch("/emailbody", async (req, res) => {
+  await patchEmailBodies(req, res);
+});
+
 // Delete a business
-router.delete("/:business_id", async (req, res) => {
+router.delete("/id/:business_id", async (req, res) => {
   res.send("Delete a business");
 });
 

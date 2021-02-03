@@ -1,23 +1,38 @@
 const Subscriber = require("../../db/models/Subscriber");
+// const connectMongo = require("../../config/scripts/mongo");
 
-const findBusinesses = require("../business/findBusinesses");
-const searchContact = require("../contact/searchContact");
+const codeScript = require("../code");
 
-const createNewSubscriber = async (email, business_id) => {
-  let contact, business;
+const createNewSubscriber = async (contactid, businessid) => {
+  let confirmation;
   let result = {
     data: null,
     err: null,
   };
 
-  let contactSearch = searchContact.findContactByEmail(email);
-  if (contactSearch.err) {
-    result.err = contactSearch.err;
-    return result;
-  }
-  contact = contactSearch.docs;
+  // let mongoDB = await connectMongo();
+  // console.log(mongoDB);
+  // mongoDB.on('open', function(){
 
-  // let businessSearch =
+  // })
+
+  confirmation = await codeScript.setCode();
+  console.log(confirmation);
+
+  let data = {
+    contact: contactid,
+    business: businessid,
+    status: 7,
+    confirmation_code: confirmation.hash,
+  };
+
+  try {
+    result.data = await Subscriber.create(data);
+  } catch (err) {
+    result.err = err;
+  }
+
+  return result;
 };
 
 module.exports = createNewSubscriber;
