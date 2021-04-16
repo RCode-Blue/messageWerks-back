@@ -1,6 +1,6 @@
 const User = require("../../db/models/User");
 // const appValues = require('../../config/appValues.json')
-const encrypt = require("../password/encrypt");
+// const encrypt = require("../password/hash");
 const findUser = require("./searchUser");
 const jsonResponse = require("../createJsonResponse");
 

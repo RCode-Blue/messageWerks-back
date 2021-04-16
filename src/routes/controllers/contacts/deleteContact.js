@@ -5,9 +5,11 @@ const jsonResponse = require("../../../services/createJsonResponse");
 const deleteContact = async (req, res) => {
   const { userId, acl_role } = req;
   const id = req.params.contact_id;
+  const minRole = "all_admins";
+
   let response, result;
 
-  response = checkRolePermissions(acl_role, 95);
+  response = checkRolePermissions(acl_role, minRole);
   if (response) {
     return res.status(response.status).json(response);
   }

@@ -1,22 +1,21 @@
 const jwt = require("jsonwebtoken");
-// const jsonResponse = require("../auth/authorise");
 
-const authorise = (key, token) => {
+const authorise = (secret, accessToken) => {
   // console.log(token);
   let result = { error: null, user: null };
 
   // If no token
-  if (!token) {
+  if (!accessToken) {
     result.error = {
       status: "401",
-      msg: "No token. Authrorisation denied",
+      msg: "No token. Authorisation denied",
     };
     return result;
   }
 
   // Verify taken
   try {
-    const decoded = jwt.verify(token, key);
+    const decoded = jwt.verify(accessToken, secret);
 
     result.user = decoded.user;
   } catch (err) {

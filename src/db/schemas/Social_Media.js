@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const SocialMediaSchema = new mongoose.Schema({
-  media: {
+  social_media_name: {
     type: String,
   },
-  user_id: {
+  user_account: {
     type: String,
   },
 });

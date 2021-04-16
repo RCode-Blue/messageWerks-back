@@ -5,19 +5,21 @@ const EmailBodySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  business: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "business",
+    required: true,
+  },
   status: {
     type: Number,
     required: true,
   },
-  emailbody_codename: {
+  email_type: {
     type: String,
     required: true,
-    lowercase: true,
-    trim: true,
   },
-  type: {
+  purpose: {
     type: String,
-    required: true,
   },
   description: {
     type: String,
@@ -32,17 +34,15 @@ const EmailBodySchema = new mongoose.Schema({
     type: String,
   },
   variables: {
-    type: String,
-  },
-  business: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "business",
-  },
-  usage: {
-    type: Number,
+    type: [String],
   },
   notes: {
     type: String,
+  },
+  usage: {
+    type: Number,
+    required: true,
+    default: 0,
   },
 });
 

@@ -8,36 +8,38 @@ const jsonResponse = require("../../../services/createJsonResponse");
 /*
   expects:
   req.body.request{ 
-    {
-      newPasswords: { 
-        newPassword1: <newpassword>, 
-        newPassword2: <newpassword> 
+    { newPasswords: { 
+        current_password: <currentpassword>,
+        new_password_1: <newpassword>, 
+        new_password_2: <newpassword> 
       }
     } 
     || 
-    { 
-      new_acl_role: <newRole>
+    { newPasswords: {
+        new_password_1: <newpassword>, 
+        new_password_2: <newpassword> 
+      }
     } 
+    ||
+    { new_acl_role: <newRole> } 
     || 
-    { 
-      newStatus: <newStatus>
-    }
+    { newStatus: <newStatus> }
   }
-
-  response in jsonResponse format
 */
 
 const patchUser = async (req, res) => {
-  // console.log(req);
   let response;
   const { acl_role } = req;
   const userId = req.params.user_id;
+  const minRole = "all_admins";
 
+  /*
   // Check permissions
-  response = checkRolePermissions(acl_role, 95);
+  response = checkRolePermissions(acl_role, minRole);
   if (response) {
     return res.status(response.status).json(response);
   }
+  */
 
   // Edit password
   if (req.body.request.newPasswords) {

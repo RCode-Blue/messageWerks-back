@@ -1,8 +1,9 @@
+const { replace } = require("../../../test/__mocks__/fileMock");
 const EmailBody = require("../../db/models/EmailBody");
 const findBusinesses = require("../business/findBusinesses");
 
 const createNewEmailBody = async (data) => {
-  const { business_id, name, description, status, type } = data;
+  const { business_id, name, description, type } = data;
   let newBody, emailbody_codename, foundBusiness, updatedBusiness;
   let result = {
     emailBody: {
@@ -14,6 +15,8 @@ const createNewEmailBody = async (data) => {
       doc: null,
     },
   };
+
+  status = data.status ? data.status : 9;
 
   emailbody_codename =
     name.replace(/[^a-zA-Z]/g, "").substring(0, 4) +
@@ -30,6 +33,16 @@ const createNewEmailBody = async (data) => {
     return result;
   }
 
+  // console.log(data.html_part);
+  const pattern = /{{var.{2,30}}}/g;
+  let searchResult = data.html_part.match(new RegExp(pattern));
+  let variables = searchResult.map((item) => {
+    return item.replace("{{var:", "").replace("}}", "");
+  });
+  // console.log(variables);
+
+  // return;
+
   newBody = {
     business: foundBusiness._id,
     emailbody_codename,
@@ -37,6 +50,7 @@ const createNewEmailBody = async (data) => {
     name,
     type,
     total_use: 0,
+    variables,
   };
 
   if (data.description) {

@@ -3,21 +3,6 @@ const mongoose = require("mongoose");
 const AddressSchema = require("../schemas/Address");
 const SocialMediaSchema = require("../schemas/Social_Media");
 
-const LocationSchema = new mongoose.Schema({
-  address: {
-    type: AddressSchema,
-  },
-  email: {
-    type: String,
-  },
-  address_type: {
-    type: String,
-  },
-  notes: {
-    type: String,
-  },
-});
-
 const ManagerSchema = new mongoose.Schema({
   user: {
     type: mongoose.Types.ObjectId,
@@ -28,36 +13,43 @@ const ManagerSchema = new mongoose.Schema({
   },
 });
 
+const ApiKeySchema = new mongoose.Schema({
+  uuid_key: {
+    type: String,
+  },
+  usage: {
+    type: Number,
+    default: 0,
+  },
+  source_url: {
+    type: String,
+  },
+});
+
 const BusinessSchema = new mongoose.Schema({
   name: {
+    type: String,
+    required: true,
+  },
+  status: {
+    type: Number,
+  },
+  slug: {
     type: String,
     required: true,
   },
   homepage: {
     type: String,
   },
-  business_id: {
-    type: String,
-  },
-  status: {
-    type: Number,
-  },
   api_key: {
-    type: String,
-  },
-  email_bodies: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: "emailbody",
+    type: ApiKeySchema,
   },
   social_media: {
     type: [SocialMediaSchema],
   },
-  mailing_lists: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: "mailinglist",
-  },
-  locations: {
-    type: [LocationSchema],
+
+  address: {
+    type: AddressSchema,
   },
   managers: {
     type: [ManagerSchema],

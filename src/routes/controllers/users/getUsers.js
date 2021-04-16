@@ -4,13 +4,15 @@ const checkRolePermissions = require("../../../services/user/checkRolePermission
 
 const getUsers = async (req, res) => {
   const { acl_role } = req;
-
+  const minRole = "all_admins";
   let response;
 
-  response = checkRolePermissions(acl_role, 90);
+  /*
+  response = checkRolePermissions(acl_role, minRole);
   if (response) {
     return res.status(response.status).json(response);
   }
+  */
 
   const filter = {};
   const projection = {};

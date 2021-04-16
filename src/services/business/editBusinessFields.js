@@ -3,7 +3,6 @@ const findBusinesses = require("./findBusinesses");
 const editBusinessFields = async (id, fields) => {
   let searchResult = await findBusinesses.byId(id);
   let business = searchResult.docs;
-  // let results = [];
   let results = {};
 
   const editField = async (document, fieldName, value) => {
@@ -25,8 +24,8 @@ const editBusinessFields = async (id, fields) => {
     results[result.key] = result.newValue;
   }
 
-  if (fields.url) {
-    let result = await editField(business, "url", fields.url);
+  if (fields.homepage) {
+    let result = await editField(business, "homepage", fields.homepage);
     results[result.key] = result.newValue;
   }
 
@@ -35,8 +34,8 @@ const editBusinessFields = async (id, fields) => {
     results[result.key] = result.newValue;
   }
 
-  if (fields.industry) {
-    let result = await editField(business, "industry", fields.industry);
+  if (fields.api_key) {
+    let result = await editField(business, "api_key", fields.api_key);
     results[result.key] = result.newValue;
   }
 

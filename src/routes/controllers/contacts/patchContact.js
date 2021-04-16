@@ -3,13 +3,7 @@ const updateContactField = require("../../../services/contact/updateContactField
 const jsonResponse = require("../../../services/createJsonResponse.js");
 
 const checkAllowedFields = (keyName) => {
-  const allowedFields = [
-    "dob",
-    "social_media",
-    "mj_contact_id",
-    "name",
-    "address",
-  ];
+  const allowedFields = ["dob", "social_media", "name", "address"];
 
   let allowedParam = 0;
 
@@ -23,6 +17,7 @@ const checkAllowedFields = (keyName) => {
 
 const patchContact = async (req, res) => {
   const { userId, acl_role } = req;
+  const minRole = "all_admins";
   let response, keyName, result;
 
   const id = req.params.contact_id;
@@ -31,18 +26,12 @@ const patchContact = async (req, res) => {
   keyName = Object.keys(req.body)[0];
 
   // Check permissions
-  response = checkRolePermissions(acl_role, 95);
+  response = checkRolePermissions(acl_role, minRole);
   if (response) {
     return res.status(response.status).json(response);
   }
-  // if (parseInt(acl_role) < 95) {
-  //   response = jsonResponse(
-  //     "401",
-  //     "You don't have permission to perform this action"
-  //   );
-  //   return res.status(response.status).json(response);
-  // }
 
+  // Check allowed fields
   let allowedParam = checkAllowedFields(keyName);
 
   if (allowedParam === 0) {

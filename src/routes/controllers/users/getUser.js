@@ -7,11 +7,14 @@ const getUser = async (req, res) => {
   const id = req.params.user_id;
 
   let response;
+  const minRole = "all_admins";
 
-  response = checkRolePermissions(acl_role, 90);
+  /*
+  response = checkRolePermissions(acl_role, minRole);
   if (response) {
     return res.status(response.status).json(response);
   }
+  */
 
   const user = await findUser.byUserId(id);
 

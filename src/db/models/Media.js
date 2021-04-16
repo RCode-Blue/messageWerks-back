@@ -5,7 +5,10 @@ const MediaSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: business,
   },
-  media_id: {
+  name: {
+    type: String,
+  },
+  url: {
     type: String,
   },
 });

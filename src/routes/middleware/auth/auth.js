@@ -1,13 +1,17 @@
-// const jwt = require("jsonwebtoken")
+// Checks if user is logged in
 const jsonResponse = require("../../../services/createJsonResponse");
 const authorise = require("../services/auth/authorise");
 
 const auth = (req, res, next) => {
-  const jwtKey = process.env.JWT_SECRET;
-  const token = req.header("x-auth-token");
+  const jwtSecret = process.env.JWT_ACCESS_TOKEN_SECRET;
+  const accessToken = req.header("x-auth-token");
   let response;
 
-  let result = authorise(jwtKey, token);
+  // Check if Access token is still valid
+  //  - if yes, use it
+  //  - if no, generate new one
+
+  let result = authorise(jwtSecret, accessToken);
 
   if (result.error) {
     response = jsonResponse(result.error.status, result.error.msg);

@@ -1,4 +1,4 @@
-const encrypt = require("../password/encrypt");
+const hash = require("../password/hash");
 
 const bcrypt = require("bcrypt");
 const findUser = require("./searchUser");
@@ -15,7 +15,7 @@ const editPassword = async (id, passwords, reset_code) => {
   // Change password
   if (passwords.current_password) {
     const { current_password } = passwords;
-    const passwordHash = await encrypt(new_password_1);
+    const passwordHash = await hash(new_password_1);
 
     const isMatch = await bcrypt.compare(current_password, foundUser.password);
 
@@ -34,7 +34,7 @@ const editPassword = async (id, passwords, reset_code) => {
   }
 
   // Reset password
-  const passwordHash = await encrypt(new_password_1);
+  const passwordHash = await hash(new_password_1);
 
   try {
     foundUser.password = passwordHash;

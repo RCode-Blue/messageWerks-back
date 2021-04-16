@@ -1,6 +1,6 @@
 const uuid = require("uuid");
 
-const encrypt = require("../password/encrypt");
+const hash = require("../password/hash");
 const findUser = require("./searchUser");
 const jsonResponse = require("../createJsonResponse");
 
@@ -14,7 +14,7 @@ const setCode = async (email) => {
   }
 
   const confirmation_code = v4();
-  const confirmation_hash = await encrypt(confirmation_code);
+  const confirmation_hash = await hash(confirmation_code);
 
   try {
     foundUser.confirmation_code = confirmation_hash;

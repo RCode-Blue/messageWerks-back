@@ -6,17 +6,13 @@ const SubscriberSchema = new mongoose.Schema({
     ref: "contact",
     required: true,
   },
-  business: {
+  mailing_list: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "business",
+    ref: "mailinglist",
     required: true,
   },
   status: {
     type: Number,
-    require: true,
-  },
-  confirmation_code: {
-    type: String,
   },
 });
 

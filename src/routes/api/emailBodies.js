@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+// const url = require("url");
+
 const auth = require("../middleware/auth/auth");
 const getUserData = require("../middleware/getUserData");
 
@@ -14,7 +16,7 @@ router.get("/", async (req, res) => {
   await getEmailBodies(req, res);
 });
 
-router.get(["/:code", "/:id"], async (req, res) => {
+router.get(["/one/code/:code", "/one/id/:id"], async (req, res) => {
   await getEmailBody(req, res);
 });
 

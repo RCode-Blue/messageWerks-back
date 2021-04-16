@@ -33,20 +33,17 @@ const ContactSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    name: {
-      type: NameSchema,
+    dob: {
+      type: Date,
     },
     address: {
       type: AddressSchema,
     },
-    dob: {
-      type: Date,
+    name: {
+      type: NameSchema,
     },
     social_media: {
       type: [SocialMediaSchema],
-    },
-    mj_contact_id: {
-      type: String,
     },
   },
 

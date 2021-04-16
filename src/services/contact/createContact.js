@@ -4,7 +4,7 @@ const createContact = async (data) => {
   // console.log(data);
   // Expect { email: ""}
 
-  let result = {};
+  let result = { doc: null, err: null };
 
   try {
     result.doc = await Contact.create(data);

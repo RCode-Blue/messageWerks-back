@@ -12,7 +12,7 @@ const jsonResponse = require("../../../services/createJsonResponse");
 
 const patchBusiness = async (req, res) => {
   let response;
-  // Business fields -------------------------
+  // Business fields
   if (req.body.business_fields) {
     const id = req.params.business_id;
     const { business_fields } = req.body;

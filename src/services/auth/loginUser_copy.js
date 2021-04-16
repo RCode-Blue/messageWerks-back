@@ -3,13 +3,14 @@ const jwt = require("jsonwebtoken");
 
 const appValues = require("../../config/appValues.json");
 const findUser = require("../user/searchUser");
+const redisTokens = require("./redisUtils");
 // const setResetCode = require("../password/setResetCode");
 // const uuid = require("uuid")
 // const uuidAPIKey = require("uuid-apikey");
 
 const loginUser = async (email, password) => {
   const { token, user } = appValues;
-  const key = process.env.JWT_SECRET;
+  const key = process.env.JWT_PASSWORD_SECRET;
   let result = {
     userNotFound: false,
     noMatch: null,
@@ -48,7 +49,7 @@ const loginUser = async (email, password) => {
     },
   };
 
-  const options = token.options;
+  const options = token.password.options;
 
   try {
     result.jwt.token = jwt.sign(payload, key, options);

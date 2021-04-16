@@ -1,7 +1,7 @@
 const Subscriber = require("../../db/models/Subscriber");
 // const connectMongo = require("../../config/scripts/mongo");
 
-const codeScript = require("../code");
+const codeScript = require("../codeUtils");
 
 const createNewSubscriber = async (contactid, businessid) => {
   let confirmation;
@@ -17,7 +17,8 @@ const createNewSubscriber = async (contactid, businessid) => {
   // })
 
   confirmation = await codeScript.setCode();
-  console.log(confirmation);
+  console.log("createNewSubscriber: 20");
+  // console.log(confirmation);
 
   let data = {
     contact: contactid,

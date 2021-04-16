@@ -17,6 +17,10 @@ const UserSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "contact",
     },
+    slug: {
+      type: String,
+      required: true,
+    },
     password: {
       type: String,
     },
@@ -31,11 +35,9 @@ const UserSchema = new mongoose.Schema(
     failed_logins: {
       type: Number,
       default: 0,
+      required: true,
     },
     reset_code: {
-      type: String,
-    },
-    confirmation_code: {
       type: String,
     },
   },

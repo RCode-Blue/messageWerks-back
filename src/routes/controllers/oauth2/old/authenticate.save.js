@@ -1,4 +1,6 @@
-const { google } = require("googleapis");
+const {
+  google,
+} = require("../../../../services/oauth/node_modules/googleapis");
 
 const clientId = process.env.GOOGLE_CLIENT_ID;
 const clientSecret = process.env.GOOGLE_CLIENT_SECRET;

@@ -1,15 +1,21 @@
 const User = require("../../db/models/User");
-const encrypt = require("../password/encrypt");
+const codeUtils = require("../codeUtils");
+const createHash = require("../password/hash");
 
 const createUser = async (userData) => {
   const { password, acl_role, status, contact_id } = userData;
-  let result = {};
+  let result = { err: null, doc: null };
 
-  let passwordHash = await encrypt(password);
+  const passwordHash = await createHash(password);
+
+  let item_ref =
+    userData.contact_id.replace(/[^a-zA-Z0-9]/g, "").substring(0, 4) +
+    Math.floor(Math.random() * 10000 + 1).toString();
 
   let data = {
     password: passwordHash,
     acl_role,
+    item_ref,
     status,
     contact: contact_id,
   };

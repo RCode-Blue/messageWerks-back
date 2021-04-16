@@ -20,11 +20,6 @@ router.get("/:business_id", async (req, res) => {
   await getBusinessById(req, res);
 });
 
-// Search businesses
-router.get("/find", async (req, res) => {
-  res.send("Get a business");
-});
-
 // Create new business
 router.post("/create", async (req, res) => {
   postBusiness(req, res);

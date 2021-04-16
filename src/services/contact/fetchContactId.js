@@ -15,7 +15,7 @@ const fetchContactId = async (data) => {
   // If Contact ID exists
   if (data.contact_id) {
     try {
-      foundContact = await Contact.findById(data.contact_id);
+      foundContact = await Contact.byId(data.contact_id);
     } catch (err) {
       result.err = err;
     }
@@ -27,7 +27,7 @@ const fetchContactId = async (data) => {
 
   // If Contact email exists, get the ID
   if (data.contact_email) {
-    foundContact = await searchContact.findContactByEmail(data.contact_email);
+    foundContact = await searchContact.byEmail(data.contact_email);
     if (foundContact.err || !foundContact.docs) {
       result.err = foundContact.err;
     } else {

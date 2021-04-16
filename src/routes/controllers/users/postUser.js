@@ -1,19 +1,19 @@
 const checkRolePermissions = require("../../../services/user/checkRolePermissions");
 const createUser = require("../../../services/user/createUser");
-const jsonResponse = require("../../../services/createJsonResponse");
 const fetchContactId = require("../../../services/contact/fetchContactId");
 const findUser = require("../../../services/user/searchUser");
+const jsonResponse = require("../../../services/createJsonResponse");
 
 const postUser = async (req, res) => {
   const { userId, acl_role } = req;
+  const minRole = "all_admins";
   let response;
 
   const data = req.body;
-
-  response = checkRolePermissions(acl_role, 95);
-  if (response) {
-    return res.status(response.status).json(response);
-  }
+  // response = checkRolePermissions(acl_role, minRole);
+  // if (response) {
+  //   return res.status(response.status).json(response);
+  // }
 
   // Check if Contact exists
   const searchResult = await fetchContactId(data);

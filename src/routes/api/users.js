@@ -34,40 +34,6 @@ router.post("/create", auth, getUserData, async (req, res) => {
   await postUser(req, res);
 });
 
-// router.get("/search", async (req, res) => {
-//   res.send("users GET (search)");
-// });
-
-// Enable password reset
-router.patch("/password/enablereset/:user_email", async (req, res) => {
-  await passwordResetEnable(req, res);
-});
-
-// Reset password
-router.patch("/password/reset/:email/:reset_code", async (req, res) => {
-  await passwordReset(req, res);
-});
-
-router.patch("/password/reset", async (req, res) => {
-  await passwordReset(req, res);
-});
-
-// Set user confirmation code
-router.patch("/confirm/set", async (req, res) => {
-  // res.send("Set user confirmation code");
-  await confirmUser.setConfirmCode(req, res);
-});
-
-// Confirm user
-router.patch("./confirm/yes/:email/:confirmation_code", async (req, res) => {
-  // res.send("User confirmation YES");
-  await confirmUser.confirm(req, res);
-});
-
-router.patch("./confirm/yes/", async (req, res) => {
-  res.send("User confirmation YES");
-});
-
 // Edit user detail
 router.patch(
   "/:user_id",
@@ -90,5 +56,39 @@ router.delete(
     await deleteUser(req, res);
   }
 );
+
+// Password reset routes
+// ---------------------
+// Enable password reset (test)
+router.patch("/password/enablereset/:user_email", async (req, res) => {
+  await passwordResetEnable(req, res);
+});
+
+// Reset password
+router.patch("/password/reset/:email/:reset_code", async (req, res) => {
+  await passwordReset(req, res);
+});
+
+router.patch("/password/reset", async (req, res) => {
+  await passwordReset(req, res);
+});
+
+// User confirmation routes
+// ------------------------
+// Set user confirmation code (test)
+router.patch("/confirm/set", async (req, res) => {
+  // res.send("Set user confirmation code");
+  await confirmUser.setConfirmCode(req, res);
+});
+
+// Confirm user
+router.patch("/confirm/yes/:email/:confirmation_code", async (req, res) => {
+  // res.send("User confirmation YES");
+  await confirmUser.confirm(req, res);
+});
+
+router.patch("./confirm/yes/", async (req, res) => {
+  res.send("User confirmation YES");
+});
 
 module.exports = router;

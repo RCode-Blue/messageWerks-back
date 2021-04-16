@@ -7,8 +7,24 @@ let result = {
 };
 
 const byCode = async (code) => {
-  // console.log(id);
+  // console.log(code);
   const filter = { emailbody_codename: code };
+  const projection = [];
+  const options = {};
+  try {
+    foundEmailBody = await EmailBody.findOne(filter, projection, options);
+    // console.log(foundEmailBody);
+    result.doc = foundEmailBody;
+  } catch (err) {
+    result.err = err;
+  }
+  return result;
+  // return { doc: [] };
+};
+
+const byName = async (name) => {
+  // console.log(code);
+  const filter = { name: name };
   const projection = [];
   const options = {};
   try {

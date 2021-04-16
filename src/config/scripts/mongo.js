@@ -33,10 +33,10 @@ const connectDB = async () => {
       useFindAndModify: false,
     });
     if (mongoose.connection.readyState) {
-      console.log("MongoDB connected...");
+      console.log("MongoDB connected ...");
     }
   } catch (err) {
-    console.error(err);
+    console.error("MongoDB error: ", err);
     process.exit(1);
   }
 };

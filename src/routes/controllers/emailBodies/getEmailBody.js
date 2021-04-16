@@ -2,10 +2,14 @@ const jsonResponse = require("../../../services/createJsonResponse");
 const findEmailBody = require("../../../services/emailBody/findEmailBody");
 
 const getEmailBody = async (req, res) => {
+  console.log(req.params);
+  // return;
+
   let result, response;
 
   if (req.params.code) {
     result = await findEmailBody.byCode(req.params.code);
+    // console.log(result);
   }
   if (req.params.id) {
     result = await findEmailBody.byId(req.params.id);

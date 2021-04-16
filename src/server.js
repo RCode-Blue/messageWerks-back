@@ -9,17 +9,19 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 
-const jwtPath = require("./routes/api/jwt");
-const businessesPath = require("./routes/api/businesses");
-const contactsPath = require("./routes/api/contacts");
-const emailBodiesPath = require("./routes/api/emailBodies");
-const mePath = require("./routes/api/me");
-const subscribersPath = require("./routes/api/subscribers");
-const usersPath = require("./routes/api/users");
+// const authPath = require("./routes/api/auth");
+// const businessesPath = require("./routes/api/businesses");
+// const contactsPath = require("./routes/api/contacts");
+// const emailBodiesPath = require("./routes/api/emailBodies");
+// const mePath = require("./routes/api/me");
+const publicPath = require("./routes/api/public");
+// const subscribersPath = require("./routes/api/subscribers");
+// const usersPath = require("./routes/api/users");
 
-const prototypePath = require("./routes/api/prototype");
+// const prototypePath = require("./routes/api/prototype");
 
 const connectMongo = require("./config/scripts/mongo");
+// const connectRedis = require("./config/scripts/redis");
 
 global.__basedir = __dirname;
 
@@ -35,21 +37,23 @@ const app = express();
 
 // DB connections
 connectMongo();
-// let mongoDB = connectMongo();
+// let redisClient = connectRedis();
 
 // Init middleware
 app.use(express.json());
 
 // Routes
-app.use("/api/auth", jwtPath);
-app.use("/api/businesses", businessesPath);
-app.use("/api/contacts", contactsPath);
-app.use("/api/emailbodies", emailBodiesPath);
-app.use("/api/me", mePath);
-app.use("/api/subscribers", subscribersPath);
-app.use("/api/users", usersPath);
+// app.use("api/v1/public", publicPath);
+// app.use("/api/auth", authPath); // User, Admin
+// app.use("/api/businesses", businessesPath); // User, Admin
+// app.use("/api/contacts", contactsPath); // Admin
+// app.use("/api/emailbodies", emailBodiesPath); // User, Admin
+// app.use("/api/subscribers", subscribersPath); // User, Admin, Email, Web
+// app.use("/api/users", usersPath); // Admin, Email
 
-app.use("/api/prototype", prototypePath);
+// app.use("/api/me", mePath); // User
+
+// app.use("/api/prototype", prototypePath); // Testing
 
 const PORT = process.env.port || 5000;
 

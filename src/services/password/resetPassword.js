@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 
 const appValues = require("../../config/appValues.json");
-const encrypt = require("../password/encrypt");
+const hash = require("./hash");
 const findUser = require("../user/searchUser");
 const jsonResponse = require("../createJsonResponse");
 const searchContact = require("../contact/searchContact");
@@ -70,7 +70,7 @@ const resetPassword = async (email, reset_code, passwords) => {
     return response;
   }
 
-  const encrypted = await encrypt(new_password_1);
+  const encrypted = await hash(new_password_1);
   if (!foundUser.reset_code) {
     response = jsonResponse("400", "No reset code");
     return response;

@@ -5,23 +5,16 @@ const updateContact = require("../../../services/contact/updateContact");
 
 const putContact = async (req, res) => {
   const { acl_role } = req;
+  const minRole = "all_admins";
   let response, result;
   const id = req.params.contact_id;
   const data = req.body;
 
   // Check permission
-  response = checkRolePermissions(acl_role, 95);
+  response = checkRolePermissions(acl_role, minRole);
   if (response) {
     return res.status(response.status).json(response);
   }
-
-  // if (parseInt(acl_role) < 95) {
-  //   response = jsonResponse(
-  //     "401",
-  //     "You do not have permission to perform this operation"
-  //   );
-  //   return res.status(response.status).json(response);
-  // }
 
   // Update
   const email = await searchContact.getEmailfromContactId(id);

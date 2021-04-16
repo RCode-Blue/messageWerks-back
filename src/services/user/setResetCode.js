@@ -1,6 +1,6 @@
 const uuid = require("uuid");
 
-const encrypt = require("../password/encrypt");
+const encrypt = require("../password/hash");
 const findUser = require("./searchUser");
 const jsonResponse = require("../createJsonResponse");
 

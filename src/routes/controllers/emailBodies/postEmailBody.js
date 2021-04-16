@@ -2,7 +2,7 @@ const jsonResponse = require("../../../services/createJsonResponse");
 const createNewEmailBody = require("../../../services/emailBody/createNewEmailBody");
 
 const postEmailBody = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   let result, response;
 
   if (
@@ -17,7 +17,7 @@ const postEmailBody = async (req, res) => {
   }
 
   result = await createNewEmailBody(req.body);
-  // console.log(result);
+  console.log(result);
 
   if (result.emailBody.err) {
     response = jsonResponse("400", "Error creating new email body", result);
