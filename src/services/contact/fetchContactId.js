@@ -3,7 +3,7 @@
 
 const Contact = require("../../db/models/Contact");
 
-const searchContact = require("./searchContact");
+const searchContact = require("../v1/contact/searchContact");
 
 const fetchContactId = async (data) => {
   let foundContact;

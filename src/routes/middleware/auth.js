@@ -12,7 +12,7 @@
  *
  */
 const jwt = require("jsonwebtoken");
-const jsonResponse = require("../../services/createJsonResponse");
+const jsonResponse = require("../../services/v1/createJsonResponse");
 
 module.exports = function (req, res, next) {
   let response;

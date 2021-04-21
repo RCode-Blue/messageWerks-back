@@ -1,7 +1,7 @@
 const findBusinesses = require("../../services/business/findBusinesses");
 const findEmailBody = require("../../services/emailBody/findEmailBody");
 const appValues = require("../../config/appValues.json");
-const jsonResponse = require("../../services/createJsonResponse");
+const jsonResponse = require("../v1/createJsonResponse");
 
 // const MailJet = require("node-mailjet");
 

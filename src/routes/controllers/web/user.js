@@ -3,7 +3,7 @@ const buildEmailRequest = require("../../../services/emailrequest/buildEmailRequ
 const createUser = require("../../../services/user/createUser");
 const findBusinesses = require("../../../services/business/findBusinesses");
 const findEmailBody = require("../../../services/emailBody/findEmailBody");
-const jsonResponse = require("../../../services/createJsonResponse");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 
 const newUser = async (req, res) => {
   const {

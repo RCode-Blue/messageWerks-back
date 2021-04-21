@@ -1,5 +1,5 @@
 const createNewBusiness = require("../../../services/business/createNewBusiness");
-const jsonResponse = require("../../../services/createJsonResponse");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 
 const postBusiness = async (req, res) => {
   let response;

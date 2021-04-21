@@ -1,4 +1,4 @@
-const jsonResponse = require("../../services/createJsonResponse");
+const jsonResponse = require("../v1/createJsonResponse");
 const tokenUtils = require("../../services/auth/tokenUtils");
 const preLoginChecks = require("../../services/auth/preLoginChecks");
 const redisUtils = require("../../services/auth/redisUtils");

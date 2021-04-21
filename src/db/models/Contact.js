@@ -1,9 +1,3 @@
-/**
- * @description Schema for the Contact model
- * @module models
- * @name Contact
- * @returns {Object} - Contact model
- */
 const mongoose = require("mongoose");
 
 const AddressSchema = require("../schemas/Address");
@@ -22,9 +16,15 @@ const NameSchema = new mongoose.Schema({
 });
 
 /**
- * @name ContactSchema
  * @description Contact schema
  * @constructor Contact
+ *
+ * @property {string} email  Required - Contact email address
+ * @property {date} dob  Date of birth
+ * @property {object} address  Addreess of Contact
+ * @property {object} name  Contact full name
+ * @property {object}social_media  Array of SocialMedia objects
+ *
  */
 const ContactSchema = new mongoose.Schema(
   {

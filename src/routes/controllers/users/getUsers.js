@@ -1,4 +1,4 @@
-const jsonTemplate = require("../../../services/createJsonResponse");
+const jsonTemplate = require("../../../services/v1/createJsonResponse");
 const fetchUsers = require("../../../services/user/fetchUsers");
 const checkRolePermissions = require("../../../services/user/checkRolePermissions");
 

@@ -3,7 +3,7 @@ const checkRolePermissions = require("../../../services/user/checkRolePermission
 const editAclRole = require("../../../services/user/editAclRole");
 const editPassword = require("../../../services/user/editPassword");
 const editStatus = require("../../../services/user/editStatus");
-const jsonResponse = require("../../../services/createJsonResponse");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 
 /*
   expects:

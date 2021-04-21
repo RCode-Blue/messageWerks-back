@@ -1,4 +1,4 @@
-const jsonResponse = require("../../../../services/createJsonResponse");
+const jsonResponse = require("../../../../services/v1/createJsonResponse");
 // const searchContact = require("../../../services/contact/searchContact");
 const searchUser = require("../../../../services/user/searchUser");
 

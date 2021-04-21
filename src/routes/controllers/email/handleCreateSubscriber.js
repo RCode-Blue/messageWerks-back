@@ -1,4 +1,4 @@
-const jsonResponse = require("../../../services/createJsonResponse");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 const createNewSubscriber = require("../../../services/subscriber/createNewSubscriber");
 
 const handleCreateSubscriber = async (

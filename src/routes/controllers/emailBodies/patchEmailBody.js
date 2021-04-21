@@ -1,5 +1,5 @@
 const editEmailBody = require("../../../services/emailBody/editEmailBody");
-const jsonResponse = require("../../../services/createJsonResponse");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 
 const patchEmailBody = async (req, res) => {
   let response;

@@ -1,5 +1,5 @@
-const searchContact = require("../../../services/contact/searchContact");
-const jsonResponse = require("../../../services/createJsonResponse");
+const searchContact = require("../../../services/v1/contact/searchContact");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 
 const handleSearchContact = async (req, res) => {
   const { email } = req.body;

@@ -1,7 +1,7 @@
 const Subscriber = require("../../db/models/Subscriber");
 
-const createFetchResponse = require("../createFetchResponse");
-const jsonResponse = require("../createJsonResponse");
+const createFetchResponse = require("../v1/createFetchResponse");
+const jsonResponse = require("../v1/createJsonResponse");
 
 const fetchAllSubscribers = async () => {
   let result;

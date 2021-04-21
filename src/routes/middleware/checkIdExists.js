@@ -1,9 +1,21 @@
-// const mongoose = require("mongoose");
+/**
+ * @description Middlware - Checks if a Contact or User exists
+ *
+ * @module
+ * @name checkIdExists
+ *
+ * @param {object} req Request object
+ * @param {object} req.params[0] ID of Contact or User
+ * @param {object} res Response object
+ * @param {object} next Next middleware
+ *
+ * @returns {object} response refer Type Definitions
+ */
 
 const Contact = require("../../db/models/Contact");
 const User = require("../../db/models/User");
 
-const jsonResponse = require("../../services/createJsonResponse");
+const jsonResponse = require("../../services/v1/createJsonResponse");
 const appValues = require("../../config/appValues.json");
 
 const checkItem = (object) => {

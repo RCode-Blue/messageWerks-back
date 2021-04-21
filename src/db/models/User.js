@@ -1,16 +1,18 @@
-/**
- * @description Schema for the User model
- * @module models
- * @name User
- * @returns {Object} - User model
- */
 const mongoose = require("mongoose");
-
 /**
- * @name UserSchema
  * @description User schema
  * @constructor User
+ *
+ * @property {object} contact Contact object
+ * @property {string} slug Required - User-friendly path for User
+ * @property {string} password User password hash
+ * @property {string} acl_role Required - Type of account
+ * @property {int} status Account status
+ * @property {int} failed_logins Required - No of times user has continuously failed login
+ * @property {string} reset_code Custom generated character string to verify reset request
+ *
  */
+
 const UserSchema = new mongoose.Schema(
   {
     contact: {

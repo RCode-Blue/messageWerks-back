@@ -2,7 +2,7 @@ const uuid = require("uuid");
 
 const encrypt = require("../password/hash");
 const findUser = require("./searchUser");
-const jsonResponse = require("../createJsonResponse");
+const jsonResponse = require("../v1/createJsonResponse");
 
 const setResetCode = async (email) => {
   const { v4 } = uuid;

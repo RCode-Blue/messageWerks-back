@@ -1,5 +1,5 @@
 const editBusinessFields = require("../../../services/business/editBusinessFields");
-const jsonResponse = require("../../../services/createJsonResponse");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 
 /*
   expects:

@@ -1,5 +1,5 @@
 const searchBusinesses = require("../../../services/business/findBusinesses");
-const jsonResponse = require("../../../services/createJsonResponse");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 
 const getBusinessById = async (req, res) => {
   const businessId = req.params.business_id;

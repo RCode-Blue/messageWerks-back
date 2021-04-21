@@ -1,5 +1,5 @@
 const checkRolePermissions = require("../../../services/user/checkRolePermissions");
-const jsonResponse = require("../../../services/createJsonResponse");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 const delUser = require("../../../services/user/delUser");
 
 const deleteUser = async (req, res) => {

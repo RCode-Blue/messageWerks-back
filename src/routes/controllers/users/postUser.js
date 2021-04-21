@@ -2,7 +2,7 @@ const checkRolePermissions = require("../../../services/user/checkRolePermission
 const createUser = require("../../../services/user/createUser");
 const fetchContactId = require("../../../services/contact/fetchContactId");
 const findUser = require("../../../services/user/searchUser");
-const jsonResponse = require("../../../services/createJsonResponse");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 
 const postUser = async (req, res) => {
   const { userId, acl_role } = req;

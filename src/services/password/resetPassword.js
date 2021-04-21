@@ -3,8 +3,8 @@ const bcrypt = require("bcrypt");
 const appValues = require("../../config/appValues.json");
 const hash = require("./hash");
 const findUser = require("../user/searchUser");
-const jsonResponse = require("../createJsonResponse");
-const searchContact = require("../contact/searchContact");
+const jsonResponse = require("../v1/createJsonResponse");
+const searchContact = require("../v1/contact/searchContact");
 // const { result } = require("validate.js");
 
 const { user } = appValues;

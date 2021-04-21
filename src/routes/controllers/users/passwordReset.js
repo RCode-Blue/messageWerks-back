@@ -1,4 +1,4 @@
-const jsonResponse = require("../../../services/createJsonResponse");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 const resetPassword = require("../../../services/password/resetPassword");
 
 const passwordReset = async (req, res) => {

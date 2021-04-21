@@ -2,7 +2,7 @@ const hash = require("../password/hash");
 
 const bcrypt = require("bcrypt");
 const findUser = require("./searchUser");
-const jsonResponse = require("../createJsonResponse");
+const jsonResponse = require("../v1/createJsonResponse");
 
 const editPassword = async (id, passwords, reset_code) => {
   const { new_password_1, new_password_2 } = passwords;

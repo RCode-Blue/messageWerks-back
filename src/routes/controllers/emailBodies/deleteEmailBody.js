@@ -1,4 +1,4 @@
-const jsonResponse = require("../../../services/createJsonResponse");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 const editBusinessEmailBodies = require("../../../services/business/editBusinessEmailBodies");
 const removeEmailBody = require("../../../services/emailBody/removeEmailBody");
 

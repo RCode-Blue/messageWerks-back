@@ -1,5 +1,5 @@
 const appValues = require("../../config/appValues.json");
-const jsonTemplate = require("../../services/createJsonResponse");
+const jsonTemplate = require("../v1/createJsonResponse");
 
 const checkRolePermissions = (acl_role, min_role) => {
   // Convert acl_role from text to integer

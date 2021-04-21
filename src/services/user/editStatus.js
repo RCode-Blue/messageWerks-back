@@ -1,6 +1,6 @@
 const appValues = require("../../config/appValues.json");
 const findUser = require("./searchUser");
-const jsonResponse = require("../createJsonResponse");
+const jsonResponse = require("../v1/createJsonResponse");
 
 const editStatus = async (id, status) => {
   let response;

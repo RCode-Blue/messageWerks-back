@@ -1,4 +1,4 @@
-const jsonResponse = require("../../../services/createJsonResponse");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 const createNewEmailBody = require("../../../services/emailBody/createNewEmailBody");
 
 const postEmailBody = async (req, res) => {

@@ -3,7 +3,7 @@ var should = require("chai").should();
 var sinon = require("sinon");
 
 const postUser = require("../../../../../src/routes/controllers/users/postUser");
-const route = require("../../../../../src/routes/api/users");
+const route = require("../../../../../src/routes/api/v1/admin/users");
 const testUser = require("../../../../mockData/test-user.json");
 
 describe("createUser", () => {

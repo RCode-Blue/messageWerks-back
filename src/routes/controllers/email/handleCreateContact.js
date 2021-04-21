@@ -1,6 +1,19 @@
-const createContact = require("../../../services/contact/createContact");
-const jsonResponse = require("../../../services/createJsonResponse");
+const createContact = require("../../../services/v1/contact/createContact");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 
+/**
+ * @description Generates JSON object for COntact creation based on results
+ *
+ * @module
+ * @name handleCreateContact
+ *
+ * @requires createContact
+ * @requires jsonResponse
+ *
+ * @param {object} req Request object
+ * @param {object} req.body.email Contact email
+ * @param {object} res Response object
+ */
 const handleCreateContact = async (req, res) => {
   const { email } = req.body;
   let response;

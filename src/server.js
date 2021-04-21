@@ -1,5 +1,6 @@
 /**
  * @description Starting server file for project
+ *
  * @name server
  * @requires express
  * @borrows {object} connectDB - DB connection to MongoDB
@@ -9,6 +10,8 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 
+const adminContactsPath = require("./routes/api/v1/admin/contacts");
+const adminUsersPath = require("./routes/api/v1/admin/users");
 // const authPath = require("./routes/api/auth");
 // const businessesPath = require("./routes/api/businesses");
 // const contactsPath = require("./routes/api/contacts");
@@ -43,6 +46,10 @@ connectMongo();
 app.use(express.json());
 
 // Routes
+app.use("/api/v1/admin/contacts", adminContactsPath);
+app.use("/api/v1/admin/users", adminUsersPath);
+// app.use("/api/v1/admin/contacts", adminContactsPath);
+// app.use("/api/v1/admin/contact", adminContactsPath);
 // app.use("api/v1/public", publicPath);
 // app.use("/api/auth", authPath); // User, Admin
 // app.use("/api/businesses", businessesPath); // User, Admin

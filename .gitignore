@@ -60,7 +60,7 @@ dist
 build
 
 # Documentation
-docs/
+# docs/
 
 # dotenv environment variable files
 .env*

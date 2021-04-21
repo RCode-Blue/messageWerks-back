@@ -1,11 +1,27 @@
 const validate = require("validate.js");
 
-const jsonResponse = require("../../../services/createJsonResponse");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 
-const checkAddressFields = require("../services/address/checkAddressFields");
-const checkNameFields = require("../services/contact/checkNameFields");
-const checkSocialMediaFields = require("../services/socialMedia/checkSocialMediaFields");
+const checkAddressFields = require("../v1/services/address/checkAddressFields");
+const checkNameFields = require("../v1/services/contact/checkNameFields");
+const checkSocialMediaFields = require("../v1/services/socialMedia/checkSocialMediaFields");
 
+/**
+ * @description Middleware - Checks validity of input fields for Contacts
+ *
+ * @module
+ * @name checkContactFields
+ *
+ * @param {object} req - Request object
+ * @param {date} req.body.dob - Date of birth
+ * @param {object} req.body.address - Contact address
+ * @param {object} req.body.social_media - Array of social media objects
+ * @param {object} req.body.name - Contact full name
+ * @param {object} res - Response object
+ * @param {object} next - Next Express middleware
+ *
+ * @returns {object} response - Error is validationResult is not empty
+ */
 const checkContactFields = (req, res, next) => {
   const { dob, address, social_media, name } = req.body;
   const dobPattern = /\d{4}-\d{2}-\d{2}|^$/gs;

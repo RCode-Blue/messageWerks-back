@@ -1,26 +1,25 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const appValues = require("../../config/appValues.json")
-const expiry = appValues.pending_email.expiry
-
+const appValues = require("../../config/appValues.json");
+const expiry = appValues.pending_email.expiry;
 
 const PendingEmailSchema = new mongoose.Schema({
-  email:{
+  email: {
     type: String,
-    required = true
+    required: true,
   },
-  confirmation_code:{
+  confirmation_code: {
     type: String,
-    required: true
+    required: true,
   },
-  data:{
-    type: String
+  data: {
+    type: String,
   },
   expireAt: {
     type: Date,
     default: Date.now,
-    expires: expiry
-  }
+    expires: expiry,
+  },
 });
 
-module.exports=mongoose.model("pendingemail", PendingEmailSchema)
+module.exports = mongoose.model("pendingemail", PendingEmailSchema);

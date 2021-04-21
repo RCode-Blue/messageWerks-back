@@ -1,5 +1,5 @@
 // Checks if user is logged in
-const jsonResponse = require("../../../services/createJsonResponse");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 const authorise = require("../services/auth/authorise");
 
 const auth = (req, res, next) => {

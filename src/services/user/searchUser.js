@@ -1,5 +1,5 @@
 const User = require("../../db/models/User");
-const searchContact = require("../contact/searchContact");
+const searchContact = require("../v1/contact/searchContact");
 
 const projection = [];
 const options = {

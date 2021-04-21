@@ -1,5 +1,5 @@
 const findBusinesses = require("../../../services/business/findBusinesses");
-const jsonResponse = require("../../../services/createJsonResponse");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 
 const handleGetBusiness = async (req, res) => {
   const { business_id } = req.body;

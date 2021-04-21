@@ -1,6 +1,6 @@
 const checkRolePermissions = require("../../../services/user/checkRolePermissions");
 const findUser = require("../../../services/user/searchUser");
-const jsonResponse = require("../../../services/createJsonResponse");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 
 const getUser = async (req, res) => {
   const { acl_role } = req;

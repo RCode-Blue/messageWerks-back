@@ -1,4 +1,4 @@
-const jsonResponse = require("../../../services/createJsonResponse");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
 const buildSubscriptionConfirmation = require("../../../services/emailrequest/buildSubscriptionConfirmation");
 
 const handleGetBusiness = require("../email/handleGetBusiness");

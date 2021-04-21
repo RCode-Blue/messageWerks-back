@@ -1,6 +1,6 @@
-const createContact = require("../../../services/contact/createContact");
-const jsonResponse = require("../../../services/createJsonResponse");
-const searchContact = require("../../../services/contact/searchContact");
+const createContact = require("../../../services/v1/contact/createContact");
+const jsonResponse = require("../../../services/v1/createJsonResponse");
+const searchContact = require("../../../services/v1/contact/searchContact");
 
 const checkContact = async (req, res) => {
   let response;

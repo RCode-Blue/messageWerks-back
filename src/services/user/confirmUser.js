@@ -1,4 +1,4 @@
-const jsonResponse = require("../createJsonResponse");
+const jsonResponse = require("../v1/createJsonResponse");
 const searchUser = require("./searchUser");
 const bcrypt = require("bcrypt");
 

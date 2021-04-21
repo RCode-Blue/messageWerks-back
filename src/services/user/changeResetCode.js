@@ -2,7 +2,7 @@ const User = require("../../db/models/User");
 // const appValues = require('../../config/appValues.json')
 // const encrypt = require("../password/hash");
 const findUser = require("./searchUser");
-const jsonResponse = require("../createJsonResponse");
+const jsonResponse = require("../v1/createJsonResponse");
 
 const changeResetCode = async (id, reset) => {
   let response;
