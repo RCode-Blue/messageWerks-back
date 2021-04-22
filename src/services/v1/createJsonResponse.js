@@ -1,7 +1,7 @@
 const jsonTemplates = require("../../config/responseTemplates.json");
 /**
  * Custom JSON response object
- * @typedef {object} response
+ * @typedef {object} responseTemplate
  * @property {string} status - HTTP status code
  * @property {string} message - Success / Error message
  * @property {object} data - Data returned from query
@@ -20,7 +20,7 @@ const jsonTemplates = require("../../config/responseTemplates.json");
  * @param {object} result - Any additional data
  *
 
- * @returns {object} response - JSON object based on HTTP status code
+ * @returns {responseTemplate} response - JSON object based on HTTP status code
  */
 const createJsonResponse = (code, message = "", data = {}, result = {}) => {
   let response = jsonTemplates[code];

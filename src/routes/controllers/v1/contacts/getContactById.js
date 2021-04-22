@@ -1,6 +1,5 @@
-const checkRolePermissions = require("../../../../services/user/checkRolePermissions");
-const processFetchResponse = require("../../../../services/v1/processFetchResponse");
-const searchContact = require("../../../../services/v1/contact/searchContact");
+// const checkRolePermissions = require("../../../../services/user/checkRolePermissions");
+const searchContact = require("../../../../services/v1/contact/searchContacts");
 
 /**
  * @description Gets a Contact by ID
@@ -35,8 +34,7 @@ const getContactById = async (req, res) => {
   //   return res.status(response.status).json(response);
   // }
 
-  let result = await searchContact.byId(id);
-  response = processFetchResponse(result);
+  response = await searchContact.byId(id);
 
   res.status(response.status).json(response);
 };

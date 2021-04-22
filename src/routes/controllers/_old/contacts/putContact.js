@@ -1,6 +1,6 @@
 const checkRolePermissions = require("../../../../services/user/checkRolePermissions");
 const jsonResponse = require("../../../../services/v1/createJsonResponse");
-const searchContact = require("../../../../services/v1/contact/searchContact");
+const searchContact = require("../../../../services/v1/contact/searchContacts");
 const updateContact = require("../../../../services/contact/updateContact");
 
 /**

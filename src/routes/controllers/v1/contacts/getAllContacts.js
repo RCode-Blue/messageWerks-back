@@ -1,6 +1,5 @@
-const checkRolePermissions = require("../../../../services/user/checkRolePermissions");
-const fetchAllContacts = require("../../../../services/v1/contact/fetchAllContacts");
-const processFetchResponse = require("../../../../services/v1/processFetchResponse");
+// const checkRolePermissions = require("../../../../services/user/checkRolePermissions");
+const searchContact = require("../../../../services/v1/contact/searchContacts");
 
 /**
  * @description Gets all Contacts
@@ -8,6 +7,7 @@ const processFetchResponse = require("../../../../services/v1/processFetchRespon
  * @module
  * @name getAllContacts
  *
+ * @param {object} req Request object
  * @param {object} res Response object
  *
  * @returns {object} response - Refer Type Definitions
@@ -26,8 +26,7 @@ const getAllContacts = async (req, res) => {
   // if (response) {
   //   return res.status(response.status).json(response);
   // }
-  let result = await fetchAllContacts();
-  response = processFetchResponse(result);
+  response = await searchContact.all();
 
   res.status(response.status).json(response);
 };

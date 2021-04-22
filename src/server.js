@@ -11,19 +11,19 @@ const fs = require("fs");
 const path = require("path");
 
 const adminContactsPath = require("./routes/api/v1/admin/contacts");
-const adminUsersPath = require("./routes/api/v1/admin/users");
+// const adminUsersPath = require("./routes/api/v1/admin/users");
 // const authPath = require("./routes/api/auth");
 // const businessesPath = require("./routes/api/businesses");
 // const contactsPath = require("./routes/api/contacts");
 // const emailBodiesPath = require("./routes/api/emailBodies");
 // const mePath = require("./routes/api/me");
-const publicPath = require("./routes/api/public");
+// const publicPath = require("./routes/api/_old/public");
 // const subscribersPath = require("./routes/api/subscribers");
 // const usersPath = require("./routes/api/users");
 
 // const prototypePath = require("./routes/api/prototype");
 
-const connectMongo = require("./config/scripts/mongo");
+const connectMongo = require("./config/v1/scripts/mongo");
 // const connectRedis = require("./config/scripts/redis");
 
 global.__basedir = __dirname;
@@ -47,7 +47,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/v1/admin/contacts", adminContactsPath);
-app.use("/api/v1/admin/users", adminUsersPath);
+// app.use("/api/v1/admin/users", adminUsersPath);
 // app.use("/api/v1/admin/contacts", adminContactsPath);
 // app.use("/api/v1/admin/contact", adminContactsPath);
 // app.use("api/v1/public", publicPath);

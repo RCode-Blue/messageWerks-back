@@ -1,17 +1,13 @@
-const Contact = require("../../../db/models/Contact");
+const Contact = require("../../../db/models/v1/Contact");
+const createQueryResponse = require("../createQueryResponse");
 
 const createContact = async (data) => {
-  // console.log(data);
-  // Expect { email: ""}
-
-  let result = { doc: null, err: null };
-
   try {
-    result.doc = await Contact.create(data);
+    result = await Contact.create(data);
+    return createQueryResponse.postResponse(null, result);
   } catch (err) {
-    result.err = err;
+    return createQueryResponse.postResponse(true, null, err);
   }
-  return result;
 };
 
 module.exports = createContact;
