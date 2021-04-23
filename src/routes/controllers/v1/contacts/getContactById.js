@@ -1,6 +1,3 @@
-// const checkRolePermissions = require("../../../../services/user/checkRolePermissions");
-const searchContact = require("../../../../services/v1/contact/searchContacts");
-
 /**
  * @description Gets a Contact by ID
  *
@@ -15,11 +12,15 @@ const searchContact = require("../../../../services/v1/contact/searchContacts");
  * @param {string} req.params.contact_id contact ID
  * @param {object} res Response object
  *
- * @returns response - Refer Type Definitions
- * @property {string} response.result._id Contact ID
- * @property {string} response.result.email Contact email
- * @property {string} response.result.social_media Contact Social Media accounts
+ * @returns {responseTemplate} res - Response object
+ * @property {string} res.result._id Contact ID
+ * @property {string} res.result.email Contact email
+ * @property {string} res.result.social_media Contact Social Media accounts
  */
+
+// const checkRolePermissions = require("../../../../services/user/checkRolePermissions");
+const searchContact = require("../../../../services/v1/contact/searchContacts");
+
 const getContactById = async (req, res) => {
   const minRole = "all_admins";
 

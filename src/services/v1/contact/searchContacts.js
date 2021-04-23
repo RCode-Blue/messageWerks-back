@@ -80,15 +80,51 @@ const byEmail = async (email) => {
   }
 };
 
+/**
+ * @description Checks if a Contact exists
+ * @function
+ *
+ * @param {string} id - Contact's id
+ *
+ * @returns {boolean} undefined
+ */
+const checkIdExists = async (id) => {
+  let result = await byId(id);
+  if (result.status === 200) {
+    return true;
+    // return createQueryResponse.doesExist(true, result.data);
+  }
+  return false;
+  // return createQueryResponse.doesExist(false);
+};
+
+/**
+ * @description Checks if a COntact exists *
+ * @function
+ *
+ * @param {string} email - Contact's email
+ *
+ * @returns {boolean} undefined
+ */
 const checkEmailExists = async (email) => {
   let result = await byEmail(email);
   // console.log(result);
   if (result.status === 200) {
-    return createQueryResponse.alreadyExists(true, result.data);
+    // return createQueryResponse.alreadyExists(true, result.data);
+    return true;
   }
-  return createQueryResponse.alreadyExists(false);
+  // return createQueryResponse.alreadyExists(false);
+  return false;
 };
 
+/**
+ * @description Gets a contact's email from the id
+ * @function
+ *
+ * @param {string} id - Contact id
+ *
+ * @returns {string} email - Contact's email
+ */
 const getEmailfromContactId = async (id) => {
   const contact = (await byId(id)).docs;
   // console.log(contact);
@@ -101,4 +137,5 @@ module.exports = {
   byEmail,
   getEmailfromContactId,
   checkEmailExists,
+  checkIdExists,
 };

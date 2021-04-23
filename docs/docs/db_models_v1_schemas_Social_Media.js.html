@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/v1/processFetchResponse.js</title>
+    <title>JSDoc: Source: db/models/v1/schemas/Social_Media.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/v1/processFetchResponse.js</h1>
+    <h1 class="page-title">Source: db/models/v1/schemas/Social_Media.js</h1>
 
     
 
@@ -26,32 +26,31 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const jsonResponse = require("./createJsonResponse");
-/**
- * @description Returns an appropriate JSON Response depending on result
+            <pre class="prettyprint source linenums"><code>/**
+ * @description Social Media schema
+ * @name SocialMediaSchema
+ * @constructor SocialMedia
  *
- * @module
- * @name processFetchResponse
+ * @property {string} [social_media_name] - Social media name
+ * @property {string} [user_account] - User account
  *
- * @param {object} result - Result of a query or request
- * @returns {object} response - Custom JSON response object to be sent to client (refer Type Definitions)
+ * @typedef socialMedia
+ * @property {string} [social_media_name] - Social media name
+ * @property {string} [user_account] - User account
  */
 
-const processFetchResponse = (result) => {
-  let response;
+const mongoose = require("mongoose");
 
-  if (result.err) {
-    response = jsonResponse("400", "Server error", result.err);
-  } else if (!result.docs) {
-    response = jsonResponse("404", "Item not found");
-  } else {
-    response = jsonResponse("200", "Success", result.docs);
-  }
+const SocialMediaSchema = new mongoose.Schema({
+  social_media_name: {
+    type: String,
+  },
+  user_account: {
+    type: String,
+  },
+});
 
-  return response;
-};
-
-module.exports = processFetchResponse;
+module.exports = SocialMediaSchema;
 </code></pre>
         </article>
     </section>

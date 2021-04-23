@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/v1/processFetchResponse.js</title>
+    <title>JSDoc: Source: services/v1/contact/createContact.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/v1/processFetchResponse.js</h1>
+    <h1 class="page-title">Source: services/v1/contact/createContact.js</h1>
 
     
 
@@ -26,32 +26,32 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const jsonResponse = require("./createJsonResponse");
-/**
- * @description Returns an appropriate JSON Response depending on result
+            <pre class="prettyprint source linenums"><code>/**
+ * @description Creates a Contact
  *
  * @module
- * @name processFetchResponse
+ * @name createContact
  *
- * @param {object} result - Result of a query or request
- * @returns {object} response - Custom JSON response object to be sent to client (refer Type Definitions)
+ * @requires Contact
+ * @requires createQueryResponse
+ *
+ * @param {Contact} data - Contact
+ *
+ * @returns {responseTemplate} Custom JSON status response
  */
+const Contact = require("../../../db/models/v1/Contact");
+const createQueryResponse = require("../createQueryResponse");
 
-const processFetchResponse = (result) => {
-  let response;
-
-  if (result.err) {
-    response = jsonResponse("400", "Server error", result.err);
-  } else if (!result.docs) {
-    response = jsonResponse("404", "Item not found");
-  } else {
-    response = jsonResponse("200", "Success", result.docs);
+const createContact = async (data) => {
+  try {
+    result = await Contact.create(data);
+    return createQueryResponse.postResponse(null, result);
+  } catch (err) {
+    return createQueryResponse.postResponse(true, null, err);
   }
-
-  return response;
 };
 
-module.exports = processFetchResponse;
+module.exports = createContact;
 </code></pre>
         </article>
     </section>

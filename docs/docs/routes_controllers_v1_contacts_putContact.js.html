@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/v1/processFetchResponse.js</title>
+    <title>JSDoc: Source: routes/controllers/v1/contacts/putContact.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/v1/processFetchResponse.js</h1>
+    <h1 class="page-title">Source: routes/controllers/v1/contacts/putContact.js</h1>
 
     
 
@@ -26,32 +26,35 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const jsonResponse = require("./createJsonResponse");
-/**
- * @description Returns an appropriate JSON Response depending on result
+            <pre class="prettyprint source linenums"><code>/**
+ * @description Controller - Handles PUT request for a contact
  *
  * @module
- * @name processFetchResponse
+ * @name putContact
  *
- * @param {object} result - Result of a query or request
- * @returns {object} response - Custom JSON response object to be sent to client (refer Type Definitions)
+ * @param {object} req - Request object
+ * @param {string} req.userId - ID of logfged in user
+ * @param {string} req.acl_role - Logged-in user role
+ * @param {string} req.params.contact_id - ID ofContact
+ * @param {object} res - Response object
+ *
+ * @returns {responseTemplate} res - Response object
  */
 
-const processFetchResponse = (result) => {
-  let response;
+const searchContacts = require("../../../../services/v1/contact/searchContacts");
+const createQueryResponse = require("../../../../services/v1/createQueryResponse");
+const updateContact = require("../../../../services/v1/contact/updateContact");
 
-  if (result.err) {
-    response = jsonResponse("400", "Server error", result.err);
-  } else if (!result.docs) {
-    response = jsonResponse("404", "Item not found");
-  } else {
-    response = jsonResponse("200", "Success", result.docs);
-  }
+const putContact = async (req, res) => {
+  const { userId, acl_role } = req;
+  const id = req.params.contact_id;
+  const data = req.body;
 
-  return response;
+  let response = await updateContact(data, id);
+  res.status(response.status).json(response);
 };
 
-module.exports = processFetchResponse;
+module.exports = putContact;
 </code></pre>
         </article>
     </section>

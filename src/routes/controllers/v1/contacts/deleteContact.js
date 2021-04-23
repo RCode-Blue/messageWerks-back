@@ -23,21 +23,8 @@ const jsonResponse = require("../../../../services/v1/createJsonResponse");
 const deleteContact = async (req, res) => {
   const { userId, acl_role } = req;
   const id = req.params.contact_id;
-  // const minRole = "all_admins";
 
-  let response;
-
-  // response = checkRolePermissions(acl_role, minRole);
-  // if (response) {
-  //   return res.status(response.status).json(response);
-  // }
-
-  response = await removeContact(id);
-  // if (result.err || result.doc === null) {
-  //   response = jsonResponse("400", "Error deleting Contact", result);
-  // } else {
-  //   response = jsonResponse("200", "Successfully deleted contact", result);
-  // }
+  let response = await removeContact(id);
   res.status(response.status).json(response);
 };
 

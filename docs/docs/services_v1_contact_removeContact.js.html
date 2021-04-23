@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/v1/processFetchResponse.js</title>
+    <title>JSDoc: Source: services/v1/contact/removeContact.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/v1/processFetchResponse.js</h1>
+    <h1 class="page-title">Source: services/v1/contact/removeContact.js</h1>
 
     
 
@@ -26,32 +26,39 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const jsonResponse = require("./createJsonResponse");
-/**
- * @description Returns an appropriate JSON Response depending on result
+            <pre class="prettyprint source linenums"><code>/**
+ * @description Deletes a Contact
  *
- * @module
- * @name processFetchResponse
+ * @module removeContact
  *
- * @param {object} result - Result of a query or request
- * @returns {object} response - Custom JSON response object to be sent to client (refer Type Definitions)
+ * @requires Contact
+ * @requires createQueryResponse
+ * @requires searchContacts
+ *
+ * @param {string} id - Contact id
+ *
+ * @returns {responseTemplate} Custom JSON status response
  */
+const Contact = require("../../../db/models/v1/Contact");
+const createQueryResponse = require("../createQueryResponse");
+const searchContacts = require("./searchContacts");
 
-const processFetchResponse = (result) => {
-  let response;
-
-  if (result.err) {
-    response = jsonResponse("400", "Server error", result.err);
-  } else if (!result.docs) {
-    response = jsonResponse("404", "Item not found");
-  } else {
-    response = jsonResponse("200", "Success", result.docs);
+const removeContact = async (id) => {
+  let checkResult = await searchContacts.byId(id);
+  console.log(checkResult);
+  if (checkResult.status === 404) {
+    return createQueryResponse.doesNotExist(true, checkResult);
   }
 
-  return response;
+  try {
+    const result = await Contact.findByIdAndDelete(id);
+    return createQueryResponse.deleteResponse(false, result, null);
+  } catch (err) {
+    return createQueryResponse.deleteResponse(true, null, err);
+  }
 };
 
-module.exports = processFetchResponse;
+module.exports = removeContact;
 </code></pre>
         </article>
     </section>

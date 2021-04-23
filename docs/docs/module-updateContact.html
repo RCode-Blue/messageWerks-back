@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: getContactById</title>
+    <title>JSDoc: Module: updateContact</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: getContactById</h1>
+    <h1 class="page-title">Module: updateContact</h1>
 
     
 
@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Gets a Contact by ID</p></div>
+            <div class="description"><p>Updates a Contact</p></div>
         
 
         
@@ -79,7 +79,7 @@
 
         <tr>
             
-                <td class="name"><code>req</code></td>
+                <td class="name"><code>data</code></td>
             
 
             <td class="type">
@@ -95,7 +95,7 @@
 
             
 
-            <td class="description last"><p>Request object</p>
+            <td class="description last"><p>Contact data</p>
                 <h6>Properties</h6>
                 
 
@@ -121,37 +121,7 @@
 
         <tr>
             
-                <td class="name"><code>params.contact_id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>contact ID</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res</code></td>
+                <td class="name"><code>dob</code></td>
             
 
             <td class="type">
@@ -167,7 +137,106 @@
 
             
 
-            <td class="description last"><p>Response object</p></td>
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>address</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>social_media</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Contact id</p></td>
         </tr>
 
     
@@ -175,104 +244,6 @@
 </table>
 
 
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>res.result._id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Contact ID</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res.result.email</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Contact email</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res.result.social_media</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Contact Social Media accounts</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -306,7 +277,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_controllers_v1_contacts_getContactById.js.html">routes/controllers/v1/contacts/getContactById.js</a>, <a href="routes_controllers_v1_contacts_getContactById.js.html#line1">line 1</a>
+        <a href="services_v1_contact_updateContact.js.html">services/v1/contact/updateContact.js</a>, <a href="services_v1_contact_updateContact.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -331,28 +302,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>res - Response object</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="global.html#responseTemplate">responseTemplate</a></span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -368,11 +317,11 @@
         <h3 class="subsection-title">Requires</h3>
 
         <ul>
-            <li>module:checkRolePermissions</li>
+            <li>module:Contact</li>
         
-            <li><a href="module-processFetchResponse.html">module:processFetchResponse</a></li>
+            <li><a href="module-createQueryResponse.html">module:createQueryResponse</a></li>
         
-            <li>module:searchContact</li>
+            <li><a href="module-searchContacts.html">module:searchContacts</a></li>
         </ul>
     
 

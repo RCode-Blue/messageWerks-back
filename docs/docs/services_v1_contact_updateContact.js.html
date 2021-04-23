@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/v1/processFetchResponse.js</title>
+    <title>JSDoc: Source: services/v1/contact/updateContact.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/v1/processFetchResponse.js</h1>
+    <h1 class="page-title">Source: services/v1/contact/updateContact.js</h1>
 
     
 
@@ -26,32 +26,55 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const jsonResponse = require("./createJsonResponse");
-/**
- * @description Returns an appropriate JSON Response depending on result
+            <pre class="prettyprint source linenums"><code>/**
+ * @description Updates a Contact
  *
  * @module
- * @name processFetchResponse
+ * @name updateContact
  *
- * @param {object} result - Result of a query or request
- * @returns {object} response - Custom JSON response object to be sent to client (refer Type Definitions)
+ * @requires Contact
+ * @requires createQueryResponse
+ * @requires searchContacts
+ *
+ * @param {object} data - Contact data
+ * @param {object} data.dob
+ * @param {object} data.address
+ * @param {object} data.name
+ * @param {object} data.social_media
+ * @param {object} id - Contact id
  */
 
-const processFetchResponse = (result) => {
-  let response;
+const Contact = require("../../../db/models/v1/Contact");
+const createQueryResponse = require("../createQueryResponse");
+const searchContacts = require("./searchContacts");
 
-  if (result.err) {
-    response = jsonResponse("400", "Server error", result.err);
-  } else if (!result.docs) {
-    response = jsonResponse("404", "Item not found");
-  } else {
-    response = jsonResponse("200", "Success", result.docs);
+const updateContact = async (data, id) => {
+  let result = {};
+
+  const filter = { _id: id };
+  const options = {
+    new: true,
+    upsert: false,
+    omitUndefined: true,
+    overwrite: true,
+  };
+  const callback = (err, doc) => {
+    result.err = err;
+    result.doc = doc;
+  };
+
+  if (!(await searchContacts.checkIdExists(id))) {
+    return createQueryResponse.doesNotExist(true);
   }
 
-  return response;
+  await Contact.findOneAndUpdate(filter, data, options, callback);
+  if (!result.err) {
+    return createQueryResponse.updateResponse(false, result.doc);
+  }
+  return createQueryResponse.updateResponse(true, null, result.err);
 };
 
-module.exports = processFetchResponse;
+module.exports = updateContact;
 </code></pre>
         </article>
     </section>
