@@ -1,33 +1,47 @@
 {
   // GLOBAL
-
   "diffEditor.ignoreTrimWhitespace": true,
-
-  "explorer.compactFolders": false,
-  "explorer.confirmDragAndDrop": false,
-  "explorer.openEditors.visible": 0,
 
   "editor.foldingStrategy": "indentation",
   "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "editor.fontSize": 13,
   "editor.formatOnSave": true,
+  "editor.linkedEditing": true,
   "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "all",
   "editor.snippetSuggestions": "top",
   "editor.suggest.showStatusBar": true,
   "editor.suggest.showWords": false,
 
   "emmet.includeLanguages": {
-    "javascript": "javascriptreact"
+    "CSS": "css",
+    "Handlebars":"handlebars",
+    "HTML": "html",
+    "JavaScript":"javascript",
+    "JavaScript React": "javascriptreact",
+    "JSON": "json",
+    "JSON with Comments": "json",
+    "Markdown":"markdown",
+    "Python":"python",
+    "Ruby":"ruby",
+    "SCSS":"scss",
+    "SQL":"sql",
+    "TypeScript":"typescript",
+    "TypeScript React":"typescript",
+    "XML": "xml"
   },
+
   "emmet.showSuggestionsAsSnippets": true,
+
+  "explorer.compactFolders": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.openEditors.visible": 0,
 
   "javascript.updateImportsOnFileMove.enabled": "always",
 
   "prettier.configPath": ".prettierrc.json",
   "prettier.requireConfig": true,
-
-  "semi": true,
 
   "window.zoomLevel": 1,
 
@@ -35,6 +49,10 @@
   "workbench.iconTheme": "vscode-icons",
   "workbench.sideBar.location": "right",
 
+
+  
+
+  // FILE TYPES
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -51,17 +69,19 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
-  // Path Intellisense
+  // PATH INTELLISENSE
   "typescript.suggest.paths": false,
   "path-intellisense.showHiddenFiles": true,
 
   // BRACKET PAIR COLORIZER 2
-  "bracket-pair-colorizer-2.forceIterationColorCycle": true,
   "bracket-pair-colorizer-2.colorMode": "Consecutive",
+  "bracket-pair-colorizer-2.forceIterationColorCycle": true,
+  "bracket-pair-colorizer-2.forceUniqueOpeningColor": false,
   "bracket-pair-colorizer-2.highlightActiveScope": true,
-  "bracket-pair-colorizer-2.showVerticalScopeLine": true,
-  "bracket-pair-colorizer-2.showHorizontalScopeLine": true,
   "bracket-pair-colorizer-2.showBracketsInGutter": true,
+  "bracket-pair-colorizer-2.showHorizontalScopeLine": true,
+  "bracket-pair-colorizer-2.showVerticalScopeLine": true,
+
   "bracket-pair-colorizer-2.activeScopeCSS": [
     "borderStyle : solid",
     "borderWidth : 1px",
@@ -93,7 +113,54 @@
     "honeydew",
     "blanchedalmond",
     "snow",
-    "mistyrose"
-  ]
+    "mistyrose",
+    "freshmint"
+  ],
+
+  "workbench.colorTheme": "Dracula",
+
+  // THEMES
+  "editor.tokenColorCustomizations": {
+    "comments": "#c9d7aa",
+    "[Dracula]": {
+      "textMateRules": [
+        {
+          "scope": ["comment"],
+          "settings": {
+            "foreground": "#c9d7aa"
+          }
+        }
+      ]
+    },
+    "[Night Owl]": {
+      "textMateRules": [
+        {
+          "scope": ["comment"],
+          "settings": {
+            "foreground": "#ee7c7c"
+          }
+        }
+      ]
+    },
+    "[★★★★★ NORD DARK ★★★★★]": {
+      "textMateRules": [
+        {
+          "scope": ["comment"],
+          "settings": {
+            "foreground": "#ccf09b"
+          }
+        }
+      ]
+    },
+    "[Outrun Night]": {
+      "textMateRules": [
+        {
+          "scope": ["comment"],
+          "settings": {
+            "foreground": "#99df70"
+          }
+        }
+      ]
+    }
+  }
 }
-// Note: VSCode user settings in /Users/<username>/Library/Application SUpport/COde/User/settings.json

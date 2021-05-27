@@ -1,9 +1,20 @@
 module.exports = {
-  colors: true,
+  bail: false,
+  "check-leaks": true,
+  color: true,
   diff: true,
-  extension: ["test.js", "spec.js"],
+  extension: ["js"],
+  "inline-diffs": true,
   package: "./package.json",
   recursive: true,
+  spec: ["test/**/*.spec.js"],
+  timeout: "2000",
   watch: true,
-  "watch-files": ["test/*.spec.js"],
+  "watch-files": [
+    "src/services/v1/**/*.js",
+    "src/routes/controllers/v1/**/*.js",
+    "src/routes/middleware/v1/**/*.js",
+    "test/**/*.spec.js",
+  ],
+  "watch-ignore": ["./docs"],
 };
