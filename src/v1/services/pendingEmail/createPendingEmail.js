@@ -49,12 +49,15 @@ const createPendingEmail = async (email) => {
   );
 
   try {
-    let postResult = await PendingEmail.findOneAndUpdate(filter, data, {
-      upsert: true,
-      new: true,
-    });
-    console.log(postResult);
-    result = { ...postResult._doc };
+    let createPendingResult = await PendingEmail.findOneAndUpdate(
+      filter,
+      data,
+      {
+        upsert: true,
+        new: true,
+      }
+    );
+    result = { ...createPendingResult._doc };
     result.confirmation_code = code.code;
     result.hash = code.hash;
 

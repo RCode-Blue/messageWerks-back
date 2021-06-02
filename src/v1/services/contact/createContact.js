@@ -15,10 +15,15 @@ const Contact = require("../../db/models/Contact");
 const createQueryResponse = require("../createQueryResponse");
 
 const createContact = async (data) => {
+  console.log(data);
   try {
     result = await Contact.create(data);
+    console.log("===result===");
+    console.log(result);
+    console.log("======");
     return createQueryResponse.postResponse(null, result);
   } catch (err) {
+    console.log(err);
     return createQueryResponse.postResponse(true, null, err);
   }
 };

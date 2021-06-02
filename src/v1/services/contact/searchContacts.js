@@ -18,7 +18,7 @@ const createQueryResponse = require("../createQueryResponse");
  *
  * @returns {responseTemplate} undefined - Search result
  */
-const all = async () => {
+const findAll = async () => {
   let result;
 
   const filter = {};
@@ -45,7 +45,7 @@ const all = async () => {
  * @property {object} searchResults.err - Error message
  * @property {object} searchResults.docs - QUery result
  */
-const byId = async (id) => {
+const findById = async (id) => {
   try {
     const contact = await Contact.findById(id);
     return createQueryResponse.getResponse(false, contact, null);
@@ -63,15 +63,21 @@ const byId = async (id) => {
  *
  * @returns {responseTemplate} searchResults
  */
-const byEmail = async (email) => {
+const findByEmail = async (email) => {
+  // console.log("email:");
+  // console.log(email);
   let searchResults = {};
 
   const filter = { email: email };
   const projection = [];
   const options = {};
+  // console.log("filter" + filter);
   try {
     // let foundContacts = await Contact.findOne(filter, projection, options);
     const contact = await Contact.findOne(filter, projection, options);
+    // console.log("=== contact ===");
+    // console.log(contact);
+    // console.log("xxx");
     return createQueryResponse.getResponse(false, contact, null);
   } catch (err) {
     return createQueryResponse.getResponse(true, null, err);
@@ -86,7 +92,7 @@ const byEmail = async (email) => {
  *
  * @returns {boolean} undefined
  */
-const checkIdExists = async (id) => {
+const checkContactIdExists = async (id) => {
   let result = await byId(id);
   if (result.status === 200) {
     return true;
@@ -102,13 +108,17 @@ const checkIdExists = async (id) => {
  *
  * @param {string} email - Contact's email
  *
- * @returns {boolean} undefined
+ * @returns {object} result
  */
-const checkEmailExists = async (email) => {
-  let result = await byEmail(email);
+const checkContactEmailExists = async (email) => {
+  // console.log(data);
+  let result = await findByEmail(email);
+  // console.log("+++ result +++");
   // console.log(result);
+  // console.log("++++++");
   if (result.status === 200) {
-    return createQueryResponse.alreadyExists(true, result.data);
+    // return createQueryResponse.alreadyExists(true, result.data);
+    return result;
     // return true;
   }
   return createQueryResponse.alreadyExists(false);
@@ -123,17 +133,17 @@ const checkEmailExists = async (email) => {
  *
  * @returns {string} email - Contact's email
  */
-const getEmailfromContactId = async (id) => {
-  const contact = (await byId(id)).docs;
+const findEmailfromContactId = async (id) => {
+  const contact = (await findById(id)).docs;
   // console.log(contact);
   return contact.email;
 };
 
 module.exports = {
-  all,
-  byId,
-  byEmail,
-  getEmailfromContactId,
-  checkEmailExists,
-  checkIdExists,
+  findAll,
+  findById,
+  findByEmail,
+  findEmailfromContactId,
+  checkContactEmailExists,
+  checkContactIdExists,
 };

@@ -6,18 +6,15 @@ const appValues = require(appRoot + "/src/v1/config/appValues.json");
 const buildEmailMessage = require("./buildEmailMessage");
 const buildEmailRequest = require("./buildEmailRequest");
 const createJsonResponse = require("../createJsonResponse");
-const { createConfirmationCode } = require("../scramble");
+// const { createConfirmationCode } = require("../scramble");
 
 const createPendingConfirmation = async (data) => {
-  // console.log(data);
-
   const { to, confirmation_code, hash } = data;
   const home = appValues.email_bodies.html_templates.home;
   const version = appValues.codebase.version;
 
   const fileName = "home_pendingEmailConfirmation.mjml";
   const filePath = appRoot + home.directory + fileName;
-  // console.log(filePath);
 
   const from_email = home.from_email;
   const homepage = process.env.HOMEPAGE;
@@ -49,8 +46,6 @@ const createPendingConfirmation = async (data) => {
     homepageUrl: process.env.HOMEPAGE,
   };
 
-  // let htm = `<h3>Confirmation code: {{var:confirmationcode}}</h3>`;
-
   messageVals = {
     from: { email: from_email, name: "" },
     to,
@@ -58,22 +53,10 @@ const createPendingConfirmation = async (data) => {
     htmlPart,
     variables: vars,
   };
-  // console.log(messageVals);
 
   emailMessage = await buildEmailMessage(messageVals);
-  // console.log("---------------------------");
-  // console.log(emailMessage);
-  // console.log("---------------------------");
-
-  // console.log(emailMessage[0]);
-
-  // return createJsonResponse("200", "test", emailMessage);
 
   return await buildEmailRequest(emailMessage);
-
-  // console.log(emsg);
-  // return createJsonResponse("200", "test", emsg);
-  // return emsg;
 };
 
 module.exports = createPendingConfirmation;
