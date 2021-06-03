@@ -4,6 +4,8 @@
  * @module
  * @name putContact
  *
+ * @requires updateContact
+ *
  * @param {object} req - Request object
  * @param {string} req.userId - ID of logfged in user
  * @param {string} req.acl_role - Logged-in user role
@@ -13,8 +15,6 @@
  * @returns {responseTemplate} res - Response object
  */
 
-const searchContacts = require("../../../services/contact/searchContacts");
-const createQueryResponse = require("../../../services/createQueryResponse");
 const updateContact = require("../../../services/contact/updateContact");
 
 const putContact = async (req, res) => {

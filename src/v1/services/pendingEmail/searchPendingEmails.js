@@ -27,7 +27,9 @@ const findByEmailAndCode = async (email, email_confirmation_code) => {
       projection,
       options
     );
-    // return createQueryResponse.getResponse(false, pendingEmailSearchResult, null);
+    if (!pendingEmailSearchResult) {
+      return createQueryResponse.doesNotExist(true);
+    }
   } catch (err) {
     return createQueryResponse.getResponse(true, null, err);
   }

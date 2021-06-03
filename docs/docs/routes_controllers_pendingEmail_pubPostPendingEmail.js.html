@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/createDeleteResponse.js</title>
+    <title>JSDoc: Source: routes/controllers/pendingEmail/pubPostPendingEmail.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/createDeleteResponse.js</h1>
+    <h1 class="page-title">Source: routes/controllers/pendingEmail/pubPostPendingEmail.js</h1>
 
     
 
@@ -27,33 +27,57 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @description Generates json response
- * @description Returns an object
- *
+ * @description Creates new PendingEmail item, then generates and sends confirmation email
  * @module
- * @name createQueryResponse
+ * @name pubPostPendingEmail
  *
- * @param {boolean} err - Indicates if en error has occured
- * @param {object} found=null - Documents returned by query
- * @param {object} errDetails - Details of error, if any
+ * @requires createPendingEmail
+ * @requires createPendingConfirmHome
  *
- * @returns {responseTemplate} undefined
+ * @param {object} req Request object
+ * @param {string} req.contact_email Email of user
+ * @param {string} req.contact_name Prospective user's email address
+ * @param {object} res Response object
+ *
+ * @returns {responseTemplate} res - Response object
+ * @property {object} res.data
+ * @property {object} res.data.to
+ * @property {string} res.data.to.email Recipient's email
+ * @property {string} res.data.to.name Recipient's name
+ * @property {string} res.data.confirmation_code Auto-generated confirmation string
+ * @property {string} res.data.hash Hash of confirmation_code
  */
 
-const jsonResponse = require("./createJsonResponse");
+const createPendingEmail = require("../../../services/pendingEmail/createPendingEmail");
+const createPendingConfirmHome = require("../../../services/emailRequest/createPendingConfirmHome");
 
-const createDeleteResponse = (isErr = null, result = null, err = null) => {
-  // If error
-  if (isErr) {
-    // console.log("err");
-    return jsonResponse("400", "Error deleting item", err);
+const pubPostPendingEmail = async (req, res) => {
+  const { contact_email, contact_name } = req.body;
+  let response, result;
+
+  // -- Create new Pending Email- with confirmation code, hash and email, with expiry --
+  let createPendingResult = await createPendingEmail(contact_email);
+  if (createPendingResult.status === 400) {
+    return res.status(createPendingResult.status).json(createPendingResult);
   }
+  const { confirmation_code, hash } = createPendingResult.data;
 
-  // Success
-  return jsonResponse("200", "Successfully deleted item", result);
+  // -- Generate confirmation email --
+  let data = {
+    to: {
+      email: contact_email,
+      name: contact_name,
+    },
+    confirmation_code,
+    hash,
+  };
+
+  response = await createPendingConfirmHome(data);
+
+  res.status(response.status).json(response);
 };
 
-module.exports = createDeleteResponse;
+module.exports = pubPostPendingEmail;
 </code></pre>
         </article>
     </section>

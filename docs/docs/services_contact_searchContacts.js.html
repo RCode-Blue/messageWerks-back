@@ -46,7 +46,7 @@ const createQueryResponse = require("../createQueryResponse");
  *
  * @returns {responseTemplate} undefined - Search result
  */
-const all = async () => {
+const findAll = async () => {
   let result;
 
   const filter = {};
@@ -73,7 +73,7 @@ const all = async () => {
  * @property {object} searchResults.err - Error message
  * @property {object} searchResults.docs - QUery result
  */
-const byId = async (id) => {
+const findById = async (id) => {
   try {
     const contact = await Contact.findById(id);
     return createQueryResponse.getResponse(false, contact, null);
@@ -91,15 +91,21 @@ const byId = async (id) => {
  *
  * @returns {responseTemplate} searchResults
  */
-const byEmail = async (email) => {
+const findByEmail = async (email) => {
+  // console.log("email:");
+  // console.log(email);
   let searchResults = {};
 
   const filter = { email: email };
   const projection = [];
   const options = {};
+  // console.log("filter" + filter);
   try {
     // let foundContacts = await Contact.findOne(filter, projection, options);
     const contact = await Contact.findOne(filter, projection, options);
+    // console.log("=== contact ===");
+    // console.log(contact);
+    // console.log("xxx");
     return createQueryResponse.getResponse(false, contact, null);
   } catch (err) {
     return createQueryResponse.getResponse(true, null, err);
@@ -114,7 +120,7 @@ const byEmail = async (email) => {
  *
  * @returns {boolean} undefined
  */
-const checkIdExists = async (id) => {
+const checkContactIdExists = async (id) => {
   let result = await byId(id);
   if (result.status === 200) {
     return true;
@@ -130,13 +136,17 @@ const checkIdExists = async (id) => {
  *
  * @param {string} email - Contact's email
  *
- * @returns {boolean} undefined
+ * @returns {object} result
  */
-const checkEmailExists = async (email) => {
-  let result = await byEmail(email);
+const checkContactEmailExists = async (email) => {
+  // console.log(data);
+  let result = await findByEmail(email);
+  // console.log("+++ result +++");
   // console.log(result);
+  // console.log("++++++");
   if (result.status === 200) {
-    return createQueryResponse.alreadyExists(true, result.data);
+    // return createQueryResponse.alreadyExists(true, result.data);
+    return result;
     // return true;
   }
   return createQueryResponse.alreadyExists(false);
@@ -151,19 +161,19 @@ const checkEmailExists = async (email) => {
  *
  * @returns {string} email - Contact's email
  */
-const getEmailfromContactId = async (id) => {
-  const contact = (await byId(id)).docs;
+const findEmailfromContactId = async (id) => {
+  const contact = (await findById(id)).docs;
   // console.log(contact);
   return contact.email;
 };
 
 module.exports = {
-  all,
-  byId,
-  byEmail,
-  getEmailfromContactId,
-  checkEmailExists,
-  checkIdExists,
+  findAll,
+  findById,
+  findByEmail,
+  findEmailfromContactId,
+  checkContactEmailExists,
+  checkContactIdExists,
 };
 </code></pre>
         </article>
@@ -175,13 +185,13 @@ module.exports = {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-checkAddressFields.html">checkAddressFields</a></li><li><a href="module-checkContactFields.html">checkContactFields</a></li><li><a href="module-checkMongoId.html">checkMongoId</a></li><li><a href="module-checkNameFields.html">checkNameFields</a></li><li><a href="module-checkSocialMediaFields.html">checkSocialMediaFields</a></li><li><a href="module-connectDB.html">connectDB</a></li><li><a href="module-createContact.html">createContact</a></li><li><a href="module-createPendingEmail.html">createPendingEmail</a></li><li><a href="module-createQueryResponse.html">createQueryResponse</a></li><li><a href="module-deleteContact.html">deleteContact</a></li><li><a href="module-getAllContacts.html">getAllContacts</a></li><li><a href="module-getContactById.html">getContactById</a></li><li><a href="module-jsonResponse.html">jsonResponse</a></li><li><a href="module-postContact.html">postContact</a></li><li><a href="module-processFetchResponse.html">processFetchResponse</a></li><li><a href="module-putContact.html">putContact</a></li><li><a href="module-removeContact.html">removeContact</a></li><li><a href="module-routers_admin_contact.html">routers/admin/contact</a></li><li><a href="module-routers_user.html">routers/user</a></li><li><a href="module-scramble.html">scramble</a></li><li><a href="module-searchContacts.html">searchContacts</a></li><li><a href="module-updateContact.html">updateContact</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-routers_admin_contact-adminRouter_Contact.html">adminRouter_Contact</a></li><li><a href="module-routers_user-adminRouter_User.html">adminRouter_User</a></li><li><a href="publicRouter_PendingEmail.html">publicRouter_PendingEmail</a></li></ul><h3>Classes</h3><ul><li><a href="Contact.html">Contact</a></li></ul><h3>Global</h3><ul><li><a href="global.html#express">express</a></li><li><a href="global.html#NameSchema">NameSchema</a></li><li><a href="global.html#server">server</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-checkAddressFields.html">checkAddressFields</a></li><li><a href="module-checkContactFields.html">checkContactFields</a></li><li><a href="module-checkMongoId.html">checkMongoId</a></li><li><a href="module-checkNameFields.html">checkNameFields</a></li><li><a href="module-checkSocialMediaFields.html">checkSocialMediaFields</a></li><li><a href="module-connectDB.html">connectDB</a></li><li><a href="module-createContact.html">createContact</a></li><li><a href="module-createPendingEmail.html">createPendingEmail</a></li><li><a href="module-createQueryResponse.html">createQueryResponse</a></li><li><a href="module-deleteContact.html">deleteContact</a></li><li><a href="module-getAllContacts.html">getAllContacts</a></li><li><a href="module-getContactById.html">getContactById</a></li><li><a href="module-jsonResponse.html">jsonResponse</a></li><li><a href="module-postContact.html">postContact</a></li><li><a href="module-processFetchResponse.html">processFetchResponse</a></li><li><a href="module-pubCreateUser.html">pubCreateUser</a></li><li><a href="module-pubPostPendingEmail.html">pubPostPendingEmail</a></li><li><a href="module-putContact.html">putContact</a></li><li><a href="module-removeContact.html">removeContact</a></li><li><a href="module-routers_admin_contact.html">routers/admin/contact</a></li><li><a href="module-routers_admin_users.html">routers/admin/users</a></li><li><a href="module-routers_pub_verify.html">routers/pub/verify</a></li><li><a href="module-scramble.html">scramble</a></li><li><a href="module-searchContacts.html">searchContacts</a></li><li><a href="module-updateContact.html">updateContact</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-routers_admin_contact-adminRouter_Contacts.html">adminRouter_Contacts</a></li><li><a href="module-routers_admin_users-adminRouter_Users.html">adminRouter_Users</a></li><li><a href="module-routers_pub_verify-publicRouter_Verify.html">publicRouter_Verify</a></li><li><a href="publicRouter_PendingEmail.html">publicRouter_PendingEmail</a></li></ul><h3>Classes</h3><ul><li><a href="Contact.html">Contact</a></li></ul><h3>Global</h3><ul><li><a href="global.html#express">express</a></li><li><a href="global.html#NameSchema">NameSchema</a></li><li><a href="global.html#server">server</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Fri May 14 2021 19:10:56 GMT+1000 (Australian Eastern Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu Jun 03 2021 18:04:15 GMT+1000 (Australian Eastern Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

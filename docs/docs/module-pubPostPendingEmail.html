@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Contact</title>
+    <title>JSDoc: Module: pubPostPendingEmail</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Contact</h1>
+    <h1 class="page-title">Module: pubPostPendingEmail</h1>
 
     
 
@@ -28,7 +28,8 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Contact<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            
         
     
 </header>
@@ -37,27 +38,164 @@
     <div class="container-overview">
     
         
+            <div class="description"><p>Creates new PendingEmail item, then generates and sends confirmation email</p></div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Request object</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>contact_email</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Email of user</p></td>
+        </tr>
 
     
 
-    
-    <h4 class="name" id="Contact"><span class="type-signature"></span>new Contact<span class="signature">()</span><span class="type-signature"></span></h4>
-    
+        <tr>
+            
+                <td class="name"><code>contact_name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Prospective user's email address</p></td>
+        </tr>
 
     
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
 
 
+            
+            </td>
 
-<div class="description">
-    <p>Contact schema</p>
-</div>
+            
 
+            
 
+            <td class="description last"><p>Response object</p></td>
+        </tr>
 
-
-
-
-
+    
+    </tbody>
+</table>
 
 
 
@@ -78,7 +216,87 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>res.data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>to</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
         
 
         
@@ -105,78 +323,10 @@
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-                </td>
-            
 
             
 
-            <td class="description last"><p>Required - Contact email address</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>dob</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">date</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Date of birth</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>address</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#address">address</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Addreess of Contact</p></td>
+            <td class="description last"><p>Recipient's email</p></td>
         </tr>
 
     
@@ -189,56 +339,77 @@
             <td class="type">
             
                 
-<span class="param-type"><a href="global.html#name">name</a></span>
+<span class="param-type">string</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
 
             
 
-            <td class="description last"><p>Contact full name</p></td>
+            <td class="description last"><p>Recipient's name</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>social_media</code></td>
+                <td class="name"><code>confirmation_code</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;<a href="global.html#socialMedia">socialMedia</a>></span>
+<span class="param-type">string</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
 
+            
+
+            <td class="description last"><p>Auto-generated confirmation string</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>hash</code></td>
+            
+
+            <td class="type">
+            
                 
-                </td>
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
             
 
             
 
-            <td class="description last"><p>Array of SocialMedia objects</p></td>
+            <td class="description last"><p>Hash of confirmation_code</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -277,7 +448,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="db_models_Contact.js.html">db/models/Contact.js</a>, <a href="db_models_Contact.js.html#line30">line 30</a>
+        <a href="routes_controllers_pendingEmail_pubPostPendingEmail.js.html">routes/controllers/pendingEmail/pubPostPendingEmail.js</a>, <a href="routes_controllers_pendingEmail_pubPostPendingEmail.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -302,16 +473,47 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>res - Response object</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="global.html#responseTemplate">responseTemplate</a></span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
 
 
+        
     
     </div>
 
     
 
+    
+        <h3 class="subsection-title">Requires</h3>
+
+        <ul>
+            <li><a href="module-createPendingEmail.html">module:createPendingEmail</a></li>
+        
+            <li>module:createPendingConfirmHome</li>
+        </ul>
     
 
     

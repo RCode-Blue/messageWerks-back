@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/createDeleteResponse.js</title>
+    <title>JSDoc: Namespace: publicRouter_Verify</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,46 +17,100 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/createDeleteResponse.js</h1>
+    <h1 class="page-title">Namespace: publicRouter_Verify</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @description Generates json response
- * @description Returns an object
- *
- * @module
- * @name createQueryResponse
- *
- * @param {boolean} err - Indicates if en error has occured
- * @param {object} found=null - Documents returned by query
- * @param {object} errDetails - Details of error, if any
- *
- * @returns {responseTemplate} undefined
- */
+        <h2>
+            <span class="ancestors"><a href="module-routers_pub_verify.html">routers/pub/verify</a>~</span>publicRouter_Verify</h2>
+        
+    
+</header>
 
-const jsonResponse = require("./createJsonResponse");
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Express router to mount public-user related functions</p></div>
+        
 
-const createDeleteResponse = (isErr = null, result = null, err = null) => {
-  // If error
-  if (isErr) {
-    // console.log("err");
-    return jsonResponse("400", "Error deleting item", err);
-  }
+        
 
-  // Success
-  return jsonResponse("200", "Successfully deleted item", result);
-};
 
-module.exports = createDeleteResponse;
-</code></pre>
-        </article>
-    </section>
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="routes_api_pub_verify.js.html">routes/api/pub/verify.js</a>, <a href="routes_api_pub_verify.js.html#line13">line 13</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

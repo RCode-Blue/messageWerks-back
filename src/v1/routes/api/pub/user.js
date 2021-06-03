@@ -1,6 +1,6 @@
 /***
  * @description Express router providing public routes for PendingEmails
- * @module routers/pub/pendingEmail
+ * @module routers/public/user
  * @requires express
  */
 
@@ -23,10 +23,10 @@ const pubPostPendingEmail = require("../../controllers/pendingEmail/pubPostPendi
 // --USERS--
 /**
  * @description Route to create new Pending Email
- * @name post/new
+ * @name post:new
  * @function
  *
- * @memberof module:routers/pub/pendingEmail-publicRouter_Contact
+ * @memberof module:routers/public/pendingEmail
  * @requires pubPostPendingEmail
  * @inner
  */

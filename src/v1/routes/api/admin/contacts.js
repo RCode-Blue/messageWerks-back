@@ -8,12 +8,13 @@
  * @description express module
  * @const
  */
+
 const express = require("express");
 /**
- * @description Express router to mount contact related functions on
+ * @description Express router to mount admin-contact related functions on
  * @type {object}
  * @constant
- * @namespace adminRouter_Contact
+ * @namespace adminRouter_Contacts
  */
 const router = express.Router();
 
@@ -28,10 +29,10 @@ const checkMongoId = require("../../middleware/checkMongoId");
 // --CONTACTS--
 /**
  * @description Route to get all contacts
- * @name get/all
+ * @name get:all
  * @function
  *
- * @memberof module:routers/contact~adminRouter_Contact
+ * @memberof module:routers/admin/contact~adminRouter_contacts
  * @requires getAllContacts
  * @inner
  */

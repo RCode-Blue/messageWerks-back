@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/createDeleteResponse.js</title>
+    <title>JSDoc: Source: routes/api/pub/verify.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/createDeleteResponse.js</h1>
+    <h1 class="page-title">Source: routes/api/pub/verify.js</h1>
 
     
 
@@ -27,33 +27,42 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @description Generates json response
- * @description Returns an object
- *
- * @module
- * @name createQueryResponse
- *
- * @param {boolean} err - Indicates if en error has occured
- * @param {object} found=null - Documents returned by query
- * @param {object} errDetails - Details of error, if any
- *
- * @returns {responseTemplate} undefined
+ * @description Express router providing public routes for verification
+ * @module routers/pub/verify
+ * @requires express
  */
 
-const jsonResponse = require("./createJsonResponse");
+/**
+ * @description express module
+ * @const
+ */
 
-const createDeleteResponse = (isErr = null, result = null, err = null) => {
-  // If error
-  if (isErr) {
-    // console.log("err");
-    return jsonResponse("400", "Error deleting item", err);
-  }
+const express = require("express");
+/**
+ * @description Express router to mount public-user related functions
+ * @type {object}
+ * @constant
+ * @namespace publicRouter_Verify
+ */
+const router = express.Router();
 
-  // Success
-  return jsonResponse("200", "Successfully deleted item", result);
-};
+const pubConfirmPendingEmail = require("../../controllers/pendingEmail/pubConfirmPendingEmail");
 
-module.exports = createDeleteResponse;
+// --EMAIL CONFIRMATION--
+/**
+ * @description Route to create a Pending Email
+ * @name post:email
+ * @function
+ *
+ * @memberof module:routers/pub/verify~publicRouter_verify
+ * @requires pubConfirmPendingEmail
+ * @inner
+ */
+router.post("/email/", async (req, res) => {
+  await pubConfirmPendingEmail(req, res);
+});
+
+module.exports = router;
 </code></pre>
         </article>
     </section>

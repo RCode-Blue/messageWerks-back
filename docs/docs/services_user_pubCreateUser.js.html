@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/createDeleteResponse.js</title>
+    <title>JSDoc: Source: services/user/pubCreateUser.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/createDeleteResponse.js</h1>
+    <h1 class="page-title">Source: services/user/pubCreateUser.js</h1>
 
     
 
@@ -27,33 +27,57 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @description Generates json response
- * @description Returns an object
+ * @description Creates a User after verification
  *
  * @module
- * @name createQueryResponse
+ * @name pubCreateUser
  *
- * @param {boolean} err - Indicates if en error has occured
- * @param {object} found=null - Documents returned by query
- * @param {object} errDetails - Details of error, if any
+ * @requires User
+ * @requires createQueryResponse.postResponse
  *
- * @returns {responseTemplate} undefined
+ * @param {object} userData - User details
+ *
+ * @returns {responseTemplate} Custom JSON status response
+ *
  */
 
-const jsonResponse = require("./createJsonResponse");
+const slug = require("slug");
+const { postResponse } = require("../createQueryResponse");
+const { user } = require("../../config/appValues.json");
 
-const createDeleteResponse = (isErr = null, result = null, err = null) => {
-  // If error
-  if (isErr) {
-    // console.log("err");
-    return jsonResponse("400", "Error deleting item", err);
+const User = require("../../db/models/User");
+
+const pubCreateUser = async (userData) => {
+  const { email } = userData;
+  let result, response;
+
+  slug.charmap["@"] = "_";
+
+  const slug = slug(email);
+  const password = Math.floor(Math.random() + 10000) + 1;
+  const status = user.status.disabled.code;
+  const acl_role = user.acl_role.owner.code;
+
+  const data = {
+    email,
+    slug,
+    password,
+    acl_role,
+    status,
+  };
+
+  // Create User
+  try {
+    result = await User.create(data);
+
+    response = postResponse(null, result);
+  } catch (err) {
+    response = postResponse(true, null.err);
   }
-
-  // Success
-  return jsonResponse("200", "Successfully deleted item", result);
+  // console.log(response);
+  return response;
 };
-
-module.exports = createDeleteResponse;
+module.exports = pubCreateUser;
 </code></pre>
         </article>
     </section>

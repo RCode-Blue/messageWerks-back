@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/createDeleteResponse.js</title>
+    <title>JSDoc: Module: pubCreateUser</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,46 +17,211 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/createDeleteResponse.js</h1>
+    <h1 class="page-title">Module: pubCreateUser</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @description Generates json response
- * @description Returns an object
- *
- * @module
- * @name createQueryResponse
- *
- * @param {boolean} err - Indicates if en error has occured
- * @param {object} found=null - Documents returned by query
- * @param {object} errDetails - Details of error, if any
- *
- * @returns {responseTemplate} undefined
- */
+        
+            
+        
+    
+</header>
 
-const jsonResponse = require("./createJsonResponse");
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Creates a User after verification</p></div>
+        
 
-const createDeleteResponse = (isErr = null, result = null, err = null) => {
-  // If error
-  if (isErr) {
-    // console.log("err");
-    return jsonResponse("400", "Error deleting item", err);
-  }
+        
+            
 
-  // Success
-  return jsonResponse("200", "Successfully deleted item", result);
-};
 
-module.exports = createDeleteResponse;
-</code></pre>
-        </article>
-    </section>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userData</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>User details</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_user_pubCreateUser.js.html">services/user/pubCreateUser.js</a>, <a href="services_user_pubCreateUser.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Custom JSON status response</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="global.html#responseTemplate">responseTemplate</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+        <h3 class="subsection-title">Requires</h3>
+
+        <ul>
+            <li>module:User</li>
+        
+            <li>module:createQueryResponse.postResponse</li>
+        </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

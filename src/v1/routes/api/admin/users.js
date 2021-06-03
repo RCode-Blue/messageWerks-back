@@ -1,12 +1,13 @@
 /**
  * @description Express router providing admin routes for Users
- * @module routers/user
+ * @module routers/admin/users
  * @requires express
  */
 
 /**
  * @description express module
- * @const
+ * @type {object}
+ * @constant
  */
 
 const express = require("express");
@@ -14,7 +15,7 @@ const express = require("express");
  * @description Express router to mount user related functions for admins
  * @type {object}
  * @constant
- * @namespace adminRouter_User
+ * @namespace adminRouter_Users
  */
 const router = express.Router();
 const pubPostPendingEmail = require("../../controllers/pendingEmail/pubPostPendingEmail");
@@ -32,7 +33,7 @@ const pubPostPendingEmail = require("../../controllers/pendingEmail/pubPostPendi
 // const passwordResetEnable = require("../../users/passwordResetEnable");
 // const patchUser = require("../../users/patchUser");
 
-// USERS
+// --USERS--
 /*
 router.get(
   "/",
@@ -57,6 +58,15 @@ router.get(
 );
 */
 
+/**
+ * @description Route to initiate new user creation
+ * @name post:signup/new
+ * @function
+ *
+ * @memberof module:routers/admin/users
+ * @requires pubPostPendingEmail
+ * @inner
+ */
 router.post(
   "/signup/new",
   // auth,

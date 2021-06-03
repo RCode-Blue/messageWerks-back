@@ -275,27 +275,27 @@
     "maxFailedLogins": 3,
     "minPasswordLength": 8,
     "status": {
-      "9": {
+      "active": {
         "code": 9,
         "name": "active",
         "description": "account is active"
       },
-      "7": {
+      "pending": {
         "code": 7,
         "name": "pending",
         "description": "waiting for user action"
       },
-      "3": {
+      "silent": {
         "code": 3,
         "name": "silent",
         "description": "account disabled by user"
       },
-      "2": {
+      "locked_out": {
         "code": 2,
         "name": "locked out",
         "description": "account disabled by system"
       },
-      "0": {
+      "disabled": {
         "code": 0,
         "name": "disabled",
         "description": "account is disabled"
@@ -307,7 +307,7 @@
         "name": "administrator",
         "description": "full admin permissions"
       },
-      "demo_administrator": {
+      "demo_admin": {
         "code": 91,
         "name": "demo_administrator",
         "description": "administtrator but view only"
@@ -319,32 +319,32 @@
       },
       "owner": {
         "code": 86,
-        "name": "owner",
-        "description": "full permissions to business sites"
+        "name": "Business Owner",
+        "description": "full permissions to own business site"
       },
       "demo_owner": {
         "code": 81,
-        "name": "demo_owner",
+        "name": "Demo Business Owner",
         "description": "owner but view only"
       },
       "all_owners": {
         "code": 80,
-        "name": "all_owners",
+        "name": "All Business Owners",
         "description": "placeholder role for all owners"
       },
       "manager": {
         "code": 76,
-        "name": "manager",
-        "description": "delegated permissions to business sites"
+        "name": "Delegated Manager",
+        "description": "delegated permissions to business site"
       },
       "demo_manager": {
         "code": 71,
-        "name": "demo_manager",
+        "name": "Demo Delegated Manager",
         "description": "manager but view only"
       },
       "all_managers": {
         "code": 70,
-        "name": "all_managers",
+        "name": "All Managers",
         "description": "placeholder role for all managers"
       },
 

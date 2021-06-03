@@ -14,6 +14,10 @@
  * @param {object} data.name
  * @param {object} data.social_media
  * @param {object} id - Contact id
+ *
+ * @returns {responseTemplate} res - Response object
+ * @property {object} [responseTemplate.doc] The created/Updated Contact
+ * @property {object} [responseTemplate.err] Error details
  */
 
 const Contact = require("../../db/models/Contact");

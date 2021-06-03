@@ -10,6 +10,8 @@ const createJsonResponse = require("../createJsonResponse");
 
 const createPendingConfirmation = async (data) => {
   const { to, confirmation_code, hash } = data;
+  const to_email = to.email;
+  const to_name = to.name;
   const home = appValues.email_bodies.html_templates.home;
   const version = appValues.codebase.version;
 
@@ -20,16 +22,15 @@ const createPendingConfirmation = async (data) => {
   const homepage = process.env.HOMEPAGE;
   const subject = "Thanks for trying us out!";
 
-  let htmlPart,
-    mjmlPart,
-    emailMessage,
-    vars,
-    messageVals,
-    confirmationUrl,
-    verifyUrl;
+  let htmlPart, mjmlPart, emailMessage, vars, messageVals;
 
-  verifyUrl = homepage + "/api/v1/pub/verify/email/";
-  confirmationUrl = verifyUrl + ":" + confirmation_code;
+  const verifyUrl = homepage + "/api/v1/public/verify/email";
+  const emailString = `email=${to_email}`;
+  const confirmation_string = `email_confirmation_code=${confirmation_code}`;
+
+  const confirmationUrl =
+    verifyUrl + "/?" + emailString + "&" + confirmation_string;
+  console.log(confirmationUrl);
 
   mjmlPart = fs.readFileSync(filePath, "utf-8", (err, data) => {
     if (err) {

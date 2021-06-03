@@ -1,4 +1,3 @@
-// const checkRolePermissions = require("../../../../services/user/checkRolePermissions");
 const searchContact = require("../../../services/contact/searchContacts");
 
 /**
