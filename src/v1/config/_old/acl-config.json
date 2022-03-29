@@ -1,7 +1,0 @@
-{
-  "filename": "acl.json",
-  "path": "src/config",
-  "baseUrl": "routes/api",
-  "defaultRole": "anonymous",
-  "roleSearchPath": "user.role.name"
-}

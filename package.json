@@ -2,16 +2,9 @@
   "name": "messagewerks-back",
   "version": "1.0.0",
   "description": "newsletter manager",
-  "main": "./src/v1/server.js",
+  "main": "./src/server.js",
   "scripts": {
-    "start": "node ./dist/server.js",
-    "dev": "-r dotenv/config dotenv_config_path=.env",
-    "serve": "node -r dotenv/config dotenvConfig.js dotenv_config_path=.env &&  nodemon ./src/v1/server.js",
-    "build": "rimraf dist && webpack --config=webpack.config.js --mode development",
-    "test": "mocha",
-    "build:dev": "rimraf dist && webpack --config=webpack.dev.config.js --mode development",
-    "build:prod": "rimraf dist && webpack --config=webpack.prod.config.js --mode production",
-    "doc": "rimraf ./docs/docs && jsdoc -c jsconfig.json"
+    "start": "node ./src/server.js"
   },
   "repository": {
     "type": "git",
@@ -28,39 +21,17 @@
   "homepage": "https://github.com/RCode-Blue/messageWerks-back#readme",
   "devDependencies": {
     "@babel/core": "^7.11.6",
-    "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.11.5",
-    "@shelf/jest-mongodb": "^1.2.3",
     "babel-loader": "^8.1.0",
-    "chai": "^4.2.0",
-    "html-webpack-plugin": "^4.5.0",
-    "jsdoc": "^3.6.7",
-    "mocha": "^8.2.1",
-    "node-mocks-http": "^1.9.0",
-    "nodemon": "^2.0.6",
+    "eslint": "^8.12.0",
+    "html-webpack-plugin": "^5.5.0",
     "rimraf": "^3.0.2",
-    "sinon": "^9.2.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "webpack-node-externals": "^2.5.2"
   },
   "dependencies": {
-    "app-root-path": "^3.0.0",
-    "bcrypt": "^5.0.0",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-acl": "^2.0.8",
-    "express-validator": "^6.6.1",
-    "jsonwebtoken": "^8.5.1",
-    "mjml": "^4.7.1",
-    "mongoose": "^5.12.11",
-    "node-mailjet": "^3.3.4",
-    "path": "^0.12.7",
-    "redis": "^3.1.2",
-    "slug": "^4.0.3",
-    "uuid": "^8.3.2",
-    "uuid-apikey": "^1.5.1",
-    "validate.js": "^0.13.1"
+    "express": "^4.17.3"
   }
 }
