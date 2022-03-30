@@ -1,5 +1,6 @@
 const path = require("path");
 const nodeExternals = require("webpack-node-externals");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 var config = {
   entry: {
@@ -25,6 +26,13 @@ var config = {
       },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+      filename: "./index.html",
+      excludeChunks: ["server"],
+    }),
+  ],
 };
 
 module.exports = config;
