@@ -1,42 +1,53 @@
-const path = require("path");
-const fs = require("fs");
-
+const cors = require("cors");
 const express = require("express");
+const fs = require("fs");
+const path = require("path");
 
-const testPath = require("./api/test");
+const dbConnect = require("./config/elephantSql/elephantConnect");
 
-// Check if .env.<environment> file exists
+// Config imports
 const rootDir = path.dirname(__dirname);
 if (fs.existsSync(path.join(rootDir) + "/.env." + process.env.NODE_ENV)) {
-  require("dotenv").config();
+  require("dotenv").config({ path: `${rootDir}/.env.${process.env.NODE_ENV}` });
 }
 
-// console.log("NODE_ENV: ", process.env.NODE_ENV);
-
-// const app = express(),
-//   DIST_DIR = __dirname,
-//   HTML_FILE = path.join(DIST_DIR, "index.html");
-//
-// app.use(express.static(DIST_DIR));
+const testApi = require("./api/test");
+const adminsApi = require("./api/admins");
 
 const app = express();
-
 app.use(express.json());
 
-// app.get("*", (req, res) => {
-//   res.sendFile(HTML_FILE);
-// });
+// Configurations
+let corsOptions = {
+  origin: process.env.CORS_ORIGIN,
+};
+app.use(cors(corsOptions));
 
-// Routes
-app.use("/test", testPath);
+const dbase = dbConnect();
 
-const PORT = process.env.PORT || 3001;
+dbase
+  .authenticate()
+  .then(() => console.log("DB connected"))
+  .catch((err) => {
+    console.error(err);
+  });
+
+// Routes;
+app.use("/test", testApi);
+app.use("/admins", adminsApi);
+
+// require("./routes/user")(app);
+
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.clear();
+  console.log(`                        messageWerks`);
   console.log("-------------------------------------------------------------");
   console.log(`Listening to port:  ${PORT}`);
   console.log(`      Environment:  ${process.env.NODE_ENV}`);
+  console.log(`        File name:  ${process.env.FILE_NAME}`);
   console.log("-------------------------------------------------------------");
+  console.log();
   console.log("Press ctrl+C to quit");
   console.log();
 });
