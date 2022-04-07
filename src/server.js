@@ -36,8 +36,6 @@ dbase
 app.use("/test", testApi);
 app.use("/users", usersApi);
 
-// require("./routes/user")(app);
-
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.clear();

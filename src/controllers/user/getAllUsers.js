@@ -4,24 +4,6 @@ const pgResponse = require("../../services/postgresResponse");
 
 const db = dbConnect();
 
-// const User = db.users;
-// console.log("db: ", db());
-// const Op = db.Sequelize.Op;
-
-/*
-const getAllUsers= (req, res) => {
-  User.findAll()
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "An error occured",
-      });
-    });
-};
-*/
-
 const getAllUsers = async () => {
   let response;
   try {
