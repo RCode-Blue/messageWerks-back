@@ -1,17 +1,19 @@
 const Sequelize = require("sequelize");
 const dbConnect = require("../config/elephantSql/elephantConnect");
 
-const db = dbConnect();
+const sequelize = dbConnect();
 
-const Admin = db.define("admins", {
+const User = sequelize.define("users", {
   email: {
     type: Sequelize.STRING,
   },
-  first_name: {
+  firstName: {
     type: Sequelize.STRING,
+    field: "first_name",
   },
-  last_name: {
+  lastName: {
     type: Sequelize.STRING,
+    field: "last_name",
   },
   slug: {
     type: Sequelize.STRING,
@@ -21,4 +23,4 @@ const Admin = db.define("admins", {
   },
 });
 
-module.exports = Admin;
+module.exports = User;

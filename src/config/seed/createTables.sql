@@ -1,5 +1,5 @@
 CREATE TABLE
-    IF NOT EXISTS admins(
+    IF NOT EXISTS users(
         id SERIAL,
         role SMALLINT NOT NULL,
         email VARCHAR(100) NOT NULL,
@@ -8,9 +8,10 @@ CREATE TABLE
         slug VARCHAR(255) NOT NULL,
         password VARCHAR(255) NOT NULL,
         createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
-        ON
-        UPDATE
-            CURRENT_TIMESTAMP,
-            PRIMARY KEY(id)
-    )
+        updatedAt TIMESTAMP DEFAULT NULL,
+        PRIMARY KEY(id)
+    );
+
+CREATE RULE users_update AS ON UPDATE TO users  
+    WHERE   NEW<>OLD
+    DO UPDATE users SET updatedAt=CURRENT_TIMESTAMP

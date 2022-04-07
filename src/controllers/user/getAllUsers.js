@@ -1,10 +1,15 @@
-const db = require("../../models/index");
+const dbConnect = require("../../config/elephantSql/elephantConnect");
+const User = require("../../models/User");
+const pgResponse = require("../../services/postgresResponse");
 
-const User = db.users;
-console.log("db: ", db());
-const Op = db.Sequelize.Op;
+const db = dbConnect();
 
-exports.findAll = (req, res) => {
+// const User = db.users;
+// console.log("db: ", db());
+// const Op = db.Sequelize.Op;
+
+/*
+const getAllUsers= (req, res) => {
   User.findAll()
     .then((data) => {
       res.send(data);
@@ -15,3 +20,26 @@ exports.findAll = (req, res) => {
       });
     });
 };
+*/
+
+const getAllUsers = async () => {
+  let response;
+  try {
+    let result = await User.findAll({
+      attributes: [
+        "role",
+        "email",
+        "firstName",
+        "lastName",
+        "slug",
+        "password",
+      ],
+    });
+    response = pgResponse(200, "", result);
+  } catch (err) {
+    response = pgResponse(400, "", "", { error: err });
+  }
+  return response;
+};
+
+module.exports = getAllUsers;

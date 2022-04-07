@@ -12,7 +12,7 @@ if (fs.existsSync(path.join(rootDir) + "/.env." + process.env.NODE_ENV)) {
 }
 
 const testApi = require("./api/test");
-const adminsApi = require("./api/admins");
+const usersApi = require("./api/users");
 
 const app = express();
 app.use(express.json());
@@ -34,7 +34,7 @@ dbase
 
 // Routes;
 app.use("/test", testApi);
-app.use("/admins", adminsApi);
+app.use("/users", usersApi);
 
 // require("./routes/user")(app);
 

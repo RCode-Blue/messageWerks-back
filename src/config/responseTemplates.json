@@ -1,0 +1,62 @@
+{
+  "200": {
+    "status": 200,
+    "status_name": "OK",
+    "message": null,
+    "data": null
+  },
+  "201": {
+    "status": 201,
+    "status_name": "Created",
+    "message": null,
+    "data": null
+  },
+  "204": {
+    "status": 204,
+    "status_name": "No Content",
+    "message": null,
+    "data": null
+  },
+  "400": {
+    "status": 400,
+    "status_name": "Bad Request",
+    "message": null,
+    "data": null
+  },
+  "401": {
+    "status": 401,
+    "status_name": "Unauthorized",
+    "message": null,
+    "data": null
+  },
+  "402": {
+    "status": 402,
+    "status_name": "Payment Required",
+    "message": null,
+    "data": null
+  },
+  "403": {
+    "status": 403,
+    "status_name": "Forbidden",
+    "message": null,
+    "data": null
+  },
+  "404": {
+    "status": 404,
+    "status_name": "Not Found",
+    "message": null,
+    "data": null
+  },
+  "409": {
+    "status": 409,
+    "status_name": "Conflict",
+    "message": null,
+    "data": null
+  },
+  "500": {
+    "status": 500,
+    "status_name": "Internal Server Error",
+    "message": null,
+    "data": null
+  }
+}
