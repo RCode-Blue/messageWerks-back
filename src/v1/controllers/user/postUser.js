@@ -3,7 +3,6 @@ const fs = require("fs");
 const path = require("path");
 const User = require("../../../models/User");
 
-const dbConnect = require("../../../config/elephantSql/elephantConnect");
 const pgResponse = require("../../services/postgresResponse");
 
 // Config imports
@@ -11,8 +10,6 @@ const rootDir = path.dirname(__dirname);
 if (fs.existsSync(path.join(rootDir) + "/.env." + process.env.NODE_ENV)) {
   require("dotenv").config({ path: `${rootDir}/.env.${process.env.NODE_ENV}` });
 }
-
-const db = dbConnect();
 
 const generateHash = (password) => {
   const saltRounds = parseInt(process.env.ENCRYPTION_SALT_ROUNDS);
@@ -26,7 +23,7 @@ const postUser = async (data) => {
 
   let response;
   try {
-    await User.sync({ force: true });
+    await User.sync();
     let result = await User.create(data);
     response = pgResponse(200, "", result);
   } catch (error) {

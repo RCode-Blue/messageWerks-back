@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const dbConnect = require("../../config/elephantSql/elephantConnect");
+const deleteUser = require("../controllers/user/deleteUser");
 const findUsers = require("../controllers/user/findUsers");
 const getAllUsers = require("../controllers/user/getAllUsers");
 const postUser = require("../controllers/user/postUser");
@@ -22,6 +23,12 @@ router.get("/id", async (req, res) => {
 router.post("/create", async (req, res) => {
   const user = req.body;
   let response = await postUser(user);
+  res.status(response.status).json(response);
+});
+
+router.delete("/remove", async (req, res) => {
+  const userData = req.body;
+  let response = await deleteUser(userData);
   res.status(response.status).json(response);
 });
 
