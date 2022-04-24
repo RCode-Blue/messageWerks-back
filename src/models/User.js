@@ -1,25 +1,29 @@
-const Sequelize = require("sequelize");
+const DataTypes = require("sequelize");
 const dbConnect = require("../config/elephantSql/elephantConnect");
 
 const sequelize = dbConnect();
 
 const User = sequelize.define("users", {
   email: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
+    unique: true,
   },
-  firstName: {
-    type: Sequelize.STRING,
-    field: "first_name",
+  uuid: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    unique: true,
   },
-  lastName: {
-    type: Sequelize.STRING,
-    field: "last_name",
+  role: {
+    type: DataTypes.INTEGER,
   },
-  slug: {
-    type: Sequelize.STRING,
+  first_name: {
+    type: DataTypes.STRING,
+  },
+  last_name: {
+    type: DataTypes.STRING,
   },
   password: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
   },
 });
 
