@@ -1,5 +1,16 @@
+/**
+ * @description Handles DELETE request for a user
+ * <br> Deletes an existing user
+ *
+ * @module
+ * @name deleteUser
+ * @requires jsonResponse
+ * @param {object} User  - User data
+ * @returns {jsonResponse} Standardised JSON object
+ */
+
 const User = require("../../../models/User");
-const pgResponse = require("../../services/postgresResponse");
+const pgResponse = require("../../services/jsonResponse");
 
 const deleteUser = async (userData) => {
   const { uuid } = userData;

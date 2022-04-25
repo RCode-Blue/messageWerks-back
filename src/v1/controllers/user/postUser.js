@@ -1,9 +1,20 @@
+/**
+ * @description Handles POST request for a User.
+ * <br> Creates new user.
+ *
+ * @module
+ * @name postUser
+ * @requires jsonResponse
+ * @param {object} User - User data
+ * @returns {jsonResponse} Standardised JSON object
+ */
+
 const bcrypt = require("bcrypt");
 const fs = require("fs");
 const path = require("path");
 const User = require("../../../models/User");
 
-const pgResponse = require("../../services/postgresResponse");
+const pgResponse = require("../../services/jsonResponse");
 
 // Config imports
 const rootDir = path.dirname(__dirname);

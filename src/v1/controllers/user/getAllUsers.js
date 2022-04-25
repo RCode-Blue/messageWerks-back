@@ -1,5 +1,14 @@
+/**
+ * @description Handles GET request to get all users
+ *
+ * @module
+ * @name getAllUsers
+ * @requires jsonResponse
+ * @returns {jsonResponse} Standardised JSON object with a list of all users, or error message
+ */
+
 const dbConnect = require("../../../config/elephantSql/elephantConnect");
-const pgResponse = require("../../services/postgresResponse");
+const pgResponse = require("../../services/jsonResponse");
 
 const User = require("../../../models/User");
 

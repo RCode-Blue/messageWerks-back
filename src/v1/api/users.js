@@ -1,23 +1,32 @@
+/**
+ * @description Express routes for User
+ * <br> GET    /users/all:    Get all users
+ * <br> GET    /users/id:     Get a user by ID
+ * <br> POST   /users/create: Create a new user
+ * <br> PATCH  /users/edit:   Edit user details
+ * <br> DELETE /users/delete: Delete a user
+ *
+ * @module routes/users
+ * @requires express
+ */
+
 const express = require("express");
 const router = express.Router();
 
-const dbConnect = require("../../config/elephantSql/elephantConnect");
 const deleteUser = require("../controllers/user/deleteUser");
 const findUsers = require("../controllers/user/findUsers");
 const getAllUsers = require("../controllers/user/getAllUsers");
 const patchUser = require("../controllers/user/patchUser");
 const postUser = require("../controllers/user/postUser");
 
-const db = dbConnect();
-
 router.get("/all", async (req, res) => {
   let response = await getAllUsers();
   res.status(response.status).json(response);
 });
 
-router.get("/id", async (req, res) => {
-  const userId = req.body.id;
-  let response = await findUsers.byId(userId);
+router.get("/uuid", async (req, res) => {
+  const uuid = req.body.uuid;
+  let response = await findUsers.byUuid(uuid);
   res.status(response.status).json(response);
 });
 

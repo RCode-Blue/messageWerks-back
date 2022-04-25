@@ -1,6 +1,18 @@
+/**
+ * @description Handles PATCH requests for a User.
+ * <br> Edits existing user data, except for password.
+ * <br> User is located based on uuid.
+ *
+ * @module
+ * @name patchUser
+ * @requires jsonResponse
+ * @param {object} User - User data
+ * @returns {jsonResponse} Standardised JSON object
+ */
+
 const User = require("../../../models/User");
 
-const pgResponse = require("../../services/postgresResponse");
+const pgResponse = require("../../services/jsonResponse");
 
 const patchUser = async (userData) => {
   const { uuid } = userData;

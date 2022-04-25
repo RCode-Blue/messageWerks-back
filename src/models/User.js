@@ -3,6 +3,20 @@ const dbConnect = require("../config/elephantSql/elephantConnect");
 
 const sequelize = dbConnect();
 
+/**
+ * @description User model
+ * @name User
+ */
+/**
+ * @typedef User
+ * @property {email} User.email - User's email
+ * @property {uuid} User.uuid - User's unique identifier
+ * @property {integer} User.role - User's role - determines level of access
+ * @property {string} User.first_name - User's first name
+ * @property {string} User.last_name - User's last name
+ * @property {string} User.password - User's password
+ */
+
 const User = sequelize.define("users", {
   email: {
     type: DataTypes.STRING,
