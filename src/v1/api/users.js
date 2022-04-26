@@ -1,10 +1,10 @@
 /**
- * @description Express routes for User
- * <br> GET    /users/all:    Get all users
- * <br> GET    /users/id:     Get a user by ID
- * <br> POST   /users/create: Create a new user
- * <br> PATCH  /users/edit:   Edit user details
- * <br> DELETE /users/delete: Delete a user
+ * @description Express routes for User <br>
+ * GET    /users/all:    Get all users <br>
+ * GET    /users/id:     Get a user by ID <br>
+ * POST   /users/create: Create a new user <br>
+ * PATCH  /users/edit:   Edit user details <br>
+ * DELETE /users/delete: Delete a user
  *
  * @module routes/users
  * @requires express
@@ -14,7 +14,7 @@ const express = require("express");
 const router = express.Router();
 
 const deleteUser = require("../controllers/user/deleteUser");
-const findUsers = require("../controllers/user/findUsers");
+const findUsers = require("../controllers/user/findUser");
 const getAllUsers = require("../controllers/user/getAllUsers");
 const patchUser = require("../controllers/user/patchUser");
 const postUser = require("../controllers/user/postUser");

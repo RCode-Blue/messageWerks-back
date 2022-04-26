@@ -8,7 +8,7 @@
  */
 
 const dbConnect = require("../../../config/elephantSql/elephantConnect");
-const jsonResponse = require("../../services/jsonResponse");
+const jsonResponse = require("../../../helpers/jsonResponse");
 
 const User = require("../../../models/User");
 
@@ -19,6 +19,7 @@ const db = dbConnect();
  *
  * @function
  * @param {string} id - Row id for the user
+ *
  * @returns {jsonResponse} Standardised JSON object containing User object, or error
  */
 const byId = async (id) => {
@@ -44,7 +45,7 @@ const byId = async (id) => {
 };
 
 /**
- * @description GET a User by ID
+ * @description GET a User by UUID
  *
  * @function
  * @param {string} uuid - UUID for the user
@@ -61,4 +62,22 @@ const byUuid = async (uuid) => {
   return response;
 };
 
-module.exports = { byId, byUuid };
+/**
+ * @description GET a User by email
+ *
+ * @function
+ * @param {string} email - User's email
+ * @returns {jsonResponse} Standardised JSON object containing User object, or error
+ */
+const byEmail = async (email) => {
+  let response;
+  try {
+    let result = await User.findOne({ where: { email } });
+    response = jsonResponse(200, "", result);
+  } catch (error) {
+    response = jsonResponse(400, "", "", { error: error });
+  }
+  return response;
+};
+
+module.exports = { byEmail, byId, byUuid };

@@ -6,11 +6,12 @@
  * @name deleteUser
  * @requires jsonResponse
  * @param {object} User  - User data
+ * @param {object} User.uuid  - User uuid
  * @returns {jsonResponse} Standardised JSON object
  */
 
 const User = require("../../../models/User");
-const pgResponse = require("../../services/jsonResponse");
+const pgResponse = require("../../../helpers/jsonResponse");
 
 const deleteUser = async (userData) => {
   const { uuid } = userData;

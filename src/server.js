@@ -11,7 +11,7 @@ if (fs.existsSync(path.join(rootDir) + "/.env." + process.env.NODE_ENV)) {
   require("dotenv").config({ path: `${rootDir}/.env.${process.env.NODE_ENV}` });
 }
 
-// const testApi = require("./v1/api/test");
+const authApi = require("./v1/api/auth");
 const usersApi = require("./v1/api/users");
 
 const app = express();
@@ -33,7 +33,7 @@ dbase
   });
 
 // Routes;
-// app.use("/test", testApi);
+app.use("/v1/auth", authApi);
 app.use("/v1/users", usersApi);
 
 const PORT = process.env.PORT || 8080;

@@ -8,7 +8,7 @@
  */
 
 const dbConnect = require("../../../config/elephantSql/elephantConnect");
-const pgResponse = require("../../services/jsonResponse");
+const pgResponse = require("../../../helpers/jsonResponse");
 
 const User = require("../../../models/User");
 

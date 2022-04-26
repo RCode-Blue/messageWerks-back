@@ -12,7 +12,7 @@
  * @property {object} result - Additional information, eg: error message
  */
 
-const jsonTemplates = require("../../config/responseTemplates.json");
+const jsonTemplates = require("../config/responseTemplates.json");
 
 const jsonResponse = (code, message = "", data = {}, result = {}) => {
   let response = jsonTemplates[code];
