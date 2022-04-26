@@ -45,6 +45,7 @@
     "express": "^4.17.3",
     "jsdoc": "^3.6.10",
     "jsonwebtoken": "^8.5.1",
+    "redis": "^4.0.6",
     "sequelize": "^6.18.0"
   }
 }
