@@ -72,6 +72,9 @@ public
 # Mac files
 .DS_Store
 
+# Redis files
+dump.rdb
+
 # Yarn
 yarn-error.log
 .pnp/

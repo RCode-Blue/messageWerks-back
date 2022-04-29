@@ -15,19 +15,19 @@ if (fs.existsSync(path.join(rootPath) + "/.env." + process.env.NODE_ENV)) {
 }
 
 const getTokenSettings = (tokenType) => {
-  let settings = {};
+  let tokenSettings = {};
 
   switch (tokenType) {
     case "access":
-      settings.options = jwt_values.access_options;
-      settings.secret = process.env.JWT_ACCESS_TOKEN_SECRET;
+      tokenSettings.options = jwt_values.access_options;
+      tokenSettings.secret = process.env.JWT_ACCESS_TOKEN_SECRET;
       break;
     case "refresh":
-      settings.options = jwt_values.refresh_options;
-      settings.secret = process.env.JWT_REFRESH_TOKEN_SECRET;
+      tokenSettings.options = jwt_values.refresh_options;
+      tokenSettings.secret = process.env.JWT_REFRESH_TOKEN_SECRET;
       break;
   }
-  return settings;
+  return tokenSettings;
 };
 
 const generateToken = (data) => {

@@ -1,9 +1,11 @@
 const cors = require("cors");
+const { createCipheriv } = require("crypto");
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
 
 const dbConnect = require("./config/elephantSql/elephantConnect");
+// const redisConnect = require("./config/redis/redisConnect");
 
 // Config imports
 const rootDir = path.dirname(__dirname);
@@ -24,13 +26,18 @@ let corsOptions = {
 app.use(cors(corsOptions));
 
 const dbase = dbConnect();
-
 dbase
   .authenticate()
   .then(() => console.log("DB connected"))
   .catch((err) => {
     console.error(err);
   });
+
+// try {
+//   redisConnect().then(() => console.log("Redis connected"));
+// } catch (err) {
+//   console.error(err);
+// }
 
 // Routes;
 app.use("/v1/auth", authApi);

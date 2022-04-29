@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 
 const findUser = require("../../controllers/user/findUser");
 const jsonResponse = require("../../../helpers/jsonResponse");
+const redisUtils = require("../../../helpers/auth/redisUtils");
 const tokenUtils = require("../../../helpers/auth/tokenUtils");
 
 const loginUser = async (data) => {
@@ -30,6 +31,7 @@ const loginUser = async (data) => {
   const sessionData = tokenUtils.generateToken(accessTokenParams);
   const refreshData = tokenUtils.generateToken(refreshTokenParams);
   response = jsonResponse(200, "", sessionData);
+  await redisUtils.setRefreshToken(refreshData);
   return response;
 };
 
