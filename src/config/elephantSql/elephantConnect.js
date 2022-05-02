@@ -19,6 +19,7 @@ const elephantConnect = () => {
     password: process.env.ELEPHANTSQL_PASSWORD,
     dbname: process.env.ELEPHANTSQL_DB,
     dialect: process.env.ELEPHANTSQL_DIALECT,
+    keepAlive:true,
     pool: {
       max: parseInt(process.env.ELEPHANTSQL_POOL_MAX),
       min: parseInt(process.env.ELEPHANTSQL_POOL_MIN),
