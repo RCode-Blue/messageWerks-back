@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: v1/api/users.js</title>
+    <title>JSDoc: Source: helpers/auth/redisUtils.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: v1/api/users.js</h1>
+    <h1 class="page-title">Source: helpers/auth/redisUtils.js</h1>
 
     
 
@@ -27,56 +27,56 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @description Express routes for User &lt;br>
- * GET    /users/all:    Get all users &lt;br>
- * GET    /users/id:     Get a user by ID &lt;br>
- * POST   /users/create: Create a new user &lt;br>
- * PATCH  /users/edit:   Edit user details &lt;br>
- * DELETE /users/delete: Delete a user
+ * @description Utilities for working with Redis
+ * @name redisUtils
  *
- * @module routes/users
- * @requires express
+ * @module
+ * @requires {object} appSettings - Application settings
  */
 
-const express = require("express");
-const router = express.Router();
+const appSettings = require("../../config/appSettings.json");
+const redisClient = require("../../config/redis/redisConnect");
 
-const deleteUser = require("../controllers/user/deleteUser");
-const findUsers = require("../controllers/user/findUser");
-const getAllUsers = require("../controllers/user/getAllUsers");
-const patchUser = require("../controllers/user/patchUser");
-const postUser = require("../controllers/user/postUser");
+// const redis = require("redis");
+// const redisConnect = require("../../config/redis/redisConnect");
 
-router.get("/all", async (req, res) => {
-  let response = await getAllUsers();
-  res.status(response.status).json(response);
-});
+const getRefreshToken = async () => {};
 
-router.get("/uuid", async (req, res) => {
-  const uuid = req.body.uuid;
-  let response = await findUsers.byUuid(uuid);
-  res.status(response.status).json(response);
-});
+/**
+ * @description Saves refresh token to Redis database
+ * @name setRefreshToken
+ *
+ * @function
+ * @param {object} refreshData
+ * @param {integer} refreshData.role - User role
+ * @param {string} refreshData.uuid - UUID for the user account (generated at creation)
+ * @param {string} refreshData.project_id - Project ID (defined in application settings)
+ * @param {string} refreshData.token - Refresh token
+ *
+ * @returns {string} "OK" if successful, error message if not
+ */
+const setRefreshToken = async (refreshData) => {
+  const { role, uuid, project_id, token: refreshToken } = refreshData;
 
-router.post("/create", async (req, res) => {
-  const user = req.body;
-  let response = await postUser(user);
-  res.status(response.status).json(response);
-});
+  const refreshKey = `${project_id}_${uuid}`;
+  const refreshValue = refreshToken;
+  const refreshDuration = appSettings.jwt_values.refresh_options.expiresIn;
 
-router.patch("/edit", async (req, res) => {
-  const userData = req.body;
-  let response = await patchUser(userData);
-  res.status(response.status).json(response);
-});
+  const client = await redisClient();
+  await client.connect();
 
-router.delete("/remove", async (req, res) => {
-  const userData = req.body;
-  let response = await deleteUser(userData);
-  res.status(response.status).json(response);
-});
+  client.on("error", (error) => {
+    console.error("Error: ", error);
+  });
+  client.on("connect", () => {
+    console.log("Redis Connected!");
+  });
 
-module.exports = router;
+  let msg = await client.setEx(refreshKey, refreshDuration, refreshValue);
+  return msg;
+};
+
+module.exports = { getRefreshToken, setRefreshToken };
 </code></pre>
         </article>
     </section>

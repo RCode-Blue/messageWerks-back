@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: routes/users</title>
+    <title>JSDoc: Source: helpers/jsonResponse.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,143 +17,44 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: routes/users</h1>
+    <h1 class="page-title">Source: helpers/jsonResponse.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>Express routes for User <br>
-GET    /users/all:    Get all users <br>
-GET    /users/id:     Get a user by ID <br>
-POST   /users/create: Create a new user <br>
-PATCH  /users/edit:   Edit user details <br>
-DELETE /users/delete: Delete a user</p></div>
-        
-
-        
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="v1_api_users.js.html">v1/api/users.js</a>, <a href="v1_api_users.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-    </div>
-
-    
-
-    
-        <h3 class="subsection-title">Requires</h3>
-
-        <ul>
-            <li>module:express</li>
-        </ul>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @description Returns a standardised JSON response based on a template
+ *
+ * @module
+ * @name jsonResponse
+ */
+/**
+ * @typedef jsonResponse
+ * @property {integer} code - HTTP response status code
+ * @property {string} message - Description of the HTTP response code
+ * @property {object} data - Data returned by callback
+ * @property {object} result - Additional information, eg: error message
+ */
+
+const jsonTemplates = require("../config/responseTemplates.json");
+
+const jsonResponse = (code, message = "", data = {}, result = {}) => {
+  let response = jsonTemplates[code];
+  response.message = message;
+  response.data = data;
+  response.result = result;
+
+  return response;
+};
+
+module.exports = jsonResponse;
+</code></pre>
+        </article>
+    </section>
 
 
 

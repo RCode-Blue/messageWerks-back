@@ -16,9 +16,10 @@
  * @returns {jsonResponse} Standardised JSON object
  */
 
-const User = require("../../../models/User");
+// const User = require("../../../models/User");
+const User = require("../../../models").user;
 
-const pgResponse = require("../../../helpers/jsonResponse");
+const jsonResponse = require("../../../helpers/jsonResponse");
 
 const patchUser = async (userData) => {
   const { uuid } = userData;
@@ -33,9 +34,9 @@ const patchUser = async (userData) => {
       where: { uuid },
       returning: true,
     });
-    response = pgResponse(200, "", result);
+    response = jsonResponse(200, "", result);
   } catch (error) {
-    response = pgResponse(400, "", "", { error });
+    response = jsonResponse(400, "", "", { error });
   }
 
   return response;

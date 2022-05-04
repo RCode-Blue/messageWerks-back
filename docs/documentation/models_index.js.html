@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: routes/users</title>
+    <title>JSDoc: Source: models/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,143 +17,38 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: routes/users</h1>
+    <h1 class="page-title">Source: models/index.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>Express routes for User <br>
-GET    /users/all:    Get all users <br>
-GET    /users/id:     Get a user by ID <br>
-POST   /users/create: Create a new user <br>
-PATCH  /users/edit:   Edit user details <br>
-DELETE /users/delete: Delete a user</p></div>
-        
-
-        
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="v1_api_users.js.html">v1/api/users.js</a>, <a href="v1_api_users.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-    </div>
-
-    
-
-    
-        <h3 class="subsection-title">Requires</h3>
-
-        <ul>
-            <li>module:express</li>
-        </ul>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @description Sequelize initialization&lt;br>
+ * All controller models are referenced to this module
+ * All model relationships are declared here
+ * @name Models
+ *
+ * @requires Sequelize
+ * @returns {object} AN object containing all declared models
+ */
+
+const dbConnect = require("../config/elephantSql/elephantConnect");
+const Sequelize = require("sequelize");
+const sequelize = dbConnect();
+
+const user = require("./User");
+
+const db = {};
+db.user = user(sequelize, Sequelize);
+
+module.exports = db;
+</code></pre>
+        </article>
+    </section>
 
 
 

@@ -4,8 +4,7 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 
-const dbConnect = require("./config/elephantSql/elephantConnect");
-// const redisConnect = require("./config/redis/redisConnect");
+const elephantConnect = require("./config/elephantSql/elephantConnect");
 
 // Config imports
 const rootDir = path.dirname(__dirname);
@@ -19,25 +18,20 @@ const usersApi = require("./v1/api/users");
 const app = express();
 app.use(express.json());
 
-// Configurations
+// Configuration - CORS
 let corsOptions = {
   origin: process.env.CORS_ORIGIN,
 };
 app.use(cors(corsOptions));
 
-const dbase = dbConnect();
-dbase
+// Configuration - Sequelize
+const sequelize = elephantConnect();
+sequelize
   .authenticate()
-  .then(() => console.log("DB connected"))
+  .then(() => console.log("Sequelize connection successful"))
   .catch((err) => {
-    console.error(err);
+    console.error("Sequelize connection error: ", err);
   });
-
-// try {
-//   redisConnect().then(() => console.log("Redis connected"));
-// } catch (err) {
-//   console.error(err);
-// }
 
 // Routes;
 app.use("/v1/auth", authApi);

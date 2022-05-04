@@ -19,7 +19,8 @@
 const bcrypt = require("bcrypt");
 const fs = require("fs");
 const path = require("path");
-const User = require("../../../models/User");
+// const User = require("../../../models/User");
+const User = require("../../../models").user;
 
 const pgResponse = require("../../../helpers/jsonResponse");
 

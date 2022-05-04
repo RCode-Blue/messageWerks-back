@@ -6,12 +6,12 @@
  * @name deleteUser
  * @requires jsonResponse
  * @param {object} User  - User data
- * @param {object} User.uuid  - User uuid
+ * @param {string} User.uuid  - User uuid
  * @returns {jsonResponse} Standardised JSON object
  */
 
-const User = require("../../../models/User");
-const pgResponse = require("../../../helpers/jsonResponse");
+const User = require("../../../models").user;
+const jsonResponse = require("../../../helpers/jsonResponse");
 
 const deleteUser = async (userData) => {
   const { uuid } = userData;
@@ -20,9 +20,9 @@ const deleteUser = async (userData) => {
     let result = await User.destroy({
       where: { uuid },
     });
-    response = pgResponse(200, "", result);
+    response = jsonResponse(200, "", result);
   } catch (error) {
-    response = pgResponse(400, "", "", { error });
+    response = jsonResponse(400, "", "", { error });
   }
   return response;
 };

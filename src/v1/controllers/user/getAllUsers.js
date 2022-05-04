@@ -7,12 +7,9 @@
  * @returns {jsonResponse} Standardised JSON object with a list of all users, or error message
  */
 
-const dbConnect = require("../../../config/elephantSql/elephantConnect");
-const pgResponse = require("../../../helpers/jsonResponse");
+const jsonResponse = require("../../../helpers/jsonResponse");
 
-const User = require("../../../models/User");
-
-const db = dbConnect();
+const User = require("../../../models").user;
 
 const getAllUsers = async () => {
   let response;
@@ -28,9 +25,9 @@ const getAllUsers = async () => {
     let result = await User.findAll({
       attributes,
     });
-    response = pgResponse(200, "", result);
+    response = jsonResponse(200, "", result);
   } catch (error) {
-    response = pgResponse(400, "", "", { error });
+    response = jsonResponse(400, "", "", { error });
   }
   return response;
 };

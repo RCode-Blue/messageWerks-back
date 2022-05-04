@@ -33,6 +33,14 @@ To generate the documents using JSDoc, run `npm run jsdoc` in project root. The 
 
 ### API Endpoints
 
+- `/auth`: Login and user authorisation
+
+- `/users`: User model access
+  - `/all`: Gets all users
+  - `/uuid`: Gets user by UUID
+  - `/create`: Creates new user
+  - `/edit`: Edits user account properties
+  - `/remove`: Deletes a user
 
 ### Authentication
 

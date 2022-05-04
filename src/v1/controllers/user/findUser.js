@@ -2,20 +2,17 @@
  * @description User search functions
  *
  * @module
- * @name findUsers
+ * @name findUser
  * @requires dbConnect
  * @requires jsonResponse
  */
 
-const dbConnect = require("../../../config/elephantSql/elephantConnect");
 const jsonResponse = require("../../../helpers/jsonResponse");
-
-const User = require("../../../models/User");
-
-const db = dbConnect();
+const User = require("../../../models").user;
 
 /**
  * @description GET a User by Primary Key
+ * @name byId
  *
  * @function
  * @param {string} id - Row id for the user
@@ -46,6 +43,7 @@ const byId = async (id) => {
 
 /**
  * @description GET a User by UUID
+ * @name byUuid
  *
  * @function
  * @param {string} uuid - UUID for the user
@@ -64,6 +62,7 @@ const byUuid = async (uuid) => {
 
 /**
  * @description GET a User by email
+ * @name byEmail
  *
  * @function
  * @param {string} email - User's email

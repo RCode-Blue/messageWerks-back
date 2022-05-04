@@ -13,6 +13,7 @@
     "checkJs": true,
     "recurse": true,
     "destination": "./docs/documentation/",
-    "tutorials": "./docs/tutorials"
+    "tutorials": "./docs/tutorials",
+    "readme": "./README.md"
   }
 }

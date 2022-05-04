@@ -1,9 +1,32 @@
+/**
+ * @description Utilities for working with Redis
+ * @name redisUtils
+ *
+ * @module
+ * @requires {object} appSettings - Application settings
+ */
+
 const appSettings = require("../../config/appSettings.json");
 const redisClient = require("../../config/redis/redisConnect");
 
-const redis = require("redis");
-const redisConnect = require("../../config/redis/redisConnect");
+// const redis = require("redis");
+// const redisConnect = require("../../config/redis/redisConnect");
 
+const getRefreshToken = async () => {};
+
+/**
+ * @description Saves refresh token to Redis database
+ * @name setRefreshToken
+ *
+ * @function
+ * @param {object} refreshData
+ * @param {integer} refreshData.role - User role
+ * @param {string} refreshData.uuid - UUID for the user account (generated at creation)
+ * @param {string} refreshData.project_id - Project ID (defined in application settings)
+ * @param {string} refreshData.token - Refresh token
+ *
+ * @returns {string} "OK" if successful, error message if not
+ */
 const setRefreshToken = async (refreshData) => {
   const { role, uuid, project_id, token: refreshToken } = refreshData;
 
@@ -12,20 +35,7 @@ const setRefreshToken = async (refreshData) => {
   const refreshDuration = appSettings.jwt_values.refresh_options.expiresIn;
 
   const client = await redisClient();
-  // console.log(client);
   await client.connect();
-
-  // const client = redis.createClient({
-  //   host: "127.0.0.1",
-  //   port: 6379,
-  //   password: "",
-  // });
-
-  // const client = await redisConnect().client;
-
-  // console.log(client);
-
-  // await client.connect();
 
   client.on("error", (error) => {
     console.error("Error: ", error);
@@ -35,6 +45,7 @@ const setRefreshToken = async (refreshData) => {
   });
 
   let msg = await client.setEx(refreshKey, refreshDuration, refreshValue);
+  return msg;
 };
 
-module.exports = { setRefreshToken };
+module.exports = { getRefreshToken, setRefreshToken };

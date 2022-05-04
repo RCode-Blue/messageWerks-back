@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: postUser</title>
+    <title>JSDoc: Module: redisUtils</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: postUser</h1>
+    <h1 class="page-title">Module: redisUtils</h1>
 
     
 
@@ -38,15 +38,128 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Handles POST request for a User.
-<br> Creates new user.
-<br> UUID for User is generated automatically</p></div>
+            <div class="description"><p>Utilities for working with Redis</p></div>
         
 
         
             
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helpers_auth_redisUtils.js.html">helpers/auth/redisUtils.js</a>, <a href="helpers_auth_redisUtils.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+        <h3 class="subsection-title">Requires</h3>
+
+        <ul>
+            <li>module:{object}</li>
+        </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~setRefreshToken"><span class="type-signature">(inner) </span>setRefreshToken<span class="signature">(refreshData)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Saves refresh token to Redis database</p>
+</div>
 
 
 
@@ -81,7 +194,7 @@
 
         <tr>
             
-                <td class="name"><code>User</code></td>
+                <td class="name"><code>refreshData</code></td>
             
 
             <td class="type">
@@ -97,7 +210,7 @@
 
             
 
-            <td class="description last"><p>User data</p>
+            <td class="description last">
                 <h6>Properties</h6>
                 
 
@@ -119,29 +232,6 @@
     </thead>
 
     <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>email</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>User email</p></td>
-        </tr>
-
     
 
         <tr>
@@ -169,7 +259,7 @@
 
         <tr>
             
-                <td class="name"><code>first_name</code></td>
+                <td class="name"><code>uuid</code></td>
             
 
             <td class="type">
@@ -185,14 +275,14 @@
 
             
 
-            <td class="description last"><p>User first name</p></td>
+            <td class="description last"><p>UUID for the user account (generated at creation)</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>last_name</code></td>
+                <td class="name"><code>project_id</code></td>
             
 
             <td class="type">
@@ -208,14 +298,14 @@
 
             
 
-            <td class="description last"><p>User last name</p></td>
+            <td class="description last"><p>Project ID (defined in application settings)</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>password</code></td>
+                <td class="name"><code>token</code></td>
             
 
             <td class="type">
@@ -231,7 +321,7 @@
 
             
 
-            <td class="description last"><p>User password</p></td>
+            <td class="description last"><p>Refresh token</p></td>
         </tr>
 
     
@@ -279,7 +369,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="v1_controllers_user_postUser.js.html">v1/controllers/user/postUser.js</a>, <a href="v1_controllers_user_postUser.js.html#line1">line 1</a>
+        <a href="helpers_auth_redisUtils.js.html">helpers/auth/redisUtils.js</a>, <a href="helpers_auth_redisUtils.js.html#line17">line 17</a>
     </li></ul></dd>
     
 
@@ -308,7 +398,7 @@
 
         
 <div class="param-desc">
-    <p>Standardised JSON object</p>
+    <p>&quot;OK&quot; if successful, error message if not</p>
 </div>
 
 
@@ -319,7 +409,7 @@
     </dt>
     <dd>
         
-<span class="param-type">jsonResponse</span>
+<span class="param-type">string</span>
 
 
     </dd>
@@ -332,29 +422,6 @@
 
 
         
-    
-    </div>
-
-    
-
-    
-        <h3 class="subsection-title">Requires</h3>
-
-        <ul>
-            <li><a href="module-jsonResponse.html">module:jsonResponse</a></li>
-        </ul>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
     
 
     
