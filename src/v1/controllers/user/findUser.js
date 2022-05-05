@@ -50,12 +50,13 @@ const byId = async (id) => {
  * @returns {jsonResponse} Standardised JSON object containing User object, or error
  */
 const byUuid = async (uuid) => {
+  console.log("UUID: ", uuid);
   let response;
   try {
-    let result = await User.findOne({ where: { uuid } });
+    let result = await User.findOne({ where: { uuid: uuid } });
     response = jsonResponse(200, "", result);
   } catch (error) {
-    response = jsonResponse(400, "", "", { error: error });
+    response = jsonResponse(400, "", "", { error });
   }
   return response;
 };

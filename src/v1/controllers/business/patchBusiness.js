@@ -1,37 +1,17 @@
-/**
- * @description Handles PATCH requests for a User.
- * <br> Edits existing user data, except for password.
- * <br> User is located based on uuid.
- *
- * @module
- * @name patchUser
- * @requires jsonResponse
- * @param {object} User - User data
- * @param {string} [User.email] - User email
- * @param {string} [User.uuid] - User uuid
- * @param {integer} [User.role] - User role
- * @param {string} [User.first_name] - User first name
- * @param {string} [User.last_name ] - User last name
- *
- * @returns {jsonResponse} Standardised JSON object
- */
+const Business = require("../../../models").business;
 
-const User = require("../../../models").user;
-
-const findBusiness = require("../business/findBusiness");
-const findUser = require("./findUser");
 const jsonResponse = require("../../../helpers/jsonResponse");
 
-const editUser = async (userData) => {
-  const { uuid } = userData;
-  delete userData.uuid;
-  if (userData.password) {
-    delete userData.password;
-  }
+const editBusiness = async (businessData) => {
+  const { uuid } = businessData;
+
+  console.log("data: ", businessData);
+
+  delete businessData.uuid;
   let response;
   try {
-    await User.sync();
-    let result = await User.update(userData, {
+    await Business.sync();
+    let result = await Business.update(businessData, {
       where: { uuid },
       returning: true,
     });
@@ -39,12 +19,11 @@ const editUser = async (userData) => {
   } catch (error) {
     response = jsonResponse(400, "", "", { error });
   }
-
   return response;
 };
 
-const linkBusiness = async (linkData) => {
-  let user, business, response;
+const linkUser = async (linkData) => {
+  let business, user, response;
   const { user_uuid, business_uuid, transactionType } = linkData;
   // Note: transactions can be either "add" or "remove"
 
@@ -61,10 +40,10 @@ const linkBusiness = async (linkData) => {
       business = businessSearchResult.data;
       try {
         if (transactionType === "add") {
-          let linkResult = await user.addBusinesses(business);
+          let linkResult = await business.addUser(user);
           response = jsonResponse(200, "", linkResult);
         } else if (transactionType === "remove") {
-          let linkResult = await user.removeBusinesses(business);
+          let linkResult = await business.removeUser(user);
           response = jsonResponse(200, "", linkResult);
         }
       } catch (error) {
@@ -76,4 +55,4 @@ const linkBusiness = async (linkData) => {
   return response;
 };
 
-module.exports = { editUser, linkBusiness };
+module.exports = { editBusiness, linkUser };

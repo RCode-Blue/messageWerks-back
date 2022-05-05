@@ -8,6 +8,7 @@
  */
 
 const jsonResponse = require("../../../helpers/jsonResponse");
+const { business } = require("../../../models");
 
 const User = require("../../../models").user;
 
@@ -21,9 +22,27 @@ const getAllUsers = async () => {
     "last_name",
     "password",
   ];
+  let include = [
+    {
+      model: business,
+      as: "businesses",
+      attributes: [
+        "name",
+        "address_line1",
+        "address_line2",
+        "suburb",
+        "state",
+        "country",
+        "postcode",
+        "uuid",
+        "id",
+      ],
+    },
+  ];
   try {
     let result = await User.findAll({
       attributes,
+      include,
     });
     response = jsonResponse(200, "", result);
   } catch (error) {

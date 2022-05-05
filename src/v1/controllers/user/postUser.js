@@ -19,10 +19,9 @@
 const bcrypt = require("bcrypt");
 const fs = require("fs");
 const path = require("path");
-// const User = require("../../../models/User");
 const User = require("../../../models").user;
 
-const pgResponse = require("../../../helpers/jsonResponse");
+const jsonResponse = require("../../../helpers/jsonResponse");
 
 // Config imports
 const rootDir = path.dirname(__dirname);
@@ -44,9 +43,9 @@ const postUser = async (data) => {
   try {
     await User.sync();
     let result = await User.create(data);
-    response = pgResponse(200, "", result);
+    response = jsonResponse(200, "", result);
   } catch (error) {
-    response = pgResponse(400, "", "", { error });
+    response = jsonResponse(400, "", "", { error });
   }
   return response;
 };

@@ -12,9 +12,23 @@ const dbConnect = require("../config/elephantSql/elephantConnect");
 const Sequelize = require("sequelize");
 const sequelize = dbConnect();
 
+const business = require("./Business");
 const user = require("./User");
 
 const db = {};
 db.user = user(sequelize, Sequelize);
+db.business = business(sequelize, Sequelize);
+
+db.user.belongsToMany(db.business, {
+  through: "business_user",
+  as: "businesses",
+  foreignKey: "user_id",
+});
+
+db.business.belongsToMany(db.user, {
+  through: "business_user",
+  as: "users",
+  foreignKey: "business_id",
+});
 
 module.exports = db;

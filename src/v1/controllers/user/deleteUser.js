@@ -1,12 +1,12 @@
 /**
- * @description Handles DELETE request for a user
- * <br> Deletes an existing user
+ * @description Handles DELETE request for a User
+ * <br> Deletes an existing User
  *
  * @module
  * @name deleteUser
  * @requires jsonResponse
- * @param {object} User  - User data
- * @param {string} User.uuid  - User uuid
+ * @param {object} userData  - User data
+ * @param {string} userData.uuid  - User uuid
  * @returns {jsonResponse} Standardised JSON object
  */
 
@@ -20,7 +20,11 @@ const deleteUser = async (userData) => {
     let result = await User.destroy({
       where: { uuid },
     });
-    response = jsonResponse(200, "", result);
+    // response = jsonResponse(200, "", result);
+    response =
+      result === 0
+        ? jsonResponse(404, "User not found")
+        : jsonResponse(200, "", result);
   } catch (error) {
     response = jsonResponse(400, "", "", { error });
   }

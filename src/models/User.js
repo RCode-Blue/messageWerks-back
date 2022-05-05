@@ -13,7 +13,7 @@
  */
 
 const userModel = (sequelize, DataTypes) => {
-  const User = sequelize.define("users", {
+  const User = sequelize.define("user", {
     email: {
       type: DataTypes.STRING,
       unique: true,
