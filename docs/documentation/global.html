@@ -98,6 +98,130 @@
 
         
             
+<h4 class="name" id="jsonResponse"><span class="type-signature">(constant) </span>jsonResponse<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>Business search options</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="v1_controllers_business_findBusiness.js.html">v1/controllers/business/findBusiness.js</a>, <a href="v1_controllers_business_findBusiness.js.html#line9">line 9</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="jsonResponse"><span class="type-signature">(constant) </span>jsonResponse<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>Handles GET requests to get all Businesses</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="v1_controllers_business_getAllBusinesses.js.html">v1/controllers/business/getAllBusinesses.js</a>, <a href="v1_controllers_business_getAllBusinesses.js.html#line9">line 9</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
 <h4 class="name" id="Models"><span class="type-signature"></span>Models<span class="type-signature"></span></h4>
 
 
@@ -225,6 +349,169 @@ All model relationships are declared here</p>
         
     
 
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="byUuid"><span class="type-signature"></span>byUuid<span class="signature">(uuid)</span><span class="type-signature"> &rarr; {<a href="global.html#jsonResponse">jsonResponse</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>GET a Business by UUID</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>uuid</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>UUID for the Business</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="v1_controllers_business_findBusiness.js.html">v1/controllers/business/findBusiness.js</a>, <a href="v1_controllers_business_findBusiness.js.html#line13">line 13</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Standardised JSON object containing Business object, or error</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="global.html#jsonResponse">jsonResponse</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
@@ -469,13 +756,13 @@ All model relationships are declared here</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-deleteUser.html">deleteUser</a></li><li><a href="module-elephantConnect.html">elephantConnect</a></li><li><a href="module-findUser.html">findUser</a></li><li><a href="module-getAllUsers.html">getAllUsers</a></li><li><a href="module-jsonResponse.html">jsonResponse</a></li><li><a href="module-patchUser.html">patchUser</a></li><li><a href="module-postUser.html">postUser</a></li><li><a href="module-redisUtils.html">redisUtils</a></li><li><a href="module-routes_users.html">routes/users</a></li><li><a href="module-tokenUtils.html">tokenUtils</a></li></ul><h3>Externals</h3><ul><li><a href="external-jwt.html">jwt</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Models">Models</a></li><li><a href="global.html#User">User</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-businessUserModel.html">businessUserModel</a></li><li><a href="module-deleteBusiness.html">deleteBusiness</a></li><li><a href="module-deleteUser.html">deleteUser</a></li><li><a href="module-elephantConnect.html">elephantConnect</a></li><li><a href="module-findUser.html">findUser</a></li><li><a href="module-getAllUsers.html">getAllUsers</a></li><li><a href="module-jsonResponse.html">jsonResponse</a></li><li><a href="module-patchUser.html">patchUser</a></li><li><a href="module-postBusiness.html">postBusiness</a></li><li><a href="module-postUser.html">postUser</a></li><li><a href="module-redisUtils.html">redisUtils</a></li><li><a href="module-routes_businesses.html">routes/businesses</a></li><li><a href="module-routes_users.html">routes/users</a></li><li><a href="module-tokenUtils.html">tokenUtils</a></li></ul><h3>Externals</h3><ul><li><a href="external-jwt.html">jwt</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-discussions.html">discussions</a></li></ul><h3>Global</h3><ul><li><a href="global.html#byUuid">byUuid</a></li><li><a href="global.html#jsonResponse">jsonResponse</a></li><li><a href="global.html#Models">Models</a></li><li><a href="global.html#User">User</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Wed May 04 2022 21:47:59 GMT+1000 (Australian Eastern Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri May 06 2022 13:24:42 GMT+1000 (Australian Eastern Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -1,10 +1,16 @@
-const jsonResponse = require("../../../helpers/jsonResponse");
+/**
+ * @description Handles GET requests to get all Businesses
+ *
+ * @module@name getAllBusinesses
+ * @requires jsonResponse
+ * @returns {jsonResponse} Standardised JSON object with a list of all businesses, or error message
+ */
 
+const jsonResponse = require("../../../helpers/jsonResponse");
 const Business = require("../../../models").business;
 
 const getAllBusinesses = async () => {
   let response;
-
   const attributes = [
     "id",
     "name",

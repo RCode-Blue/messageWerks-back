@@ -2,9 +2,10 @@
  * @description Express routes for User <br>
  * Endpoints:<br>
  * GET    /users/all - Get all users <br>
- * GET    /users/id - Get a user by ID <br>
- * POST   /users/create - Create a new user <br>
+ * GET    /users/id - Get a user by UUID <br>
+ * POST   /users/new - Create a new user <br>
  * PATCH  /users/edit - Edit user details <br>
+ * PATCH  /users/link - Create or remove a link between a user and a business
  * DELETE /users/delete - Delete a user
  *
  * @module routes/users
@@ -20,7 +21,7 @@ const getAllUsers = require("../controllers/user/getAllUsers");
 const patchUser = require("../controllers/user/patchUser");
 const postUser = require("../controllers/user/postUser");
 
-const businessUserModel = require("../middleware/models/businessUserModel");
+const businessUserModel = require("../middleware/models/businessUserModelUtils");
 
 router.get("/all", async (req, res) => {
   let response = await getAllUsers();
@@ -33,7 +34,7 @@ router.get("/uuid", async (req, res) => {
   res.status(response.status).json(response);
 });
 
-router.post("/create", async (req, res) => {
+router.post("/new", async (req, res) => {
   const user = req.body;
   let response = await postUser(user);
   res.status(response.status).json(response);

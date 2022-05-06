@@ -1,6 +1,6 @@
 /**
  * @description Handles POST request for a User.
- * <br> Creates new user.
+ * <br> Creates new User.
  * <br> UUID for User is generated automatically
  *
  * @module

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: redisUtils</title>
+    <title>JSDoc: Module: postBusiness</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: redisUtils</h1>
+    <h1 class="page-title">Module: postBusiness</h1>
 
     
 
@@ -38,128 +38,15 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Utilities for working with Redis</p></div>
+            <div class="description"><p>Handles POST request for a Business.
+<br> Creates new Business.
+<br> UUID for Business is generated automatically</p></div>
         
 
         
             
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helpers_auth_redisUtils.js.html">helpers/auth/redisUtils.js</a>, <a href="helpers_auth_redisUtils.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-    </div>
-
-    
-
-    
-        <h3 class="subsection-title">Requires</h3>
-
-        <ul>
-            <li>module:{object}</li>
-        </ul>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~setRefreshToken"><span class="type-signature">(inner) </span>setRefreshToken<span class="signature">(refreshData)</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Saves refresh token to Redis database</p>
-</div>
 
 
 
@@ -194,7 +81,7 @@
 
         <tr>
             
-                <td class="name"><code>refreshData</code></td>
+                <td class="name"><code>businessData</code></td>
             
 
             <td class="type">
@@ -210,7 +97,7 @@
 
             
 
-            <td class="description last">
+            <td class="description last"><p>User data</p>
                 <h6>Properties</h6>
                 
 
@@ -236,30 +123,7 @@
 
         <tr>
             
-                <td class="name"><code>role</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">integer</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>User role</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>uuid</code></td>
+                <td class="name"><code>address_line1</code></td>
             
 
             <td class="type">
@@ -275,14 +139,14 @@
 
             
 
-            <td class="description last"><p>UUID for the user account (generated at creation)</p></td>
+            <td class="description last"><p>Business address line 1</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>project_id</code></td>
+                <td class="name"><code>address_line2</code></td>
             
 
             <td class="type">
@@ -298,14 +162,14 @@
 
             
 
-            <td class="description last"><p>Project ID (defined in application settings)</p></td>
+            <td class="description last"><p>Business address line 2</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>token</code></td>
+                <td class="name"><code>suburb</code></td>
             
 
             <td class="type">
@@ -321,7 +185,76 @@
 
             
 
-            <td class="description last"><p>Refresh token</p></td>
+            <td class="description last"><p>Business address suburb</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Business address state</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>country</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Business address country</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>postcode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Business address postcode</p></td>
         </tr>
 
     
@@ -369,7 +302,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helpers_auth_redisUtils.js.html">helpers/auth/redisUtils.js</a>, <a href="helpers_auth_redisUtils.js.html#line17">line 17</a>
+        <a href="v1_controllers_business_postBusiness.js.html">v1/controllers/business/postBusiness.js</a>, <a href="v1_controllers_business_postBusiness.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -398,7 +331,7 @@
 
         
 <div class="param-desc">
-    <p>&quot;OK&quot; if successful, error message if not</p>
+    <p>Standardised JSON object</p>
 </div>
 
 
@@ -409,7 +342,7 @@
     </dt>
     <dd>
         
-<span class="param-type">string</span>
+<span class="param-type"><a href="global.html#jsonResponse">jsonResponse</a></span>
 
 
     </dd>
@@ -422,6 +355,29 @@
 
 
         
+    
+    </div>
+
+    
+
+    
+        <h3 class="subsection-title">Requires</h3>
+
+        <ul>
+            <li><a href="module-jsonResponse.html">module:jsonResponse</a></li>
+        </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
     
 
     

@@ -15,6 +15,7 @@ if (fs.existsSync(path.join(rootDir) + "/.env." + process.env.NODE_ENV)) {
 const authApi = require("./v1/api/auth");
 const businessesApi = require("./v1/api/businesses");
 const usersApi = require("./v1/api/users");
+const testApi = require("./v1/api/test");
 
 const app = express();
 app.use(express.json());
@@ -38,6 +39,7 @@ sequelize
 app.use("/v1/auth", authApi);
 app.use("/v1/businesses", businessesApi);
 app.use("/v1/users", usersApi);
+app.use("/v1/test", testApi);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

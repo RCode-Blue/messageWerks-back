@@ -3,7 +3,7 @@
  *
  * @module
  * @name findUser
- * @requires dbConnect
+ * @requires User
  * @requires jsonResponse
  */
 

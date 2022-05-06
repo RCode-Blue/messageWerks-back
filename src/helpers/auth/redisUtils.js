@@ -9,9 +9,6 @@
 const appSettings = require("../../config/appSettings.json");
 const redisClient = require("../../config/redis/redisConnect");
 
-// const redis = require("redis");
-// const redisConnect = require("../../config/redis/redisConnect");
-
 const getRefreshToken = async () => {};
 
 /**
@@ -28,9 +25,9 @@ const getRefreshToken = async () => {};
  * @returns {string} "OK" if successful, error message if not
  */
 const setRefreshToken = async (refreshData) => {
-  const { role, uuid, project_id, token: refreshToken } = refreshData;
+  const { uuid, project_id, token: refreshToken } = refreshData;
 
-  const refreshKey = `${project_id}_${uuid}`;
+  const refreshKey = `${project_id}:${uuid}`;
   const refreshValue = refreshToken;
   const refreshDuration = appSettings.jwt_values.refresh_options.expiresIn;
 
@@ -41,7 +38,7 @@ const setRefreshToken = async (refreshData) => {
     console.error("Error: ", error);
   });
   client.on("connect", () => {
-    console.log("Redis Connected!");
+    console.log("Redis Connected");
   });
 
   let msg = await client.setEx(refreshKey, refreshDuration, refreshValue);

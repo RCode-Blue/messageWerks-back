@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: helpers/auth/tokenUtils.js</title>
+    <title>JSDoc: Source: v1/controllers/business/getAllBusinesses.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: helpers/auth/tokenUtils.js</h1>
+    <h1 class="page-title">Source: v1/controllers/business/getAllBusinesses.js</h1>
 
     
 
@@ -27,79 +27,43 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * JSON Web Token
- * @external jwt
- * @see {@link https://www.npmjs.com/package/jsonwebtoken}
- */
-
-/**
- * @description Utilities for working with JWT Tokens
- * @module
- * @name tokenUtils
+ * @description Handles GET requests to get all Businesses
  *
- * @requires external:jwt
+ * @module@name getAllBusinesses
+ * @requires jsonResponse
+ * @returns {jsonResponse} Standardised JSON object with a list of all businesses, or error message
  */
 
-const appRoot = require("app-root-path");
-const fs = require("fs");
-const jwt = require("jsonwebtoken");
-const path = require("path");
+const jsonResponse = require("../../../helpers/jsonResponse");
+const Business = require("../../../models").business;
 
-const appSettings = require("../../config/appSettings.json");
-const { jwt_values } = appSettings;
+const getAllBusinesses = async () => {
+  let response;
+  const attributes = [
+    "id",
+    "name",
+    "uuid",
+    "address_line1",
+    "address_line2",
+    "suburb",
+    "state",
+    "country",
+    "postcode",
+  ];
 
-// Config imports
-const rootPath = appRoot.path;
-if (fs.existsSync(path.join(rootPath) + "/.env." + process.env.NODE_ENV)) {
-  require("dotenv").config({
-    path: `${rootPath}/.env.${process.env.NODE_ENV}`,
-  });
-}
-
-const getTokenSettings = (tokenType) => {
-  let tokenSettings = {};
-
-  switch (tokenType) {
-    case "access":
-      tokenSettings.options = jwt_values.access_options;
-      tokenSettings.secret = process.env.JWT_ACCESS_TOKEN_SECRET;
-      break;
-    case "refresh":
-      tokenSettings.options = jwt_values.refresh_options;
-      tokenSettings.secret = process.env.JWT_REFRESH_TOKEN_SECRET;
-      break;
+  try {
+    let result = await Business.findAll({
+      attributes,
+    });
+    response = jsonResponse(200, "", result);
+  } catch (error) {
+    response = jsonResponse(400, "", "", { error });
   }
-  return tokenSettings;
+
+  return response;
 };
 
-/**
- * @description Generates a JWT token
- *
- * @function generateToken
- * @param {object} tokenRequestData
- * @param {integer} tokenRequestData.role - User role
- * @param {string} tokenRequestData.uuid - User UUID
- * @param {string} tokenRequestData.type - Type of token requested
- * @param {string} tokenRequestData.project_id - Project ID
- */
-const generateToken = (tokenRequestData) => {
-  const { role, uuid } = tokenRequestData.user;
-  const { type } = tokenRequestData;
-  const project_id = appSettings.project.project_id;
-  const payload = {
-    role,
-    uuid,
-    project_id,
-  };
-
-  const tokenSettings = getTokenSettings(type);
-
-  const token = jwt.sign(payload, tokenSettings.secret, tokenSettings.options);
-  payload.token.value = token;
-  return payload;
-};
-
-module.exports = { generateToken };
+module.exports = getAllBusinesses;
 </code></pre>
         </article>
     </section>

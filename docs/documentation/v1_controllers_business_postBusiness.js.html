@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: helpers/auth/tokenUtils.js</title>
+    <title>JSDoc: Source: v1/controllers/business/postBusiness.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: helpers/auth/tokenUtils.js</h1>
+    <h1 class="page-title">Source: v1/controllers/business/postBusiness.js</h1>
 
     
 
@@ -27,79 +27,39 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * JSON Web Token
- * @external jwt
- * @see {@link https://www.npmjs.com/package/jsonwebtoken}
- */
-
-/**
- * @description Utilities for working with JWT Tokens
+ * @description Handles POST request for a Business.
+ * &lt;br> Creates new Business.
+ * &lt;br> UUID for Business is generated automatically
+ *
  * @module
- * @name tokenUtils
+ * @name postBusiness
+ * @requires jsonResponse
+ * @param {object} businessData - User data
+ * @param {string} businessData.address_line1 - Business address line 1
+ * @param {string} businessData.address_line2 - Business address line 2
+ * @param {string} businessData.suburb - Business address suburb
+ * @param {string} businessData.state - Business address state
+ * @param {string} businessData.country - Business address country
+ * @param {string} businessData.postcode - Business address postcode
  *
- * @requires external:jwt
+ * @returns {jsonResponse} Standardised JSON object
  */
+const Business = require("../../../models").business;
+const jsonResponse = require("../../../helpers/jsonResponse");
 
-const appRoot = require("app-root-path");
-const fs = require("fs");
-const jwt = require("jsonwebtoken");
-const path = require("path");
-
-const appSettings = require("../../config/appSettings.json");
-const { jwt_values } = appSettings;
-
-// Config imports
-const rootPath = appRoot.path;
-if (fs.existsSync(path.join(rootPath) + "/.env." + process.env.NODE_ENV)) {
-  require("dotenv").config({
-    path: `${rootPath}/.env.${process.env.NODE_ENV}`,
-  });
-}
-
-const getTokenSettings = (tokenType) => {
-  let tokenSettings = {};
-
-  switch (tokenType) {
-    case "access":
-      tokenSettings.options = jwt_values.access_options;
-      tokenSettings.secret = process.env.JWT_ACCESS_TOKEN_SECRET;
-      break;
-    case "refresh":
-      tokenSettings.options = jwt_values.refresh_options;
-      tokenSettings.secret = process.env.JWT_REFRESH_TOKEN_SECRET;
-      break;
+const postBusiness = async (businessData) => {
+  let response;
+  try {
+    await Business.sync();
+    let result = await Business.create(businessData);
+    response = jsonResponse(200, "", result);
+  } catch (error) {
+    response = jsonResponse(400, "", "", { error });
   }
-  return tokenSettings;
+  return response;
 };
 
-/**
- * @description Generates a JWT token
- *
- * @function generateToken
- * @param {object} tokenRequestData
- * @param {integer} tokenRequestData.role - User role
- * @param {string} tokenRequestData.uuid - User UUID
- * @param {string} tokenRequestData.type - Type of token requested
- * @param {string} tokenRequestData.project_id - Project ID
- */
-const generateToken = (tokenRequestData) => {
-  const { role, uuid } = tokenRequestData.user;
-  const { type } = tokenRequestData;
-  const project_id = appSettings.project.project_id;
-  const payload = {
-    role,
-    uuid,
-    project_id,
-  };
-
-  const tokenSettings = getTokenSettings(type);
-
-  const token = jwt.sign(payload, tokenSettings.secret, tokenSettings.options);
-  payload.token.value = token;
-  return payload;
-};
-
-module.exports = { generateToken };
+module.exports = postBusiness;
 </code></pre>
         </article>
     </section>

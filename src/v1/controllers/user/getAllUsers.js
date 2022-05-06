@@ -1,5 +1,5 @@
 /**
- * @description Handles GET request to get all users
+ * @description Handles GET request to get all Users
  *
  * @module
  * @name getAllUsers

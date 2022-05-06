@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: config/elephantSql/elephantConnect.js</title>
+    <title>JSDoc: Module: businessUserModel</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,61 +17,235 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: config/elephantSql/elephantConnect.js</h1>
+    <h1 class="page-title">Module: businessUserModel</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @description
- * Creates an object for connection to a PostgreSQL database&lt;br>
- * Values are taken from app configuration settings and environmental variables
- *
- * @module
- * @name elephantConnect
- * @requires Sequelize
- * @returns {Sequelize} An instance of the Sequelize object with the required settings to connect to the database
- */
+        
+            
+        
+    
+</header>
 
-"use strict";
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Middleware for model transactions</p></div>
+        
 
-const fs = require("fs");
-const path = require("path");
-const Sequelize = require("sequelize");
-const appSettings = require("../../config/appSettings.json");
+        
+            
 
-const elephantConnect = () => {
-  const { project } = appSettings;
 
-  const rootDir = path.dirname(__dirname);
-  if (fs.existsSync(path.join(rootDir) + "/.env." + process.env.NODE_ENV)) {
-    require("dotenv").config({
-      path: `${rootDir}/.env.${process.env.NODE_ENV}`,
-    });
-  }
-  const dbname = process.env.ELEPHANTSQL_DB;
-  const host = process.env.ELEPHANTSQL_HOST;
-  const password = process.env.ELEPHANTSQL_PASSWORD;
-  const user = process.env.ELEPHANTSQL_USERID;
 
-  const settings = {
-    host,
-    ...project.sequelize,
-  };
 
-  const sequelize = new Sequelize(dbname, user, password, settings);
 
-  return sequelize;
-};
 
-module.exports = elephantConnect;
-</code></pre>
-        </article>
-    </section>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="v1_middleware_models_businessUserModel.js.html">v1/middleware/models/businessUserModel.js</a>, <a href="v1_middleware_models_businessUserModel.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~checkTransactionType"><span class="type-signature">(inner) </span>checkTransactionType<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Checks User - Business link transaction type <br>
+Verifies if transactionType is one af a set of predefined strings</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="v1_middleware_models_businessUserModel.js.html">v1/middleware/models/businessUserModel.js</a>, <a href="v1_middleware_models_businessUserModel.js.html#line11">line 11</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Error 400 if not, allows request to proceed if it is</p>
+</div>
+
+
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

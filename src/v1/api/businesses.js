@@ -1,3 +1,17 @@
+/**
+ * @description Express routes for Business <br>
+ * Endpoints:<br>
+ * GET    /businesses/all - Get all businesses <br>
+ * GET    /businesses/uuid - Get a business by uuid <br>
+ * POST   /businesses/new - Create a new business
+ * PATCH  /businesses/edit - Edit business details
+ * PATCH  /businesses/link - Create or remove a link between a business and a user
+ * DELETE /businesses/remove - Delete a Business
+ *
+ * @module routes/businesses
+ * @requires express
+ */
+
 const express = require("express");
 const router = express.Router();
 
@@ -7,7 +21,7 @@ const getAllBusinesses = require("../controllers/business/getAllBusinesses");
 const patchBusiness = require("../controllers/business/patchBusiness");
 const postBusiness = require("../controllers/business/postBusiness");
 
-const businessUserModel = require("../middleware/models/businessUserModel");
+const businessUserModel = require("../middleware/models/businessUserModelUtils");
 
 router.get("/all", async (req, res) => {
   let response = await getAllBusinesses();

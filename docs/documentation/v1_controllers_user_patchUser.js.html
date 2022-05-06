@@ -28,28 +28,33 @@
         <article>
             <pre class="prettyprint source linenums"><code>/**
  * @description Handles PATCH requests for a User.
- * &lt;br> Edits existing user data, except for password.
+ * &lt;br> Edits existing User data, except for password.
  * &lt;br> User is located based on uuid.
  *
  * @module
  * @name patchUser
- * @requires jsonResponse
- * @param {object} User - User data
- * @param {string} [User.email] - User email
- * @param {string} [User.uuid] - User uuid
- * @param {integer} [User.role] - User role
- * @param {string} [User.first_name] - User first name
- * @param {string} [User.last_name ] - User last name
- *
- * @returns {jsonResponse} Standardised JSON object
  */
 
-// const User = require("../../../models/User");
 const User = require("../../../models").user;
 
+const findBusiness = require("../business/findBusiness");
+const findUser = require("./findUser");
 const jsonResponse = require("../../../helpers/jsonResponse");
 
-const patchUser = async (userData) => {
+/**
+ * @description Edits User details
+ *
+ * @function
+ * @name editUser
+ * @requires jsonResponse
+ * @param {object} userData
+ * @param {string} [userData.email] - User email
+ * @param {string} userData.uuid - User uuid
+ * @param {integer} [userData.role] - User role
+ * @param {string} [userData.first_name] - User first name
+ * @param {string} [userData.last_name ] - User last name
+ */
+const editUser = async (userData) => {
   const { uuid } = userData;
   delete userData.uuid;
   if (userData.password) {
@@ -70,7 +75,50 @@ const patchUser = async (userData) => {
   return response;
 };
 
-module.exports = patchUser;
+/**
+ * @description Creates or removes a links between a User and a Business
+ *
+ * @function
+ * @name linkBusiness
+ * @param {object} linkData
+ * @param {string} linkData.user_uuid - User's UUID
+ * @param {string} linkData.business_uuid - UUID of business to be linked
+ * @param {string} linkData.transactionType - Type of transaction (add or remove)
+ */
+const linkBusiness = async (linkData) => {
+  let user, business, response;
+  const { user_uuid, business_uuid, transactionType } = linkData;
+  // Note: transactions can be either "add" or "remove"
+
+  let userSearchResult = await findUser.byUuid(user_uuid);
+
+  if (userSearchResult.status >= 400) {
+    response = { ...userSearchResult };
+  } else {
+    user = userSearchResult.data;
+    let businessSearchResult = await findBusiness.byUuid(business_uuid);
+    if (businessSearchResult.status >= 400) {
+      response = { ...businessSearchResult };
+    } else {
+      business = businessSearchResult.data;
+      try {
+        if (transactionType === "add") {
+          let linkResult = await user.addBusinesses(business);
+          response = jsonResponse(200, "", linkResult);
+        } else if (transactionType === "remove") {
+          let linkResult = await user.removeBusinesses(business);
+          response = jsonResponse(200, "", linkResult);
+        }
+      } catch (error) {
+        response = jsonResponse(400, "", "", { error });
+      }
+    }
+  }
+
+  return response;
+};
+
+module.exports = { editUser, linkBusiness };
 </code></pre>
         </article>
     </section>
@@ -81,13 +129,13 @@ module.exports = patchUser;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-deleteUser.html">deleteUser</a></li><li><a href="module-elephantConnect.html">elephantConnect</a></li><li><a href="module-findUser.html">findUser</a></li><li><a href="module-getAllUsers.html">getAllUsers</a></li><li><a href="module-jsonResponse.html">jsonResponse</a></li><li><a href="module-patchUser.html">patchUser</a></li><li><a href="module-postUser.html">postUser</a></li><li><a href="module-redisUtils.html">redisUtils</a></li><li><a href="module-routes_users.html">routes/users</a></li><li><a href="module-tokenUtils.html">tokenUtils</a></li></ul><h3>Externals</h3><ul><li><a href="external-jwt.html">jwt</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Models">Models</a></li><li><a href="global.html#User">User</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-businessUserModel.html">businessUserModel</a></li><li><a href="module-deleteBusiness.html">deleteBusiness</a></li><li><a href="module-deleteUser.html">deleteUser</a></li><li><a href="module-elephantConnect.html">elephantConnect</a></li><li><a href="module-findUser.html">findUser</a></li><li><a href="module-getAllUsers.html">getAllUsers</a></li><li><a href="module-jsonResponse.html">jsonResponse</a></li><li><a href="module-patchUser.html">patchUser</a></li><li><a href="module-postBusiness.html">postBusiness</a></li><li><a href="module-postUser.html">postUser</a></li><li><a href="module-redisUtils.html">redisUtils</a></li><li><a href="module-routes_businesses.html">routes/businesses</a></li><li><a href="module-routes_users.html">routes/users</a></li><li><a href="module-tokenUtils.html">tokenUtils</a></li></ul><h3>Externals</h3><ul><li><a href="external-jwt.html">jwt</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-discussions.html">discussions</a></li></ul><h3>Global</h3><ul><li><a href="global.html#byUuid">byUuid</a></li><li><a href="global.html#jsonResponse">jsonResponse</a></li><li><a href="global.html#Models">Models</a></li><li><a href="global.html#User">User</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Wed May 04 2022 21:47:59 GMT+1000 (Australian Eastern Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri May 06 2022 13:24:42 GMT+1000 (Australian Eastern Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

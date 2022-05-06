@@ -1,19 +1,10 @@
 /**
  * @description Handles PATCH requests for a User.
- * <br> Edits existing user data, except for password.
+ * <br> Edits existing User data, except for password.
  * <br> User is located based on uuid.
  *
  * @module
  * @name patchUser
- * @requires jsonResponse
- * @param {object} User - User data
- * @param {string} [User.email] - User email
- * @param {string} [User.uuid] - User uuid
- * @param {integer} [User.role] - User role
- * @param {string} [User.first_name] - User first name
- * @param {string} [User.last_name ] - User last name
- *
- * @returns {jsonResponse} Standardised JSON object
  */
 
 const User = require("../../../models").user;
@@ -22,6 +13,19 @@ const findBusiness = require("../business/findBusiness");
 const findUser = require("./findUser");
 const jsonResponse = require("../../../helpers/jsonResponse");
 
+/**
+ * @description Edits User details
+ *
+ * @function
+ * @name editUser
+ * @requires jsonResponse
+ * @param {object} userData
+ * @param {string} [userData.email] - User email
+ * @param {string} userData.uuid - User uuid
+ * @param {integer} [userData.role] - User role
+ * @param {string} [userData.first_name] - User first name
+ * @param {string} [userData.last_name ] - User last name
+ */
 const editUser = async (userData) => {
   const { uuid } = userData;
   delete userData.uuid;
@@ -43,6 +47,16 @@ const editUser = async (userData) => {
   return response;
 };
 
+/**
+ * @description Creates or removes a links between a User and a Business
+ *
+ * @function
+ * @name linkBusiness
+ * @param {object} linkData
+ * @param {string} linkData.user_uuid - User's UUID
+ * @param {string} linkData.business_uuid - UUID of business to be linked
+ * @param {string} linkData.transactionType - Type of transaction (add or remove)
+ */
 const linkBusiness = async (linkData) => {
   let user, business, response;
   const { user_uuid, business_uuid, transactionType } = linkData;

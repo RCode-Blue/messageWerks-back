@@ -62,14 +62,12 @@ const generateToken = (tokenRequestData) => {
     role,
     uuid,
     project_id,
-    token: {
-      type,
-    },
+    token: { value: null },
   };
 
   const tokenSettings = getTokenSettings(type);
-
   const token = jwt.sign(payload, tokenSettings.secret, tokenSettings.options);
+
   payload.token.value = token;
   return payload;
 };
