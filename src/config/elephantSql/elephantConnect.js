@@ -27,8 +27,15 @@ const elephantConnect = () => {
   }
   const dbname = process.env.ELEPHANTSQL_DB;
   const host = process.env.ELEPHANTSQL_HOST;
-  const password = process.env.ELEPHANTSQL_PASSWORD;
-  const user = process.env.ELEPHANTSQL_USERID;
+  
+  // Mac settings
+  // const password = process.env.ELEPHANTSQL_PASSWORD;
+  // const user = process.env.ELEPHANTSQL_USERID;
+
+  // Windows settings
+  const password="password";
+  const user = "localDev";
+
 
   const settings = {
     host,

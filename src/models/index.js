@@ -19,6 +19,8 @@ const db = {};
 db.user = user(sequelize, Sequelize);
 db.business = business(sequelize, Sequelize);
 
+const business_user = sequelize.define("business_user", {});
+
 db.user.belongsToMany(db.business, {
   through: "business_user",
   as: "businesses",
@@ -30,5 +32,6 @@ db.business.belongsToMany(db.user, {
   as: "users",
   foreignKey: "business_id",
 });
+sequelize.sync();
 
 module.exports = db;

@@ -7,6 +7,10 @@
  * @requires jsonResponse
  */
 
+const {
+  includeBusinesses,
+  userQueryAttributes,
+} = require("../../../helpers/queryHelpers");
 const jsonResponse = require("../../../helpers/jsonResponse");
 const User = require("../../../models").user;
 
@@ -23,16 +27,7 @@ const byId = async (id) => {
   let response;
   try {
     let result = await User.findByPk(id, {
-      attributes: [
-        "id",
-        "uuid",
-        "role",
-        "email",
-        "first_name",
-        "last_name",
-        "createdAt",
-        "updatedAt",
-      ],
+      attributes: userQueryAttributes(),
     });
     response = jsonResponse(200, "", result);
   } catch (error) {
@@ -50,10 +45,15 @@ const byId = async (id) => {
  * @returns {jsonResponse} Standardised JSON object containing User object, or error
  */
 const byUuid = async (uuid) => {
-  console.log("UUID: ", uuid);
   let response;
+  const include = includeBusinesses();
+
   try {
-    let result = await User.findOne({ where: { uuid: uuid } });
+    let result = await User.findOne({
+      where: { uuid: uuid },
+      attributes: userQueryAttributes(),
+      include,
+    });
     response = jsonResponse(200, "", result);
   } catch (error) {
     response = jsonResponse(400, "", "", { error });

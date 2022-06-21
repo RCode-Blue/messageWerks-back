@@ -8,42 +8,25 @@
  */
 
 const jsonResponse = require("../../../helpers/jsonResponse");
-const { business } = require("../../../models");
+const {
+  includeBusinesses,
+  userQueryAttributes,
+} = require("../../../helpers/queryHelpers");
 
 const User = require("../../../models").user;
 
 const getAllUsers = async () => {
   let response;
-  const attributes = [
-    "id",
-    "role",
-    "email",
-    "first_name",
-    "last_name",
-    "password",
-  ];
-  let include = [
-    {
-      model: business,
-      as: "businesses",
-      attributes: [
-        "name",
-        "address_line1",
-        "address_line2",
-        "suburb",
-        "state",
-        "country",
-        "postcode",
-        "uuid",
-        "id",
-      ],
-    },
-  ];
+  const attributes = userQueryAttributes();
+
+  let include = includeBusinesses();
+
   try {
     let result = await User.findAll({
       attributes,
       include,
     });
+
     response = jsonResponse(200, "", result);
   } catch (error) {
     response = jsonResponse(400, "", "", { error });

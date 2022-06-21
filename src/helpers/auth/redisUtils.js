@@ -26,9 +26,8 @@ const getRefreshToken = async () => {};
  */
 const setRefreshToken = async (refreshData) => {
   const { uuid, project_id, token: refreshToken } = refreshData;
-
   const refreshKey = `${project_id}:${uuid}`;
-  const refreshValue = refreshToken;
+  const refreshValue = refreshToken.value;
   const refreshDuration = appSettings.jwt_values.refresh_options.expiresIn;
 
   const client = await redisClient();

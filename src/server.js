@@ -13,7 +13,7 @@ if (fs.existsSync(path.join(rootDir) + "/.env." + process.env.NODE_ENV)) {
 }
 
 const authApi = require("./v1/api/auth");
-const businessesApi = require("./v1/api/businesses");
+const businessApi = require("./v1/api/business");
 const usersApi = require("./v1/api/users");
 const testApi = require("./v1/api/test");
 
@@ -37,14 +37,14 @@ sequelize
 
 // Routes;
 app.use("/v1/auth", authApi);
-app.use("/v1/businesses", businessesApi);
+app.use("/v1/business", businessApi);
 app.use("/v1/users", usersApi);
 app.use("/v1/test", testApi);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.clear();
-  console.log(`                        messageWerks`);
+  console.log(`                     messageWerks-Back`);
   console.log("-------------------------------------------------------------");
   console.log(`Listening to port:  ${PORT}`);
   console.log(`      Environment:  ${process.env.NODE_ENV}`);

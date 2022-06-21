@@ -18,10 +18,14 @@ const jwt = require("jsonwebtoken");
 const path = require("path");
 
 const appSettings = require("../../config/appSettings.json");
+const getEnvSettings = require("../../helpers/getEnvSettings");
 const { jwt_values } = appSettings;
+const jsonResponse = require("../../helpers/jsonResponse");
 
 // Config imports
 const rootPath = appRoot.path;
+const env = getEnvSettings();
+
 if (fs.existsSync(path.join(rootPath) + "/.env." + process.env.NODE_ENV)) {
   require("dotenv").config({
     path: `${rootPath}/.env.${process.env.NODE_ENV}`,
@@ -72,4 +76,16 @@ const generateToken = (tokenRequestData) => {
   return payload;
 };
 
-module.exports = { generateToken };
+const verifyToken = (token) => {
+  let response;
+  const secret = env.JWT_ACCESS_TOKEN_SECRET;
+  try {
+    let result = jwt.verify(token, secret);
+    response = jsonResponse(200, "Verified Token", result);
+  } catch (error) {
+    response = jsonResponse(401, "", "", error);
+  }
+  return response;
+};
+
+module.exports = { generateToken, verifyToken };

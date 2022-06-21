@@ -75,11 +75,11 @@ const linkBusiness = async (linkData) => {
       business = businessSearchResult.data;
       try {
         if (transactionType === "add") {
-          let linkResult = await user.addBusinesses(business);
-          response = jsonResponse(200, "", linkResult);
+          let findBusiness = await user.addBusiness(business);
+          response = jsonResponse(200, "", findBusiness);
         } else if (transactionType === "remove") {
-          let linkResult = await user.removeBusinesses(business);
-          response = jsonResponse(200, "", linkResult);
+          let linkResult = await user.removeBusiness(business);
+          response = jsonResponse(200, "", findBusiness);
         }
       } catch (error) {
         response = jsonResponse(400, "", "", { error });

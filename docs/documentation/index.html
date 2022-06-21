@@ -84,14 +84,14 @@
 <h3>Databases</h3>
 <h2>The demo app</h2>
 <h2>Viewing the development environment</h2>
-<h3>Downloading the codebase</h3>
-<h3>Prerequisites for running the app locally</h3>
+<h2>Downloading the codebase</h2>
+<h2>Prerequisites for running the app locally</h2>
 <ul>
 <li>Local Redis server</li>
 <li>Local PostgreSQL server</li>
 <li>PGAdmin (optional)</li>
 </ul>
-<h4>Environment variables</h4>
+<h3>- Environment variables</h3>
 <p>Environment variables are contained in 2 files:</p>
 <ul>
 <li><code>.env.development</code> for development environment use.</li>
@@ -99,21 +99,135 @@
 <li>Please refer to the <code>sample_.env</code> file for reference variable keys.</li>
 </ul>
 <p>The npm script specifies the NODE_ENV value which is used by a small function in the ./server.js file to determine which file to reference.</p>
-<h4>Postman</h4>
+<h3>Node runtome environment</h3>
+<p>To install NodeJs in Windows:</p>
+<ul>
+<li>Download the packages <a href="https://nodejs.org/en/download/">here</a></li>
+<li>Installation instructions <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm">here</a></li>
+</ul>
+<h3>Postman</h3>
 <p>Postman can be used to query API endpoints.
 Click <a href="https://learning.postman.com/docs/getting-started/installation-and-updates/">here</a> for details on setting up Postman on your local computer.</p>
-<h4>PostgreSQL</h4>
-<h4>MongoDB</h4>
-<h4>Redis</h4>
+<h3>WSL (Windows Subsystem for Linux) - Windows only</h3>
+<ul>
+<li>
+<p>Go <a href="https://docs.microsoft.com/en-us/windows/wsl/install">here</a> for instructions</p>
+</li>
+<li>
+<p>To run WSL, double-click the icon provided by the installation, or run the file located in <code>C:\Windows\System32\wsl.exe</code></p>
+</li>
+<li>
+<p>To stop WSL:</p>
+<ul>
+<li>Open the command prompt or PowerShell console</li>
+<li>View running distros by typing <code>wsl --list</code></li>
+<li>Terminate the running distro by typing <code>wsl -t &lt;distro_name&gt;</code></li>
+<li>Alternately, you can terminate all distros by running <code>wsl --shutdown</code></li>
+</ul>
+</li>
+</ul>
+<h3>PostgreSQL</h3>
+<ul>
+<li>PostgreSQL installer downloads <a href="https://www.postgresql.org/download/">here</a></li>
+</ul>
+<h3>MongoDB</h3>
+<h3>Redis</h3>
+<ul>
+<li>If you wish to install a local copy of Redis, the instructions are located <a href="https://redis.io/docs/getting-started/">here</a>.</li>
+</ul>
+<h4><em>Windows</em></h4>
+<ul>
+<li>
+<p>Installation instructions <a href="https://redis.io/docs/getting-started/installation/install-redis-on-windows/">here</a></p>
+</li>
+<li>
+<p>Open the WIndows Subsystem for Linux (WSL)</p>
+</li>
+<li>
+<p>Run the following to install Redis:</p>
+</li>
+</ul>
+<p><code>sudo apt-add-repository ppa:redislabs/redis</code><br>
+<code>sudo apt-get update</code><br>
+<code>sudo apt-get upgrade</code><br>
+<code>sudo apt-get install redis-server</code><br></p>
+<ul>
+<li>
+<p>To start Redis, run <code>sudo service redis-server start</code></p>
+</li>
+<li>
+<p>To open the command-line interface, run <code>redis-cli</code></p>
+</li>
+<li>
+<p>To stop Redis, run <code>sudo service redis-server stop</code></p>
+</li>
+<li>
+<p>References:</p>
+<ul>
+<li><a href="https://redis.io/commands/">Redis command reference</a></li>
+<li><a href="https://redis.io/docs/manual/cli/">Redis cli manual</a></li>
+</ul>
+</li>
+<li>
+<p>Common CLI commands:</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SET &lt;key&gt; &lt;value&gt;</code></td>
+<td>Sets a key and value</td>
+</tr>
+<tr>
+<td><code>KEYS *</code></td>
+<td>Gets all keys</td>
+</tr>
+<tr>
+<td><code>GET &lt;key&gt;</code></td>
+<td>Gets the value of a key</td>
+</tr>
+</tbody>
+</table>
 <p>Reference <a href="https://docs.redis.com/latest/rs/references/client_references/client_nodejs/">here</a>
 Default settings for local Redis:</p>
 <ul>
 <li>host: &quot;12.0.0.1&quot;</li>
 <li>port: 6379</li>
-<li>password: <none></li>
+<li>password: <code>&lt;none&gt;</code></li>
 </ul>
-<h3>Running the dev environment locally</h3>
-<p>To start the application, run <code>npm run serve:dev</code>. The app listens on port 3001.</p></article>
+<h2>Running the dev environment locally</h2>
+<h3>Start PostgreSQL</h3>
+<p><em>Mac</em></p>
+<p><em>Windows</em></p>
+<ul>
+<li>Double-click on the <code>pgAdmin 4</code> icon to start the PostgreSQL server</li>
+<li>Enter the Master Password</li>
+</ul>
+<h3>Start Redis</h3>
+<p><em>Mac</em></p>
+<p><em>Windows</em></p>
+<ul>
+<li>Open the Windows Subsystem for linux (WSL)to the project root</li>
+<li>To start Redis, run <code>sudo service redis-server start</code></li>
+<li>Enter the Redis admin password when prompted.</li>
+</ul>
+<h3>Run the application</h3>
+<ul>
+<li>Install dependencies by running <code>npm i</code></li>
+</ul>
+<p><em>Mac</em></p>
+<p><em>Windows</em></p>
+<ul>
+<li>Open the Command Prompt or PowerShell console to the project root.</li>
+<li>To start the application, run <code>npm run dev</code>. The app listens on port 3001.</li>
+<li>Alternatively, start Redis Commander by running <code>npx redis-commander</code> at project root in the Command Prompt. The default URL for viewing the database is <code>http://127.0.0.1:8081</code></li>
+</ul></article>
     </section>
 
 
@@ -130,7 +244,7 @@ Default settings for local Redis:</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri May 06 2022 13:24:42 GMT+1000 (Australian Eastern Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Tue May 24 2022 17:17:35 GMT+1000 (Australian Eastern Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

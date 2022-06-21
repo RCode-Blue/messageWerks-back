@@ -19,6 +19,7 @@
 const bcrypt = require("bcrypt");
 const fs = require("fs");
 const path = require("path");
+const sequelize = require("sequelize");
 const User = require("../../../models").user;
 
 const jsonResponse = require("../../../helpers/jsonResponse");

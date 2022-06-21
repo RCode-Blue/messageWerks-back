@@ -54,17 +54,17 @@ To generate the documents using JSDoc, run `npm run jsdoc` in project root. The 
 
 ## Viewing the development environment
 
-### Downloading the codebase
+## Downloading the codebase
 
 
-### Prerequisites for running the app locally
+## Prerequisites for running the app locally
 
 - Local Redis server
 - Local PostgreSQL server
 - PGAdmin (optional)
 
 
-#### Environment variables
+### - Environment variables
 Environment variables are contained in 2 files:
 - `.env.development` for development environment use.
 - `.env.production `for production environment use.
@@ -72,31 +72,108 @@ Environment variables are contained in 2 files:
 
 The npm script specifies the NODE_ENV value which is used by a small function in the ./server.js file to determine which file to reference.
 
+### Node runtome environment
+To install NodeJs in Windows:
+- Download the packages [here](https://nodejs.org/en/download/)
+- Installation instructions [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-#### Postman
+
+### Postman
 Postman can be used to query API endpoints.
 Click [here](https://learning.postman.com/docs/getting-started/installation-and-updates/) for details on setting up Postman on your local computer.
 
 
+### WSL (Windows Subsystem for Linux) - Windows only
+- Go [here](https://docs.microsoft.com/en-us/windows/wsl/install) for instructions
+- To run WSL, double-click the icon provided by the installation, or run the file located in `C:\Windows\System32\wsl.exe`
 
-#### PostgreSQL
+- To stop WSL:
+  - Open the command prompt or PowerShell console
+  - View running distros by typing `wsl --list`
+  - Terminate the running distro by typing `wsl -t <distro_name>`
+  - Alternately, you can terminate all distros by running `wsl --shutdown`
 
 
-#### MongoDB
+### PostgreSQL
+
+- PostgreSQL installer downloads [here](https://www.postgresql.org/download/)
+
+### MongoDB
 
 
-#### Redis
+### Redis
+
+- If you wish to install a local copy of Redis, the instructions are located [here](https://redis.io/docs/getting-started/). 
+
+#### _Windows_
+- Installation instructions [here](https://redis.io/docs/getting-started/installation/install-redis-on-windows/)
+
+
+- Open the Windows Subsystem for Linux (WSL)
+- Run the following to install Redis:
+
+`sudo apt-add-repository ppa:redislabs/redis`<br>
+`sudo apt-get update`<br>
+`sudo apt-get upgrade`<br>
+`sudo apt-get install redis-server`<br>
+
+
+- To start Redis, run `sudo service redis-server start`
+- To open the command-line interface, run `redis-cli`
+- To stop Redis, run `sudo service redis-server stop`
+
+
+- References:
+  - [Redis command reference](https://redis.io/commands/)
+  - [Redis cli manual](https://redis.io/docs/manual/cli/)
+
+- Common CLI commands:
+
+|Command|Description|
+|---|---|
+|`SET <key> <value>`|Sets a key and value|
+|`KEYS *`|Gets all keys|
+|`GET <key>`|Gets the value of a key|
 
 Reference [here](https://docs.redis.com/latest/rs/references/client_references/client_nodejs/)
 Default settings for local Redis:
 - host: "12.0.0.1"
 - port: 6379
-- password: <none>
+- password: `<none>`
 
 
-### Running the dev environment locally
+## Running the dev environment locally
 
-To start the application, run `npm run serve:dev`. The app listens on port 3001.
+### Start PostgreSQL
+
+_Mac_
+
+_Windows_
+  - Double-click on the `pgAdmin 4` icon to start the PostgreSQL server
+  - Enter the Master Password
+
+
+
+
+### Start Redis
+
+_Mac_
+
+_Windows_
+- Open the Windows Subsystem for linux (WSL)to the project root
+- To start Redis, run `sudo service redis-server start`
+- Enter the Redis admin password when prompted.
+
+### Run the application
+- Install dependencies by running `npm i`
+
+
+_Mac_
+
+_Windows_
+- Open the Command Prompt or PowerShell console to the project root.
+- To start the application, run `npm run dev`. The app listens on port 3001.
+- Optionally, start Redis Commander by running `npx redis-commander` at project root in the Command Prompt. The default URL for viewing the database is `http://127.0.0.1:8081`
 
 
 
