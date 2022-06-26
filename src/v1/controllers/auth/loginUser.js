@@ -4,9 +4,11 @@ const findUser = require("../../controllers/user/findUser");
 const jsonResponse = require("../../../helpers/jsonResponse");
 const redisUtils = require("../../../helpers/auth/redisUtils");
 const tokenUtils = require("../../../helpers/auth/tokenUtils");
+const appSettings = require("../../../config/appSettings.json");
 
 const loginUser = async (data) => {
   const { email, password } = data;
+  const project_id = appSettings.project.project_id;
   let response;
 
   const result = await findUser.byEmail(email);
@@ -28,10 +30,15 @@ const loginUser = async (data) => {
     type: "refresh",
   };
 
-  const sessionData = tokenUtils.generateToken(accessTokenParams);
-  const refreshData = tokenUtils.generateToken(refreshTokenParams);
-  response = jsonResponse(200, "", sessionData);
-  await redisUtils.setRefreshToken(refreshData);
+  const accessToken = tokenUtils.generateToken(accessTokenParams);
+  const refreshToken = tokenUtils.generateToken(refreshTokenParams);
+  response = jsonResponse(200, "", accessToken);
+  // console.log("");
+  // console.log("---------------");
+  // console.log(accessToken);
+  // console.log("---------------");
+  // console.log("");
+  await redisUtils.setRefreshToken({ project_id, accessToken, refreshToken });
   return response;
 };
 

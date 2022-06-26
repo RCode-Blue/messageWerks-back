@@ -16,11 +16,13 @@ const appRoot = require("app-root-path");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const path = require("path");
+const jwt_decode = require("jwt-decode");
 
 const appSettings = require("../../config/appSettings.json");
 const getEnvSettings = require("../../helpers/getEnvSettings");
 const { jwt_values } = appSettings;
 const jsonResponse = require("../../helpers/jsonResponse");
+const redisUtils = require("./redisUtils");
 
 // Config imports
 const rootPath = appRoot.path;
@@ -32,6 +34,7 @@ if (fs.existsSync(path.join(rootPath) + "/.env." + process.env.NODE_ENV)) {
   });
 }
 
+// Helpers
 const getTokenSettings = (tokenType) => {
   let tokenSettings = {};
 
@@ -48,6 +51,16 @@ const getTokenSettings = (tokenType) => {
   return tokenSettings;
 };
 
+const checkRefreshToken = async (uuid) => {
+  const projectId = appSettings.project.project_id;
+  const refreshTokenExists = await redisUtils.checkRefreshToken(
+    projectId,
+    uuid
+  );
+  return refreshTokenExists;
+};
+
+// Exported
 /**
  * @description Generates a JWT token
  *
@@ -62,18 +75,30 @@ const generateToken = (tokenRequestData) => {
   const { role, uuid } = tokenRequestData.user;
   const { type } = tokenRequestData;
   const project_id = appSettings.project.project_id;
-  const payload = {
+  const expiresIn = jwt_values.access_options.expiresIn;
+  let tokenPayload = {
     role,
     uuid,
     project_id,
-    token: { value: null },
+    token: null,
+    expiresIn,
   };
 
   const tokenSettings = getTokenSettings(type);
-  const token = jwt.sign(payload, tokenSettings.secret, tokenSettings.options);
+  const token = jwt.sign(
+    tokenPayload,
+    tokenSettings.secret,
+    tokenSettings.options
+  );
 
-  payload.token.value = token;
-  return payload;
+  // console.log("xxxxxxxxxxxxxxxx");
+  // console.log(jwt_decode(token));
+  // console.log("xxxxxxxxxxxxxxxx");
+
+  // payload.token = token;
+
+  // return payload;
+  return token;
 };
 
 const verifyToken = (token) => {

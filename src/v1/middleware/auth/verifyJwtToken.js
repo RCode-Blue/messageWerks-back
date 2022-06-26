@@ -6,23 +6,24 @@ const path = require("path");
 const appSettings = require("../../../config/appSettings.json");
 const getEnvSettings = require("../../../helpers/getEnvSettings");
 const jsonResponse = require("../../../helpers/jsonResponse");
+const { verifyToken } = require("../../../helpers/auth/tokenUtils");
 
 const verifyJwtToken = (req, res, next) => {
   let response;
 
   const env = getEnvSettings();
-  const secret = env.JWT_ACCESS_TOKEN_SECRET;
+  // const secret = env.JWT_ACCESS_TOKEN_SECRET;
 
-  const headerData = req.headers;
-  let token = headerData.authorization.split(" ")[1];
+  const token = req.headers.authorization;
 
-  try {
-    let result = jwt.verify(token, secret);
-    console.log("result: ", result);
-    // response = jsonResponse(200, "Header check", result);
-  } catch (error) {
-    response = jsonResponse(401, "", "", error);
-    res.status(response.status).json(response);
+  const tokenResult = verifyToken(token);
+
+  if (tokenResult.status == 401) {
+    console.log("token error");
+  }
+
+  if (tokenResult.status == 200) {
+    console.log("Success!");
   }
 
   next();

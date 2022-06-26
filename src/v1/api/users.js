@@ -21,6 +21,7 @@ const getAllUsers = require("../controllers/user/getAllUsers");
 const patchUser = require("../controllers/user/patchUser");
 const postUser = require("../controllers/user/postUser");
 const tokenUtils = require("../../helpers/auth/tokenUtils");
+const verifyJwtToken = require("../middleware/auth/verifyJwtToken");
 
 const businessUserModel = require("../middleware/models/businessUserModelUtils");
 
@@ -32,7 +33,6 @@ router.get("/all", async (req, res) => {
 router.get("/uuid", async (req, res) => {
   const token = req.headers.authorization;
   let verified = tokenUtils.verifyToken(token);
-
   const { uuid } = verified.data;
   let response = await findUser.byUuid(uuid);
   res.status(response.status).json(response);

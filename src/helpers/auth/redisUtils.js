@@ -9,7 +9,33 @@
 const appSettings = require("../../config/appSettings.json");
 const redisClient = require("../../config/redis/redisConnect");
 
-const getRefreshToken = async () => {};
+// Helpers
+const connectRedis = async () => {
+  const client = await redisClient();
+  await client.connect();
+
+  let result = { error: null, client: null };
+
+  try {
+    result.client = client;
+  } catch (err) {
+    result.error = error;
+  }
+
+  return result;
+};
+
+// Exported
+const checkRefreshToken = async (project_id, uuid) => {
+  const client = await redisClient();
+
+  let refreshToken = client.get(`${project_id}:${uuid}`);
+  if (refreshToken) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 /**
  * @description Saves refresh token to Redis database
@@ -25,23 +51,19 @@ const getRefreshToken = async () => {};
  * @returns {string} "OK" if successful, error message if not
  */
 const setRefreshToken = async (refreshData) => {
-  const { uuid, project_id, token: refreshToken } = refreshData;
-  const refreshKey = `${project_id}:${uuid}`;
-  const refreshValue = refreshToken.value;
-  const refreshDuration = appSettings.jwt_values.refresh_options.expiresIn;
+  const { project_id, accessToken, refreshToken } = refreshData;
+  const refreshKey = `${project_id}:${accessToken}`;
+  const refreshValue = refreshToken;
+  const refreshExpiry = appSettings.jwt_values.refresh_options.expiresIn;
 
-  const client = await redisClient();
-  await client.connect();
+  const connectResult = await connectRedis();
+  let client;
+  if (!connectResult.error) {
+    client = connectResult.client;
+  }
 
-  client.on("error", (error) => {
-    console.error("Error: ", error);
-  });
-  client.on("connect", () => {
-    console.log("Redis Connected");
-  });
-
-  let msg = await client.setEx(refreshKey, refreshDuration, refreshValue);
+  let msg = await client.setEx(refreshKey, refreshExpiry, refreshValue);
   return msg;
 };
 
-module.exports = { getRefreshToken, setRefreshToken };
+module.exports = { checkRefreshToken, setRefreshToken };

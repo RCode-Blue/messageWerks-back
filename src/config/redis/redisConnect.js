@@ -5,13 +5,6 @@ const redisPort = process.env.REDIS_PORT;
 const redisPassword = process.env.REDIS_PASSWORD;
 
 const redisConnect = async () => {
-  /*
-  let result = {
-    err: null,
-    client: null,
-  };
-  */
-
   let redisClient = redis.createClient({
     port: redisPort,
     host: redisHost,
@@ -19,20 +12,5 @@ const redisConnect = async () => {
   });
 
   return redisClient;
-
-  /*
-  try {
-    result.client = await redisClient.connect();
-
-    result.client.on("connect", () => {
-      console.log("Redis connected ...");
-    });
-  } catch (err) {
-    console.error("Redis error: ", err);
-    result.err = err;
-    process.exit(1);
-  }
-  return result;
-  */
 };
 module.exports = redisConnect;
