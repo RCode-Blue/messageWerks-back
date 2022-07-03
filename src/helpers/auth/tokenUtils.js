@@ -80,7 +80,6 @@ const generateToken = (tokenRequestData) => {
     role,
     uuid,
     project_id,
-    token: null,
     expiresIn,
   };
 
@@ -90,14 +89,6 @@ const generateToken = (tokenRequestData) => {
     tokenSettings.secret,
     tokenSettings.options
   );
-
-  // console.log("xxxxxxxxxxxxxxxx");
-  // console.log(jwt_decode(token));
-  // console.log("xxxxxxxxxxxxxxxx");
-
-  // payload.token = token;
-
-  // return payload;
   return token;
 };
 
@@ -106,7 +97,7 @@ const verifyToken = (token) => {
   const secret = env.JWT_ACCESS_TOKEN_SECRET;
   try {
     let result = jwt.verify(token, secret);
-    response = jsonResponse(200, "Verified Token", result);
+    response = jsonResponse(200, "Successfully Verified Token", result);
   } catch (error) {
     response = jsonResponse(401, "", "", error);
   }

@@ -33,11 +33,6 @@ const loginUser = async (data) => {
   const accessToken = tokenUtils.generateToken(accessTokenParams);
   const refreshToken = tokenUtils.generateToken(refreshTokenParams);
   response = jsonResponse(200, "", accessToken);
-  // console.log("");
-  // console.log("---------------");
-  // console.log(accessToken);
-  // console.log("---------------");
-  // console.log("");
   await redisUtils.setRefreshToken({ project_id, accessToken, refreshToken });
   return response;
 };
