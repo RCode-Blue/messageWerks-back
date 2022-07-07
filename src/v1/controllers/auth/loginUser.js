@@ -20,20 +20,26 @@ const loginUser = async (data) => {
     return response;
   }
 
+  const foundUserData = {
+    role: foundUser.role,
+    uuid: foundUser.uuid,
+  };
+
   const accessTokenParams = {
-    user: foundUser,
+    user: foundUserData,
     type: "access",
   };
 
   const refreshTokenParams = {
-    user: foundUser,
+    user: foundUserData,
     type: "refresh",
   };
 
   const accessToken = tokenUtils.generateToken(accessTokenParams);
+  const { uuid } = foundUser;
   const refreshToken = tokenUtils.generateToken(refreshTokenParams);
   response = jsonResponse(200, "", accessToken);
-  await redisUtils.setRefreshToken({ project_id, accessToken, refreshToken });
+  await redisUtils.setRefreshToken({ project_id, uuid, refreshToken });
   return response;
 };
 

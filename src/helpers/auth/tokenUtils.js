@@ -52,9 +52,9 @@ const getTokenSettings = (tokenType) => {
 };
 
 const checkRefreshToken = async (uuid) => {
-  const projectId = appSettings.project.project_id;
+  // const projectId = appSettings.project.project_id;
   const refreshTokenExists = await redisUtils.checkRefreshToken(
-    projectId,
+    // projectId,
     uuid
   );
   return refreshTokenExists;
@@ -74,13 +74,12 @@ const checkRefreshToken = async (uuid) => {
 const generateToken = (tokenRequestData) => {
   const { role, uuid } = tokenRequestData.user;
   const { type } = tokenRequestData;
-  const project_id = appSettings.project.project_id;
-  const expiresIn = jwt_values.access_options.expiresIn;
+  // const project_id = appSettings.project.project_id;
   let tokenPayload = {
     role,
     uuid,
-    project_id,
-    expiresIn,
+    // project_id,
+    // expiresIn,
   };
 
   const tokenSettings = getTokenSettings(type);
@@ -99,7 +98,7 @@ const verifyToken = (token) => {
     let result = jwt.verify(token, secret);
     response = jsonResponse(200, "Successfully Verified Token", result);
   } catch (error) {
-    response = jsonResponse(401, "", "", error);
+    response = jsonResponse(401, "Token verification error", "", error);
   }
   return response;
 };

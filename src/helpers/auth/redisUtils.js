@@ -8,6 +8,7 @@
 
 const appSettings = require("../../config/appSettings.json");
 const redisClient = require("../../config/redis/redisConnect");
+// const appSettings = require("../../config/appSettings.json");
 
 // Helpers
 const connectRedis = async () => {
@@ -26,12 +27,19 @@ const connectRedis = async () => {
 };
 
 // Exported
-const checkRefreshToken = async (project_id, uuid) => {
-  const client = await redisClient();
+const checkRefreshToken = async (uuid) => {
+  const { project_id } = appSettings.project;
 
-  let refreshToken = client.get(`${project_id}:${uuid}`);
+  const connectResult = await connectRedis();
+  let client;
+  if (!connectResult.error) {
+    client = connectResult.client;
+  }
+
+  let refreshToken = await client.get(`${project_id}:${uuid}`);
+  let ttl = await client.ttl(`${project_id}:${uuid}`);
   if (refreshToken) {
-    return true;
+    return refreshToken;
   } else {
     return false;
   }
@@ -51,9 +59,8 @@ const checkRefreshToken = async (project_id, uuid) => {
  * @returns {string} "OK" if successful, error message if not
  */
 const setRefreshToken = async (refreshData) => {
-  const { project_id, accessToken, refreshToken } = refreshData;
-  const refreshKey = `${project_id}:${accessToken}`;
-  const refreshValue = refreshToken;
+  const { project_id, uuid, refreshToken } = refreshData;
+  const refreshKey = `${project_id}:${uuid}`;
   const refreshExpiry = appSettings.jwt_values.refresh_options.expiresIn;
 
   const connectResult = await connectRedis();
@@ -62,7 +69,7 @@ const setRefreshToken = async (refreshData) => {
     client = connectResult.client;
   }
 
-  let msg = await client.setEx(refreshKey, refreshExpiry, refreshValue);
+  let msg = await client.setEx(refreshKey, refreshExpiry, refreshToken);
   return msg;
 };
 

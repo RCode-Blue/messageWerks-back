@@ -4,7 +4,6 @@
   "description": "newsletter manager",
   "main": "./src/server.js",
   "scripts": {
-    "clean": "rimraf './dist/*'",
     "build": "webpack --mode development",
     "doc": "jsdoc -c jsdocConf.json",
     "start": "node ./dist/server.js",

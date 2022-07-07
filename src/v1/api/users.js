@@ -30,9 +30,10 @@ router.get("/all", async (req, res) => {
   res.status(response.status).json(response);
 });
 
-router.get("/uuid", async (req, res) => {
+router.get("/profile", verifyJwtToken, async (req, res) => {
   const token = req.headers.authorization;
   let verified = tokenUtils.verifyToken(token);
+
   const { uuid } = verified.data;
   let response = await findUser.byUuid(uuid);
   res.status(response.status).json(response);
