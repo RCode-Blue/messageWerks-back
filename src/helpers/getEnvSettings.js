@@ -1,3 +1,11 @@
+/**
+ * @description Returns environment settings
+ *
+ * @function
+ * @name getEnvSettings
+ * @memberof helpers#
+ */
+
 const appRoot = require("app-root-path");
 const fs = require("fs");
 const path = require("path");

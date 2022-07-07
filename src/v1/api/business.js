@@ -8,7 +8,8 @@
  * PATCH  /businesses/link - Create or remove a link between a business and a user
  * DELETE /businesses/remove - Delete a Business
  *
- * @module routes/businesses
+ * @module
+ * @name routes/businesses
  * @requires express
  */
 

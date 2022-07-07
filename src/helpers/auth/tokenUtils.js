@@ -70,6 +70,8 @@ const checkRefreshToken = async (uuid) => {
  * @param {string} tokenRequestData.uuid - User UUID
  * @param {string} tokenRequestData.type - Type of token requested
  * @param {string} tokenRequestData.project_id - Project ID
+ *
+ * @memberof helpers#
  */
 const generateToken = (tokenRequestData) => {
   const { role, uuid } = tokenRequestData.user;
@@ -91,6 +93,14 @@ const generateToken = (tokenRequestData) => {
   return token;
 };
 
+/**
+ * @description Verifies a JWT token
+ *
+ * @function varifyToken
+ * @param {string} JET token to be verified
+ *
+ * @memberof helpers#
+ */
 const verifyToken = (token) => {
   let response;
   const secret = env.JWT_ACCESS_TOKEN_SECRET;

@@ -7,7 +7,7 @@
  * @requires jsonResponse
  * @param {object} businessData - Business data
  * @param {string} businessData.uuid - Business uuid
- * @returns {jsonResponse} Standardised JSON object
+ * @returns {jsonResponse} Standardised JSON object containing Business data or error
  */
 
 const Business = require("../../../models").business;

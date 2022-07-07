@@ -1,7 +1,8 @@
 /**
  * @description Business search options
  *
- * @module@name findBusiness
+ * @module
+ * @name findBusiness
  * @requires Business
  * @requires jsonResponse
  */

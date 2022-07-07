@@ -44,18 +44,25 @@ const appRoot = require("app-root-path");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const path = require("path");
+const jwt_decode = require("jwt-decode");
 
 const appSettings = require("../../config/appSettings.json");
+const getEnvSettings = require("../../helpers/getEnvSettings");
 const { jwt_values } = appSettings;
+const jsonResponse = require("../../helpers/jsonResponse");
+const redisUtils = require("./redisUtils");
 
 // Config imports
 const rootPath = appRoot.path;
+const env = getEnvSettings();
+
 if (fs.existsSync(path.join(rootPath) + "/.env." + process.env.NODE_ENV)) {
   require("dotenv").config({
     path: `${rootPath}/.env.${process.env.NODE_ENV}`,
   });
 }
 
+// Helpers
 const getTokenSettings = (tokenType) => {
   let tokenSettings = {};
 
@@ -72,6 +79,16 @@ const getTokenSettings = (tokenType) => {
   return tokenSettings;
 };
 
+const checkRefreshToken = async (uuid) => {
+  // const projectId = appSettings.project.project_id;
+  const refreshTokenExists = await redisUtils.checkRefreshToken(
+    // projectId,
+    uuid
+  );
+  return refreshTokenExists;
+};
+
+// Exported
 /**
  * @description Generates a JWT token
  *
@@ -81,26 +98,50 @@ const getTokenSettings = (tokenType) => {
  * @param {string} tokenRequestData.uuid - User UUID
  * @param {string} tokenRequestData.type - Type of token requested
  * @param {string} tokenRequestData.project_id - Project ID
+ *
+ * @memberof helpers#
  */
 const generateToken = (tokenRequestData) => {
   const { role, uuid } = tokenRequestData.user;
   const { type } = tokenRequestData;
-  const project_id = appSettings.project.project_id;
-  const payload = {
+  // const project_id = appSettings.project.project_id;
+  let tokenPayload = {
     role,
     uuid,
-    project_id,
-    token: { value: null },
+    // project_id,
+    // expiresIn,
   };
 
   const tokenSettings = getTokenSettings(type);
-  const token = jwt.sign(payload, tokenSettings.secret, tokenSettings.options);
-
-  payload.token.value = token;
-  return payload;
+  const token = jwt.sign(
+    tokenPayload,
+    tokenSettings.secret,
+    tokenSettings.options
+  );
+  return token;
 };
 
-module.exports = { generateToken };
+/**
+ * @description Verifies a JWT token
+ *
+ * @function varifyToken
+ * @param {string} JET token to be verified
+ *
+ * @memberof helpers#
+ */
+const verifyToken = (token) => {
+  let response;
+  const secret = env.JWT_ACCESS_TOKEN_SECRET;
+  try {
+    let result = jwt.verify(token, secret);
+    response = jsonResponse(200, "Successfully Verified Token", result);
+  } catch (error) {
+    response = jsonResponse(401, "Token verification error", "", error);
+  }
+  return response;
+};
+
+module.exports = { generateToken, verifyToken };
 </code></pre>
         </article>
     </section>
@@ -111,13 +152,13 @@ module.exports = { generateToken };
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-businessUserModel.html">businessUserModel</a></li><li><a href="module-deleteBusiness.html">deleteBusiness</a></li><li><a href="module-deleteUser.html">deleteUser</a></li><li><a href="module-elephantConnect.html">elephantConnect</a></li><li><a href="module-findUser.html">findUser</a></li><li><a href="module-getAllUsers.html">getAllUsers</a></li><li><a href="module-jsonResponse.html">jsonResponse</a></li><li><a href="module-patchUser.html">patchUser</a></li><li><a href="module-postBusiness.html">postBusiness</a></li><li><a href="module-postUser.html">postUser</a></li><li><a href="module-redisUtils.html">redisUtils</a></li><li><a href="module-routes_businesses.html">routes/businesses</a></li><li><a href="module-routes_users.html">routes/users</a></li><li><a href="module-tokenUtils.html">tokenUtils</a></li></ul><h3>Externals</h3><ul><li><a href="external-jwt.html">jwt</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-discussions.html">discussions</a></li></ul><h3>Global</h3><ul><li><a href="global.html#byUuid">byUuid</a></li><li><a href="global.html#jsonResponse">jsonResponse</a></li><li><a href="global.html#Models">Models</a></li><li><a href="global.html#User">User</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-businessUserModel.html">businessUserModel</a></li><li><a href="module-deleteBusiness.html">deleteBusiness</a></li><li><a href="module-deleteUser.html">deleteUser</a></li><li><a href="module-elephantConnect.html">elephantConnect</a></li><li><a href="module-findBusiness.html">findBusiness</a></li><li><a href="module-findUser.html">findUser</a></li><li><a href="module-getAllUsers.html">getAllUsers</a></li><li><a href="module-loginUser.html">loginUser</a></li><li><a href="module-patchUser.html">patchUser</a></li><li><a href="module-postBusiness.html">postBusiness</a></li><li><a href="module-postUser.html">postUser</a></li><li><a href="module-redisUtils.html">redisUtils</a></li><li><a href="module-routes_auth.html">routes/auth</a></li><li><a href="module-routes_businesses.html">routes/businesses</a></li><li><a href="module-routes_users.html">routes/users</a></li><li><a href="module-tokenUtils.html">tokenUtils</a></li></ul><h3>Externals</h3><ul><li><a href="external-jwt.html">jwt</a></li></ul><h3>Namespaces</h3><ul><li><a href="helpers.html">helpers</a></li><li><a href="middleware.html">middleware</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-discussions.html">discussions</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Models">Models</a></li><li><a href="global.html#User">User</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Tue May 24 2022 17:17:34 GMT+1000 (Australian Eastern Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Thu Jul 07 2022 13:18:06 GMT+1000 (Australian Eastern Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

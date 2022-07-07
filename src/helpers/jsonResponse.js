@@ -1,8 +1,13 @@
 /**
+ * JSON Response
+ * @namespace helpers
+ */
+/**
  * @description Returns a standardised JSON response based on a template
  *
- * @module
+ * @function
  * @name jsonResponse
+ * @memberof helpers#
  */
 /**
  * @typedef jsonResponse

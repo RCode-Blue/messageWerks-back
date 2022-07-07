@@ -1,3 +1,13 @@
+/**
+ * @description Express routes for Authentication <br>
+ * Endpoints: <br>
+ * GET /login - Authenticates user id and password
+ *
+ * @module
+ * @name routes/auth
+ * @requires express
+ */
+
 const express = require("express");
 const router = express.Router();
 

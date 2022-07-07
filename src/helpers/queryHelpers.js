@@ -1,5 +1,13 @@
 const { business } = require("../models/index");
 
+/**
+ * @description Returns attributes of a Sequelize query for the Business model
+ *
+ * @function
+ * @name includeBusinesses
+ * @memberof helpers
+ * @returns {object} fields from the Business model to be returned from the query
+ */
 const includeBusinesses = () => {
   return [
     {
@@ -20,6 +28,14 @@ const includeBusinesses = () => {
   ];
 };
 
+/**
+ * @description Returns attributes of a Sequelize query for the User model
+ *
+ * @function
+ * @name userQueryAttributes
+ * @memberof helpers
+ * @returns {object} fields from the User model to be returned from the query
+ */
 const userQueryAttributes = () => {
   return ["uuid", "role", "email", "first_name", "last_name"];
 };

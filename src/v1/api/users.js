@@ -2,13 +2,14 @@
  * @description Express routes for User <br>
  * Endpoints:<br>
  * GET    /users/all - Get all users <br>
- * GET    /users/id - Get a user by UUID <br>
+ * GET    /users/profile - Get a user by UUID <br>
  * POST   /users/new - Create a new user <br>
  * PATCH  /users/edit - Edit user details <br>
  * PATCH  /users/link - Create or remove a link between a user and a business
  * DELETE /users/delete - Delete a user
  *
- * @module routes/users
+ * @module
+ * @name routes/users
  * @requires express
  */
 
