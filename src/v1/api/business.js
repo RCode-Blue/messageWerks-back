@@ -21,15 +21,19 @@ const findBusiness = require("../controllers/business/findBusiness");
 const getAllBusinesses = require("../controllers/business/getAllBusinesses");
 const patchBusiness = require("../controllers/business/patchBusiness");
 const postBusiness = require("../controllers/business/postBusiness");
+const verifyJwtToken = require("../middleware/auth/verifyJwtToken");
 
 const businessUserModel = require("../middleware/models/businessUserModelUtils");
 
 router.get("/all", async (req, res) => {
-  let response = await getAllBusinesses();
+  // console.log("-----------");
+  // console.log(req.headers.querytype);
+  let response = await getAllBusinesses(req.headers.querytype);
   res.status(response.status).json(response);
 });
 
 router.get("/uuid", async (req, res) => {
+  console.log("___token: ", req.headers.token);
   const { uuid } = req.body;
   let response = await findBusiness.byUuid(uuid);
   res.status(response.status).json(response);
@@ -44,6 +48,8 @@ router.post("/new", async (req, res) => {
 router.patch("/edit", async (req, res) => {
   const businessData = req.body;
   let response = await patchBusiness.editBusiness(businessData);
+  response.data = response.data[1];
+  // console.log("response: ", response);
   res.status(response.status).json(response);
 });
 

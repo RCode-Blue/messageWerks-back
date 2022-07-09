@@ -2,11 +2,13 @@ const businessModel = (sequelize, DataTypes) => {
   const Business = sequelize.define("business", {
     name: {
       type: DataTypes.STRING,
+      allowNull: false,
       unique: true,
     },
     uuid: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
       unique: true,
     },
     address_line1: {

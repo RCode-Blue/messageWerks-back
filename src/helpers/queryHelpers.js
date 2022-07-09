@@ -36,8 +36,12 @@ const includeBusinesses = () => {
  * @memberof helpers
  * @returns {object} fields from the User model to be returned from the query
  */
-const userQueryAttributes = () => {
-  return ["uuid", "role", "email", "first_name", "last_name"];
+const userQueryAttributes = (queryType = null) => {
+  if (queryType === "nameOnly") {
+    return ["uuid", "first_name", "last_name"];
+  } else {
+    return ["uuid", "role", "email", "first_name", "last_name"];
+  }
 };
 
 module.exports = { includeBusinesses, userQueryAttributes };

@@ -34,8 +34,11 @@ const editBusiness = async (businessData) => {
     let result = await Business.update(businessData, {
       where: { uuid },
       returning: true,
+      plain: true,
     });
+    // console.log("--- result: ", result);
     response = jsonResponse(200, "", result);
+    // console.log("response: ", response);
   } catch (error) {
     response = jsonResponse(400, "", "", { error });
   }

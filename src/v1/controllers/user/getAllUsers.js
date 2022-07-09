@@ -15,17 +15,25 @@ const {
 
 const User = require("../../../models").user;
 
-const getAllUsers = async () => {
-  let response;
-  const attributes = userQueryAttributes();
+const getAllUsers = async (queryType = null) => {
+  // console.log("---- queryType: ", queryType);
+  let response, include, queryParameters;
+  const attributes = userQueryAttributes(queryType);
 
-  let include = includeBusinesses();
+  // console.log("--- attributes: ", attributes);
 
-  try {
-    let result = await User.findAll({
+  include = includeBusinesses();
+
+  if (queryType === "nameOnly") {
+    queryParameters = { attributes };
+  } else
+    queryParameters = {
       attributes,
       include,
-    });
+    };
+
+  try {
+    let result = await User.findAll(queryParameters);
 
     response = jsonResponse(200, "", result);
   } catch (error) {

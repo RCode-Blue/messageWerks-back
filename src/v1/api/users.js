@@ -27,7 +27,10 @@ const verifyJwtToken = require("../middleware/auth/verifyJwtToken");
 const businessUserModel = require("../middleware/models/businessUserModelUtils");
 
 router.get("/all", async (req, res) => {
-  let response = await getAllUsers();
+  // expect req.body: {queryType: "nameOnly" or null}
+  // console.log("------------");
+  // console.log(req.headers);
+  let response = await getAllUsers(req.headers.querytype);
   res.status(response.status).json(response);
 });
 
@@ -36,6 +39,14 @@ router.get("/profile", verifyJwtToken, async (req, res) => {
   let verified = tokenUtils.verifyToken(token);
 
   const { uuid } = verified.data;
+  let response = await findUser.byUuid(uuid);
+  res.status(response.status).json(response);
+});
+
+router.get("/uuid", verifyJwtToken, async (req, res) => {
+  console.log("-----------------");
+  console.log(req.headers.uuid);
+  const { uuid } = req.headers;
   let response = await findUser.byUuid(uuid);
   res.status(response.status).json(response);
 });
