@@ -53,6 +53,8 @@ const verifyJwtToken = async (req, res, next) => {
       };
       const accessToken = generateToken(accessTokenParams);
       response = jsonResponse(401, "", { accessToken });
+      // console.log("--- accessToken -----");
+      // console.log(response);
       return res.status(response.status).json(response);
     }
 

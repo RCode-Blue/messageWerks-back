@@ -23,10 +23,11 @@ const patchUser = require("../controllers/user/patchUser");
 const postUser = require("../controllers/user/postUser");
 const tokenUtils = require("../../helpers/auth/tokenUtils");
 const verifyJwtToken = require("../middleware/auth/verifyJwtToken");
+const verifyIsAdmin = require("../middleware/auth/verifyIsAdmin");
 
 const businessUserModel = require("../middleware/models/businessUserModelUtils");
 
-router.get("/all", async (req, res) => {
+router.get("/all", verifyJwtToken, verifyIsAdmin, async (req, res) => {
   // expect req.body: {queryType: "nameOnly" or null}
   // console.log("------------");
   // console.log(req.headers);
@@ -44,8 +45,8 @@ router.get("/profile", verifyJwtToken, async (req, res) => {
 });
 
 router.get("/uuid", verifyJwtToken, async (req, res) => {
-  console.log("-----------------");
-  console.log(req.headers.uuid);
+  // console.log("-----------------");
+  // console.log(req.headers.uuid);
   const { uuid } = req.headers;
   let response = await findUser.byUuid(uuid);
   res.status(response.status).json(response);
