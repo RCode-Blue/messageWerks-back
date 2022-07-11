@@ -39,7 +39,9 @@ const editUser = async (userData) => {
       where: { uuid },
       returning: true,
     });
-    response = jsonResponse(200, "", result);
+    // console.log("----- result -----");
+    // console.log(result[1][0].dataValues);
+    response = jsonResponse(200, "", result[1][0].dataValues);
   } catch (error) {
     response = jsonResponse(400, "", "", { error });
   }

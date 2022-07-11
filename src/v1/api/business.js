@@ -33,8 +33,8 @@ router.get("/all", async (req, res) => {
 });
 
 router.get("/uuid", async (req, res) => {
-  console.log("___token: ", req.headers.token);
-  const { uuid } = req.body;
+  console.log("___token: ", req.headers.uuid);
+  const { uuid } = req.headers;
   let response = await findBusiness.byUuid(uuid);
   res.status(response.status).json(response);
 });

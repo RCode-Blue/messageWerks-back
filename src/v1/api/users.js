@@ -60,6 +60,10 @@ router.post("/new", async (req, res) => {
 
 router.patch("/edit", async (req, res) => {
   const userData = req.body;
+
+  // console.log("------- req body -------");
+  // console.log(req.body);
+
   let response = await patchUser.editUser(userData);
   res.status(response.status).json(response);
 });
