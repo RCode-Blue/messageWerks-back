@@ -26,8 +26,6 @@ const verifyJwtToken = require("../middleware/auth/verifyJwtToken");
 const businessUserModel = require("../middleware/models/businessUserModelUtils");
 
 router.get("/all", async (req, res) => {
-  // console.log("-----------");
-  // console.log(req.headers.querytype);
   let response = await getAllBusinesses(req.headers.querytype);
   res.status(response.status).json(response);
 });
@@ -49,7 +47,6 @@ router.patch("/edit", async (req, res) => {
   const businessData = req.body;
   let response = await patchBusiness.editBusiness(businessData);
   response.data = response.data[1];
-  // console.log("response: ", response);
   res.status(response.status).json(response);
 });
 

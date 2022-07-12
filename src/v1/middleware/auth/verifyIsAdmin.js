@@ -9,11 +9,9 @@ const verifyIsAdmin = async (req, res, next) => {
   const role = jwt_decode(token).role;
 
   if (parseInt(role) < parseInt(adminLevel)) {
-    // console.log("--- not admin ---");
     response = jsonResponse(403, "Not an administrator");
     return res.status(response.status).json(response);
   }
-  // console.log("--- is admin ---");
   next();
 };
 

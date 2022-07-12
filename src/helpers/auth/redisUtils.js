@@ -8,7 +8,6 @@
 
 const appSettings = require("../../config/appSettings.json");
 const redisClient = require("../../config/redis/redisConnect");
-// const appSettings = require("../../config/appSettings.json");
 
 // Helpers
 const connectRedis = async () => {

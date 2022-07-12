@@ -20,7 +20,6 @@ const deleteUser = async (userData) => {
     let result = await User.destroy({
       where: { uuid },
     });
-    // response = jsonResponse(200, "", result);
     response =
       result === 0
         ? jsonResponse(404, "User not found")

@@ -28,9 +28,6 @@ const verifyIsAdmin = require("../middleware/auth/verifyIsAdmin");
 const businessUserModel = require("../middleware/models/businessUserModelUtils");
 
 router.get("/all", verifyJwtToken, verifyIsAdmin, async (req, res) => {
-  // expect req.body: {queryType: "nameOnly" or null}
-  // console.log("------------");
-  // console.log(req.headers);
   let response = await getAllUsers(req.headers.querytype);
   res.status(response.status).json(response);
 });
@@ -45,8 +42,6 @@ router.get("/profile", verifyJwtToken, async (req, res) => {
 });
 
 router.get("/uuid", verifyJwtToken, async (req, res) => {
-  // console.log("-----------------");
-  // console.log(req.headers.uuid);
   const { uuid } = req.headers;
   let response = await findUser.byUuid(uuid);
   res.status(response.status).json(response);
@@ -60,10 +55,6 @@ router.post("/new", async (req, res) => {
 
 router.patch("/edit", async (req, res) => {
   const userData = req.body;
-
-  // console.log("------- req body -------");
-  // console.log(req.body);
-
   let response = await patchUser.editUser(userData);
   res.status(response.status).json(response);
 });

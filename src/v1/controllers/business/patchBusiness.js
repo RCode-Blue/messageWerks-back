@@ -36,9 +36,7 @@ const editBusiness = async (businessData) => {
       returning: true,
       plain: true,
     });
-    // console.log("--- result: ", result);
     response = jsonResponse(200, "", result);
-    // console.log("response: ", response);
   } catch (error) {
     response = jsonResponse(400, "", "", { error });
   }

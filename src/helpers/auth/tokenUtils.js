@@ -52,11 +52,7 @@ const getTokenSettings = (tokenType) => {
 };
 
 const checkRefreshToken = async (uuid) => {
-  // const projectId = appSettings.project.project_id;
-  const refreshTokenExists = await redisUtils.checkRefreshToken(
-    // projectId,
-    uuid
-  );
+  const refreshTokenExists = await redisUtils.checkRefreshToken(uuid);
   return refreshTokenExists;
 };
 
@@ -76,12 +72,9 @@ const checkRefreshToken = async (uuid) => {
 const generateToken = (tokenRequestData) => {
   const { role, uuid } = tokenRequestData.user;
   const { type } = tokenRequestData;
-  // const project_id = appSettings.project.project_id;
   let tokenPayload = {
     role,
     uuid,
-    // project_id,
-    // expiresIn,
   };
 
   const tokenSettings = getTokenSettings(type);

@@ -16,12 +16,8 @@ const {
 const User = require("../../../models").user;
 
 const getAllUsers = async (queryType = null) => {
-  // console.log("---- queryType: ", queryType);
   let response, include, queryParameters;
   const attributes = userQueryAttributes(queryType);
-
-  // console.log("--- attributes: ", attributes);
-
   include = includeBusinesses();
 
   if (queryType === "nameOnly") {
