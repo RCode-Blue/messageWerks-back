@@ -8,8 +8,13 @@ const elephantConnect = require("./config/elephantSql/elephantConnect");
 
 // Config imports
 const rootDir = path.dirname(__dirname);
-if (fs.existsSync(path.join(rootDir) + "/.env." + process.env.NODE_ENV)) {
-  require("dotenv").config({ path: `${rootDir}/.env.${process.env.NODE_ENV}` });
+if (
+  process.env.NODE_ENV &&
+  fs.existsSync(path.join(rootDir) + "/.env" + process.env.NODE_ENV)
+) {
+  require("dotenv").config({ path: `${rootDir}/.env${process.env.NODE_ENV}` });
+} else {
+  require("dotenv").config();
 }
 
 const authApi = require("./v1/api/auth");

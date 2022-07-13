@@ -4,10 +4,11 @@
   "description": "newsletter manager",
   "main": "./src/server.js",
   "scripts": {
-    "build": "webpack --mode development",
     "doc": "jsdoc -c jsdocConf.json",
     "start": "node ./dist/server.js",
-    "dev": "NODE_ENV=development nodemon ./src/server.js"
+    "dev": "NODE_ENV=.development nodemon ./src/server.js",
+    "prod":"NODE_ENV=.production nodemon ./src/server.js",
+    "publish":"node ./src/server.js"
   },
   "repository": {
     "type": "git",
