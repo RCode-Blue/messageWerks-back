@@ -15,7 +15,7 @@ const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
 const appSettings = require("../../config/appSettings.json");
-const pg = require("pg");
+import * as pg from "pg";
 
 const elephantConnect = () => {
   const { project } = appSettings;
