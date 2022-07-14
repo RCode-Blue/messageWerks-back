@@ -15,7 +15,6 @@ const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
 const appSettings = require("../../config/appSettings.json");
-import * as pg from "pg";
 
 const elephantConnect = () => {
   const { project } = appSettings;
@@ -32,7 +31,6 @@ const elephantConnect = () => {
   const user = process.env.ELEPHANTSQL_USERID;
 
   const settings = {
-    dialectModule: pg,
     host,
     ...project.sequelize,
   };
