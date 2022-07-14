@@ -5,9 +5,9 @@
   "main": "./src/server.js",
   "scripts": {
     "doc": "jsdoc -c jsdocConf.json",
-    "start": "node ./dist/server.js",
+    "start": "NODE_ENV=.production nodemon ./src/server.js",
     "dev": "NODE_ENV=.development nodemon ./src/server.js",
-    "prod":"NODE_ENV=.production nodemon ./src/server.js",
+    "prod":"NODE_ENV=.production node ./src/server.js",
     "publish":"node ./src/server.js"
   },
   "repository": {
