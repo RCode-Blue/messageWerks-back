@@ -53,7 +53,8 @@ app.listen(PORT, () => {
   console.log("-------------------------------------------------------------");
   console.log(`Listening to port:  ${PORT}`);
   console.log(`      Environment:  ${process.env.NODE_ENV}`);
-  console.log(`        File name:  ${process.env.FILE_NAME}`);
+  console.log(`    env File name:  ${process.env.FILE_NAME}`);
+  console.log(`  Database server:  ${process.env.ELEPHANTSQL_HOST}`);
   console.log("-------------------------------------------------------------");
   console.log();
   console.log("Press ctrl+C to quit");
