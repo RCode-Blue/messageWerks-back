@@ -31,7 +31,6 @@ const elephantConnect = () => {
   const user = process.env.ELEPHANTSQL_USERID;
 
   const settings = {
-    dialect: "postgres",
     host,
     ...project.sequelize,
   };

@@ -1,5 +1,5 @@
 const cors = require("cors");
-const { createCipheriv } = require("crypto");
+// const { createCipheriv } = require("crypto");
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -8,6 +8,7 @@ const elephantConnect = require("./config/elephantSql/elephantConnect");
 
 // Config imports
 const rootDir = path.dirname(__dirname);
+
 if (
   process.env.NODE_ENV &&
   fs.existsSync(path.join(rootDir) + "/.env" + process.env.NODE_ENV)
@@ -55,6 +56,8 @@ app.listen(PORT, () => {
   console.log(`      Environment:  ${process.env.NODE_ENV}`);
   console.log(`    env File name:  ${process.env.FILE_NAME}`);
   console.log(`  Database server:  ${process.env.ELEPHANTSQL_HOST}`);
+  console.log(`      DB Password:  ${process.env.ELEPHANTSQL_PASSWORD}`);
+  console.log(`        DB UserId:  ${process.env.ELEPHANTSQL_USERID}`);
   console.log("-------------------------------------------------------------");
   console.log();
   console.log("Press ctrl+C to quit");
