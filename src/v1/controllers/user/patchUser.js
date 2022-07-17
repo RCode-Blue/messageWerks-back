@@ -75,6 +75,7 @@ const linkBusiness = async (linkData) => {
       business = businessSearchResult.data;
       try {
         if (transactionType === "add") {
+          // console.log("-----user: ", user.dataValues);
           let findBusiness = await user.addBusiness(business);
           response = jsonResponse(200, "", findBusiness);
         } else if (transactionType === "remove") {
@@ -82,6 +83,7 @@ const linkBusiness = async (linkData) => {
           response = jsonResponse(200, "", findBusiness);
         }
       } catch (error) {
+        console.error(error);
         response = jsonResponse(400, "", "", { error });
       }
     }

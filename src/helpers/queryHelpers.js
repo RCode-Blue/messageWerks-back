@@ -40,7 +40,7 @@ const userQueryAttributes = (queryType = null) => {
   if (queryType === "nameOnly") {
     return ["uuid", "first_name", "last_name"];
   } else {
-    return ["uuid", "role", "email", "first_name", "last_name"];
+    return ["id", "uuid", "role", "email", "first_name", "last_name"];
   }
 };
 
