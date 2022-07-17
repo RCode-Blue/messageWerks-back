@@ -4,7 +4,7 @@ Newsletter utility - backend
 
 ## Desription
 
-messageWerks - backend is the backend of a 2-part application suite. This is the backend that:
+messageWerks - backend is the backend of a 2-part application suite. This backend:
 - Serves API endpoints that provide access to the frontend
 - Interfaces with the backend databases
 - Handles authentication for authorised users
@@ -34,13 +34,22 @@ To generate the documents using JSDoc, run `npm run jsdoc` in project root. The 
 ### API Endpoints
 
 - `/auth`: Login and user authorisation
+  - POST `/login`: Authenticates a user
+
+- `/business`: Business model access
+  - GET `/all`: Gets all businesses
+  - GET `/uuid`: GEts a Business by UUID
+  - POST `/new`: Creates a new Business
+  - PATCH `/edit`: Edits the details of a Business
+  - DELETE `/DELETE`: Deletes a Business
 
 - `/users`: User model access
-  - `/all`: Gets all users
-  - `/uuid`: Gets user by UUID
-  - `/create`: Creates new user
-  - `/edit`: Edits user account properties
-  - `/remove`: Deletes a user
+  - GET `/all`: Gets all users
+  - GET `/uuid`: Gets user by UUID
+  - POST `/create`: Creates new user
+  - PATCH `/edit`: Edits user account properties
+  - DELETE `/remove`: Deletes a user
+
 
 ### Authentication
 
